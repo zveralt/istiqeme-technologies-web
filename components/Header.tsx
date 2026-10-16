@@ -53,7 +53,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
         <Logo />
-        <nav className="hidden items-center gap-8 text-[13px] text-white/75 md:flex" aria-label="Primary">
+        <nav className="relative hidden items-center gap-8 text-[13px] text-white/75 md:flex" aria-label="Primary">
           {nav.map((item) => {
             const key = keyFor(item.href);
             const base = item.href.split("#")[0];
@@ -74,6 +74,18 @@ export function Header() {
               </Link>
             );
           })}
+          {menu && (
+            <div
+              className="absolute top-full left-0 z-50 hidden pt-2 md:block"
+              onMouseEnter={() => {
+                clearTimer();
+              }}
+            >
+              <div className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-white p-8 text-ink shadow-xl">
+                <MenuColumns menu={menu} />
+              </div>
+            </div>
+          )}
         </nav>
         <div className="hidden items-center gap-4 md:flex">
           <Link href="/login" className="text-[13px] text-white/80 hover:text-white">
@@ -97,19 +109,6 @@ export function Header() {
           </span>
         </button>
       </div>
-
-      {menu && (
-        <div
-          className="absolute top-full left-1/2 z-50 hidden -translate-x-1/2 pt-2 md:block"
-          onMouseEnter={() => {
-            clearTimer();
-          }}
-        >
-          <div className="w-max rounded-2xl border border-line bg-white p-4 text-ink shadow-xl">
-            <MenuColumns menu={menu} />
-          </div>
-        </div>
-      )}
 
       {open && (
         <div className="border-t border-white/10 bg-[#07182c] px-5 py-6 md:hidden">
@@ -171,16 +170,16 @@ function Column({
   divided?: boolean;
 }) {
   return (
-    <div className={divided ? "border-l border-line pl-4" : ""}>
+    <div className={`min-w-0 flex-1 ${divided ? "border-l border-line pl-8" : ""}`}>
       <p className="text-[11px] uppercase tracking-[0.18em] text-muted">{title}</p>
-      <div className="mt-2 flex flex-col">
+      <div className="mt-3 flex flex-col gap-1">
         {items.map((item) =>
           item.href.startsWith("http") ? (
-            <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="py-1 text-[14px] text-forest hover:underline">
+            <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="rounded-lg px-2 py-2 text-[15px] text-forest hover:bg-[#eef3f9]">
               {item.title}
             </a>
           ) : (
-            <Link key={item.href} href={item.href} className="py-1 text-[14px] text-forest hover:underline">
+            <Link key={item.href} href={item.href} className="rounded-lg px-2 py-2 text-[15px] text-forest hover:bg-[#eef3f9]">
               {item.title}
             </Link>
           ),
@@ -196,7 +195,7 @@ function MenuColumns({ menu }: { menu: MenuKey }) {
     const left = serviceMenu.slice(0, mid).map((item) => ({ href: `/services#${item.id}`, title: item.title }));
     const right = serviceMenu.slice(mid).map((item) => ({ href: `/services#${item.id}`, title: item.title }));
     return (
-      <div className="flex gap-4">
+      <div className="flex gap-10">
         <Column title="Services" items={left} />
         <Column title="More" items={right} divided />
       </div>
@@ -204,7 +203,7 @@ function MenuColumns({ menu }: { menu: MenuKey }) {
   }
   if (menu === "work") {
     return (
-      <div className="flex gap-4">
+      <div className="flex gap-10">
         <Column title="Solutions" items={workMenu.map((item) => ({ href: `/work#${item.id}`, title: item.title }))} />
         <Column title="Live sites" items={work.map((item) => ({ href: item.href, title: item.name }))} divided />
       </div>

@@ -168,6 +168,20 @@ input:focus-visible {
   animation: blink 1s step-end infinite;
 }
 
+@keyframes float-mid {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float-mid {
+  animation: float-mid 4.5s ease-in-out infinite;
+}
+
 @keyframes load-bar {
   from {
     transform: translateX(-100%);
@@ -195,6 +209,7 @@ input:focus-visible {
   .pulse-ring,
   .rise-in,
   .caret,
+  .float-mid,
   .load-bar {
     animation: none !important;
     transition: none !important;

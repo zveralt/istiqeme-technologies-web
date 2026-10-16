@@ -8,18 +8,29 @@ import { WorkCard } from "@/components/WorkCard";
 import { marquee, pillars, problems, services, site, work } from "@/lib/site";
 import Link from "next/link";
 
+function stackStyle(index: number) {
+  return {
+    top: 120,
+    zIndex: index + 1,
+    background: `linear-gradient(${150 + index * 8}deg, #070707 0%, #1c1c1c 55%, #111111 100%)`,
+    color: "#ffffff",
+  };
+}
+
 export default function HomePage() {
   return (
     <>
       <section id="top" className="glow-field relative overflow-hidden bg-white px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-40">
         <div className="mx-auto max-w-7xl">
-          <p className="text-center text-[clamp(1.15rem,2.4vw,1.7rem)] font-bold leading-snug text-forest">
+          <p className="float-mid text-center font-accent text-[clamp(1rem,2vw,1.45rem)] font-semibold uppercase leading-snug tracking-[0.12em] text-forest">
             “The standard for technology inquiries — systems that answer before the question grows old.”
           </p>
-          <p className="mt-8 text-[11px] uppercase tracking-[0.32em] text-muted">
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+          <p className="text-[11px] uppercase tracking-[0.32em] text-muted">
             {site.city} · Est. {site.since} · ISTIQEME Technologies
           </p>
-          <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.7rem,8vw,7.2rem)] leading-[0.92] tracking-[-0.03em] text-forest">
+          <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[1.05] text-forest">
             Complex systems.
             <br />
             <span className="font-accent">Beautifully simplified.</span>
@@ -33,6 +44,13 @@ export default function HomePage() {
               Start quick intake
             </ButtonLink>
             <WhatsAppLink variant="ghost">Message us on WhatsApp</WhatsAppLink>
+          </div>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80"
+              alt="A calm workspace for planning digital systems"
+              className="h-72 w-full rounded-[28px] object-cover lg:h-full"
+            />
           </div>
         </div>
       </section>
@@ -55,11 +73,11 @@ export default function HomePage() {
           <Reveal>
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <Eyebrow className="text-white/75">Our services</Eyebrow>
+                <Eyebrow className="text-white/65">Our services</Eyebrow>
                 <h2 className="font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[1.05] text-white">
                   What we build
                 </h2>
-                <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-white/75">
+                <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-white/65">
                   Websites, online stores, mobile apps, AI assistants, and
                   marketing — scoped to your business, not a one-size-fits-all
                   template.
@@ -70,25 +88,25 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </Reveal>
-          <div className="relative mt-8">
+          <div className="relative mt-16">
             {services.map((s, i) => (
               <Link
                 key={s.id}
                 href={`/services#${s.id}`}
-                className="group sticky mb-4 flex flex-col justify-between rounded-[24px] border border-line bg-white p-6 text-ink shadow-[0_16px_40px_-24px_rgba(7,24,44,0.45)]"
-                style={{ top: 108, zIndex: i + 1 }}
+                className="group sticky mb-4 flex flex-col justify-between rounded-[24px] p-6 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.45)]"
+                style={stackStyle(i)}
               >
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
+                  <p className="inline-flex rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.16em]">
                     Tier {s.tier} · {s.category}
                   </p>
-                  <p className="mt-3 text-[13px] text-forest">{s.problem}</p>
-                  <h3 className="mt-2 font-display text-2xl text-forest">{s.title}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
+                  <p className="mt-4 text-[13px] opacity-80">{s.problem}</p>
+                  <h3 className="mt-2 font-display text-2xl">{s.title}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed opacity-85">
                     {s.summary}
                   </p>
                 </div>
-                <span className="mt-6 text-[13px] text-forest transition delay-100 group-hover:translate-x-1">
+                <span className="mt-6 text-[13px] transition delay-100 group-hover:translate-x-1">
                   Explore →
                 </span>
               </Link>
@@ -97,7 +115,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-white px-5 py-24 md:px-8">
+      <section className="w-full bg-white px-5 py-24 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Reveal>
           <Eyebrow>AI voice assistant</Eyebrow>
           <h2 className="max-w-3xl font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[1.05]">
@@ -112,6 +131,7 @@ export default function HomePage() {
         <div className="mt-10">
           <Guide />
         </div>
+        </div>
       </section>
 
       <section className="bg-black/[0.03] px-5 py-8 md:px-8">
@@ -120,7 +140,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-white px-5 py-24 md:px-8">
+      <section className="w-full bg-white px-5 py-24 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Reveal>
           <Eyebrow>What we do best</Eyebrow>
         </Reveal>
@@ -137,6 +158,7 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+        </div>
       </section>
 
       <section className="bg-black/[0.03] px-5 py-24 md:px-8">
@@ -145,7 +167,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="work" className="glow-field mx-auto max-w-7xl scroll-mt-28 bg-white px-5 py-24 md:px-8">
+      <section id="work" className="glow-field w-full scroll-mt-28 bg-white px-5 py-24 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
@@ -170,37 +193,38 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+        </div>
       </section>
 
-      <section id="problems" className="band-deep glow-field scroll-mt-28 px-5 py-24 md:px-8">
+      <section id="problems" className="band-deep glow-field scroll-mt-[4.75rem] px-5 py-24 md:scroll-mt-20 md:px-8">
         <div className="mx-auto max-w-7xl">
           <Reveal>
-            <Eyebrow className="text-white/75">Problems we solve</Eyebrow>
+            <Eyebrow className="text-white/65">Problems we solve</Eyebrow>
             <h2 className="max-w-3xl font-display text-[clamp(2.2rem,4vw,3.6rem)] leading-[1.05] text-white">
               Every system starts with a problem we already see in the market.
             </h2>
-            <p className="mt-4 max-w-xl text-[16px] text-white/75">
+            <p className="mt-4 max-w-xl text-[16px] text-white/65">
               Since {site.since} we have built practical tools for retailers,
               wholesalers, and local businesses in Karachi. These are the
               gaps we keep meeting — and the systems that close them.
             </p>
           </Reveal>
-          <div className="relative mt-8">
+          <div className="relative mt-16">
             {problems.map((item, i) => (
               <Link
                 key={item.problem}
                 href={item.href}
-                className="sticky mb-4 block rounded-[24px] border border-line bg-white p-6 text-ink shadow-[0_16px_40px_-24px_rgba(7,24,44,0.45)]"
-                style={{ top: 108, zIndex: i + 1 }}
+                className="sticky mb-4 block rounded-[24px] p-6 shadow-[0_16px_40px_-24px_rgba(0,0,0,0.45)]"
+                style={stackStyle(i)}
               >
-                <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
+                <p className="inline-flex rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.16em]">
                   The problem
                 </p>
-                <h3 className="mt-3 font-display text-2xl text-forest">{item.problem}</h3>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-forest">
+                <h3 className="mt-4 font-display text-2xl">{item.problem}</h3>
+                <p className="mt-4 inline-flex rounded-full bg-white/15 px-3 py-1 text-[11px] uppercase tracking-[0.16em]">
                   What we build
                 </p>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
+                <p className="mt-3 text-[15px] leading-relaxed opacity-85">
                   {item.solution}
                 </p>
               </Link>
@@ -209,7 +233,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="start" className="mx-auto grid max-w-7xl gap-12 bg-black/[0.03] px-5 py-24 md:grid-cols-2 md:px-8">
+      <section id="start" className="w-full bg-black/[0.03] px-5 py-24 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2">
         <Reveal>
           <Eyebrow>Quick intake</Eyebrow>
           <h2 className="font-display text-[clamp(2.2rem,4vw,3.6rem)] leading-[1.05]">
@@ -222,6 +247,7 @@ export default function HomePage() {
           </p>
         </Reveal>
         <Intake />
+        </div>
       </section>
     </>
   );

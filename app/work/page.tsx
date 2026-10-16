@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="glow-field mx-auto max-w-7xl bg-white px-5 pb-12 pt-32 md:px-8 md:pt-40">
+      <section className="glow-field w-full bg-white px-5 pb-12 pt-32 md:px-8 md:pt-40">
+        <div className="mx-auto max-w-7xl">
         <Eyebrow>Portfolio</Eyebrow>
         <h1 className="max-w-4xl font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.95]">
           Our work.
@@ -26,14 +27,19 @@ export default function WorkPage() {
           See real sites we have built, try our live demos, and reach our team
           directly when you are ready to talk.
         </p>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-black/[0.03] px-5 py-12 md:px-8">
-        <Compare />
+      <section className="w-full bg-black/[0.03] px-5 py-12 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Compare />
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-white px-5 py-20 md:px-8">
-        <CommandCenter />
+      <section className="w-full bg-white px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <CommandCenter />
+        </div>
       </section>
 
       <section className="bg-black/[0.03] px-5 py-8 md:px-8">
@@ -42,7 +48,8 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-white px-5 py-20 md:px-8">
+      <section className="w-full bg-white px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Eyebrow>Demo guide</Eyebrow>
         <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.05]">
           Tour our live work.
@@ -62,9 +69,11 @@ export default function WorkPage() {
             ]}
           />
         </div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-white px-5 pb-8 md:px-8">
+      <section className="w-full bg-white px-5 pb-8 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Eyebrow>Solutions</Eyebrow>
         <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)]">
           What we have built for problems in the market.
@@ -90,9 +99,11 @@ export default function WorkPage() {
             </article>
           ))}
         </div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl bg-black/[0.03] px-5 pb-12 md:px-8">
+      <section className="w-full bg-black/[0.03] px-5 pb-12 md:px-8">
+        <div className="mx-auto max-w-7xl">
         <Eyebrow>Live client sites</Eyebrow>
         <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)]">
           Real websites we build and operate.
@@ -101,6 +112,7 @@ export default function WorkPage() {
           {work.map((item) => (
             <WorkCard key={item.name} {...item} />
           ))}
+        </div>
         </div>
       </section>
 

@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function StartPage() {
   return (
-    <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-24 pt-32 md:grid-cols-2 md:px-8 md:pt-40">
+    <section className="w-full bg-white px-5 pb-24 pt-32 md:px-8 md:pt-40">
+      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2">
       <div>
         <Eyebrow>Quick intake</Eyebrow>
         <h1 className="font-display text-[clamp(2.6rem,6vw,5rem)] leading-[0.95]">
@@ -29,6 +30,7 @@ export default function StartPage() {
         </div>
       </div>
       <Intake />
+      </div>
     </section>
   );
 }

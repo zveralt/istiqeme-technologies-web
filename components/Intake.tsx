@@ -38,8 +38,8 @@ WhatsApp: ${answers.phone || "—"}`;
 
   return (
     <div
-      className={`overflow-hidden rounded-[28px] border border-line bg-cream shadow-[0_30px_80px_-40px_rgba(22,19,16,0.45)] ${
-        compact ? "" : ""
+      className={`rounded-[28px] border border-line bg-cream shadow-[0_30px_80px_-40px_rgba(22,19,16,0.45)] ${
+        compact ? "" : "h-full w-full"
       }`}
     >
       <div className="flex items-center justify-between border-b border-line px-6 py-4">
@@ -69,7 +69,7 @@ WhatsApp: ${answers.phone || "—"}`;
                   key={opt.id}
                   type="button"
                   onClick={() => pick(opt.id)}
-                  className="group flex items-center justify-between rounded-2xl border border-line bg-paper px-4 py-4 text-left transition hover:border-ember/50 hover:bg-white"
+                  className="group flex w-full items-center justify-between rounded-2xl border border-line bg-paper px-4 py-4 text-left transition hover:border-ember/50 hover:bg-white"
                 >
                   <span>
                     <span className="block text-[15px] font-medium">{opt.title}</span>

@@ -9,11 +9,22 @@ export function Testimonials() {
   const startX = useRef<number | null>(null);
   const t = testimonials[i];
 
+  const [nudge, setNudge] = useState(0);
+
+  function go(nextIndex: number, direction: number) {
+    setNudge(direction * 48);
+    window.setTimeout(() => {
+      setI(nextIndex);
+      setNudge(direction * -48);
+      window.setTimeout(() => setNudge(0), 40);
+    }, 180);
+  }
+
   function next() {
-    setI((n) => (n + 1) % testimonials.length);
+    go((i + 1) % testimonials.length, -1);
   }
   function prev() {
-    setI((n) => (n - 1 + testimonials.length) % testimonials.length);
+    go((i - 1 + testimonials.length) % testimonials.length, 1);
   }
 
   return (
@@ -23,7 +34,7 @@ export function Testimonials() {
       </p>
       <blockquote
         className="mt-8 max-w-4xl cursor-grab touch-pan-y font-display text-[clamp(2rem,5vw,4.4rem)] leading-[1.05] tracking-tight transition-transform duration-200 active:cursor-grabbing"
-        style={{ transform: `translateX(${drag}px)` }}
+        style={{ transform: `translateX(${drag + nudge}px)` }}
         onPointerDown={(event) => {
           startX.current = event.clientX;
           event.currentTarget.setPointerCapture(event.pointerId);
@@ -93,7 +104,7 @@ export function Testimonials() {
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => {
               event.stopPropagation();
-              setI(idx);
+              go(idx, idx > i ? -1 : 1);
             }}
             className={`h-1.5 flex-1 rounded-full ${idx === i ? "bg-ember" : "bg-white/15"}`}
           />
