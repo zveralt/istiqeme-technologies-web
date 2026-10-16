@@ -39,9 +39,15 @@ export function Reveal({
   );
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
+export function Eyebrow({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-muted">
+    <p className={`mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-muted ${className}`}>
       {children}
     </p>
   );

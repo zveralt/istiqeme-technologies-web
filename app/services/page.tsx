@@ -4,7 +4,7 @@ import { Guide } from "@/components/Guide";
 import { LeadDemo } from "@/components/LeadDemo";
 import { Eyebrow, Reveal } from "@/components/Reveal";
 import { WhatsAppLink } from "@/components/Button";
-import { services, site, waLink } from "@/lib/site";
+import { serviceMenu, services, site, waLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-5 pb-12 pt-32 md:px-8 md:pt-40">
+      <section className="glow-field mx-auto max-w-7xl bg-white px-5 pb-12 pt-32 md:px-8 md:pt-40">
         <Eyebrow>Product catalogue</Eyebrow>
         <h1 className="max-w-4xl font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.95]">
           Five ways to get your business online.
@@ -26,7 +26,7 @@ export default function ServicesPage() {
         </p>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-16 md:px-8">
+      <section className="mx-auto max-w-7xl bg-black/[0.03] px-5 pb-16 md:px-8">
         <Reveal>
           <Eyebrow>AI matcher</Eyebrow>
           <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] leading-[1.05]">
@@ -51,6 +51,46 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl space-y-4 px-5 pb-16 md:px-8">
+        <Eyebrow>What we provide</Eyebrow>
+        <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] leading-[1.05]">
+          A solution for each job.
+        </h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {serviceMenu.map((item) => {
+            return (
+              <article
+                key={item.id}
+                id={item.id}
+                className="scroll-mt-28 rounded-[24px] bg-forest p-6 text-white"
+              >
+                <h3 className="font-display text-2xl">{item.title}</h3>
+                <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-white/55">
+                  The problem
+                </p>
+                <p className="mt-1 text-[15px] text-white/90">{item.problem}</p>
+                <p className="mt-4 text-[12px] uppercase tracking-[0.18em] text-ember-bright">
+                  What we build
+                </p>
+                <p className="mt-1 text-[15px] leading-relaxed text-white/90">
+                  {item.solution}
+                </p>
+                <a
+                  href={waLink(
+                    `Hi ISTIQEME Technologies — I'd like to discuss ${item.title} for my business.`,
+                  )}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex text-[13px] font-medium text-ember-bright"
+                >
+                  Discuss this on WhatsApp →
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       <section className="space-y-6 px-5 pb-24 md:px-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {services.map((s, i) => (
@@ -64,7 +104,8 @@ export default function ServicesPage() {
                     <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
                       Tier {s.tier} · {s.category}
                     </p>
-                    <h2 className="mt-3 font-display text-4xl">{s.title}</h2>
+                    <p className="mt-3 text-[14px] text-ember">{s.problem}</p>
+                    <h2 className="mt-2 font-display text-4xl">{s.title}</h2>
                     <p className="mt-4 text-[16px] leading-relaxed text-ink-soft">
                       {s.summary}
                     </p>
@@ -126,7 +167,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-cream/80 px-5 py-24 md:px-8">
+      <section className="bg-black/[0.03] px-5 py-24 md:px-8">
         <div className="mx-auto max-w-7xl">
           <LeadDemo />
         </div>

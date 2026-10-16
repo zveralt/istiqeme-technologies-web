@@ -64,14 +64,6 @@ export function Footer() {
       <div className="relative mx-auto flex max-w-7xl flex-col gap-3 border-t border-white/10 px-5 py-6 text-[12px] text-cream/50 md:flex-row md:items-center md:justify-between md:px-8">
         <p>© {new Date().getFullYear()} ISTIQEME Technologies</p>
         <p>Engineered in Karachi · Premium digital systems</p>
-        <a
-          href={site.parent}
-          className="hover:text-cream"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Return to ISTIQEME.net
-        </a>
       </div>
     </footer>
   );

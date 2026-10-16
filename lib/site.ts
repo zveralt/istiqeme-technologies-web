@@ -2,16 +2,14 @@ export const site = {
   name: "ISTIQEME Technologies",
   shortName: "ISTIQEME",
   tagline: "Premium digital engineering for growing businesses in Karachi and beyond.",
-  parent: "https://istiqeme.net/",
-  since: 2019,
+  since: 2026,
   city: "Karachi",
   phones: [
     { label: "+92 332 3407131", href: "tel:+923323407131" },
-    { label: "+92 21 34167709", href: "tel:+922134167709" },
+    { label: "+92 21 37124242", href: "tel:+922137124242" },
   ],
   emails: [
     { label: "tech@istiqeme.net", href: "mailto:tech@istiqeme.net" },
-    { label: "kamran@istiqeme.net", href: "mailto:kamran@istiqeme.net" },
   ],
   address:
     "Office # E-17, 5th Floor, Descon Plaza, Main Shahrah-e-Faisal, Near KFC Nursery, Karachi, Pakistan",
@@ -34,9 +32,168 @@ export function waLink(text: string = site.whatsapp.defaultText) {
 
 export const nav = [
   { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/team", label: "Team" },
+  { href: "/work", label: "Work", menu: "work" },
+  { href: "/services", label: "Services", menu: "services" },
+  { href: "/#problems", label: "Problems" },
+] as const;
+
+export const serviceMenu = [
+  {
+    id: "website-development",
+    title: "Website development",
+    problem: "Visitors arrive and leave without becoming customers.",
+    solution:
+      "A high-speed landing page or corporate site that captures attention, routes buyers to WhatsApp, and builds trust.",
+    source: "landing",
+  },
+  {
+    id: "custom-app-frameworks",
+    title: "Custom app frameworks",
+    problem: "Your team needs a mobile layer built around how you actually work.",
+    solution:
+      "A custom mobile app with a secure cloud backend, staff roles, and data that stays under your control.",
+    source: "app",
+  },
+  {
+    id: "software-development",
+    title: "Software development",
+    problem: "Off-the-shelf tools do not match daily operations.",
+    solution:
+      "Custom software scoped to your business — not a one-size-fits-all template.",
+    source: "app",
+  },
+  {
+    id: "social-media-marketing",
+    title: "Social media marketing",
+    problem: "The brand goes quiet and customers forget you.",
+    solution:
+      "End-to-end management of social profiles, content, and a posting rhythm that keeps the business active.",
+    source: "marketing",
+  },
+  {
+    id: "brand-awareness",
+    title: "Brand awareness",
+    problem: "People do not yet recognize the business when they are ready to buy.",
+    solution:
+      "Written posts, graphics, and short-form video that present the brand clearly and consistently.",
+    source: "marketing",
+  },
+  {
+    id: "digital-marketing",
+    title: "Digital marketing",
+    problem: "Likes do not turn into leads or sales.",
+    solution:
+      "Targeted paid campaigns and monthly reports so you can see the return, not only the reach.",
+    source: "marketing",
+  },
+  {
+    id: "ai-voice-agents",
+    title: "AI voice agents",
+    problem: "Calls and inquiries arrive when the team cannot pick up.",
+    solution:
+      "An AI receptionist in English or Urdu that qualifies the lead and hands a summary to WhatsApp.",
+    source: "shop",
+  },
+  {
+    id: "ai-chatbot-systems",
+    title: "AI chatbot systems",
+    problem: "Product and order questions sit unanswered after hours.",
+    solution:
+      "A chatbot on WhatsApp that answers questions, checks context, and logs the conversation for your team.",
+    source: "shop",
+  },
+  {
+    id: "crm-systems",
+    title: "CRM systems",
+    problem: "Follow-ups slip through chats and spreadsheets.",
+    solution:
+      "One workspace for customers, sales, and team activity so nothing sits in a private chat.",
+    source: "app",
+  },
+  {
+    id: "erp-systems",
+    title: "ERP systems",
+    problem: "Orders, staff, and sales live in separate tools.",
+    solution:
+      "An operational workspace where orders, staff activity, and sales sit in one system your team can run every day.",
+    source: "app",
+  },
+  {
+    id: "custom-ai-agents",
+    title: "Custom AI agents",
+    problem: "Repetitive questions and lead sorting eat the day.",
+    solution:
+      "Agents trained on your services and rules — they qualify leads, answer in simple words, and continue on WhatsApp.",
+    source: "landing",
+  },
+] as const;
+
+export const workMenu = [
+  {
+    id: "websites",
+    title: "Websites",
+    problem: "A business has no clear site that converts visitors.",
+    solution:
+      "Landing pages and corporate sites built for speed, clarity, and trust — including istiqeme.net, Credo, and Pascale Agency.",
+  },
+  {
+    id: "crm-systems",
+    title: "CRM systems",
+    problem: "Manual order tracking lets sales follow-ups slip through.",
+    solution:
+      "A clean dashboard staff actually use every day, so customers and follow-ups stay in one place.",
+  },
+  {
+    id: "chatbots",
+    title: "Chatbots",
+    problem: "Inquiries arrive at night and nobody is at the desk.",
+    solution:
+      "WhatsApp chatbots that answer questions, capture the lead, and route a summary to the team.",
+  },
+  {
+    id: "ai-agents",
+    title: "AI agents",
+    problem: "Staff repeat the same answers instead of closing sales.",
+    solution:
+      "Custom agents connected to your database that qualify leads, check stock, and log sales around the clock.",
+  },
+  {
+    id: "ai-voice-agents",
+    title: "AI voice agents",
+    problem: "Missed calls become missed customers.",
+    solution:
+      "A voice receptionist that picks up in English or Urdu, asks the right questions, and hands the lead to WhatsApp.",
+  },
+  {
+    id: "dashboards",
+    title: "Dashboards",
+    problem: "Leadership cannot see sales without wading through spreadsheets.",
+    solution:
+      "The Command Center: salesman, manager, and CEO each see the picture they need in one secure place.",
+  },
+] as const;
+
+export const problems = [
+  {
+    problem: "Visitors never become customers.",
+    solution: "Landing pages and corporate websites with WhatsApp routing and overnight lead capture.",
+    href: "/services#website-development",
+  },
+  {
+    problem: "After-hours inquiries go unanswered.",
+    solution: "AI voice agents and chatbots that qualify the lead and continue on WhatsApp.",
+    href: "/services#ai-voice-agents",
+  },
+  {
+    problem: "Orders live in spreadsheets and private chats.",
+    solution: "CRM and dashboard systems so staff, managers, and leadership share one workspace.",
+    href: "/work#crm-systems",
+  },
+  {
+    problem: "Follow-ups slip through the cracks.",
+    solution: "A clean operational view of customers, sales, and team activity — the same reliability we bring from larger networks to local businesses.",
+    href: "/work#dashboards",
+  },
 ] as const;
 
 export const services = [
@@ -45,6 +202,7 @@ export const services = [
     tier: "01",
     category: "Web design",
     title: "Landing page & lead capture",
+    problem: "Casual visitors leave without becoming customers.",
     summary:
       "A high-speed, professional single-page website designed to capture attention and turn casual visitors into paying customers.",
     points: [
@@ -60,6 +218,7 @@ export const services = [
     tier: "02",
     category: "Web design",
     title: "Corporate website",
+    problem: "Clients and partners cannot see a clear, trustworthy presence.",
     summary:
       "A premium, multi-page web presence designed to build instant trust with your clients and partners.",
     points: [
@@ -75,6 +234,7 @@ export const services = [
     tier: "03",
     category: "Online shop",
     title: "E-commerce store",
+    problem: "Customers cannot browse, cart, and buy in one place.",
     summary:
       "A complete, fully functional online storefront where customers can browse your catalog, add items to their cart, and purchase.",
     points: [
@@ -91,6 +251,7 @@ export const services = [
     tier: "04",
     category: "Custom software",
     title: "Custom mobile app",
+    problem: "Spreadsheets and generic apps do not match how the team works.",
     summary: "A custom mobile app built around your exact business needs.",
     points: [
       "A custom mobile app built around your exact business needs.",
@@ -104,6 +265,7 @@ export const services = [
     tier: "05",
     category: "Growth",
     title: "Social media & marketing",
+    problem: "The brand goes quiet, and attention never turns into leads.",
     summary:
       "End-to-end management of your brand's social profiles to keep your business active and relevant.",
     points: [
@@ -134,24 +296,53 @@ export const pillars = [
 export const work = [
   {
     name: "istiqeme.net",
+    problem: "Leadership needs a clear view of data and a direct line to the business.",
     kind: "Enterprise telemetry corporate hub",
     body: "Corporate platform for clear data tracking, clean information mapping, and direct executive communication.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
     href: "https://istiqeme.net/",
     uptime: "99.9%",
   },
   {
     name: "Credo",
+    problem: "Complex workflows fall apart on a phone screen.",
     kind: "Interactive workflow business framework",
     body: "Multi-page corporate layout presenting complex operational workflows smoothly on any mobile screen.",
+    image:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80",
     href: "https://credo-lumina-framework.lovable.app/",
     uptime: "99.8%",
   },
   {
     name: "Pascale Agency",
+    problem: "High-end work needs a fast showcase that does not lag.",
     kind: "High-velocity digital media showcase",
     body: "Fast digital media showcase for high-end brand assets and portfolios without local network lag.",
+    image:
+      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1400&q=80",
     href: "https://pascaleagency.org/",
     uptime: "99.7%",
+  },
+  {
+    name: "SKH Solutions",
+    problem: "Students need one institute for subjects, practice, and a campus close to home.",
+    kind: "O and A Level coaching",
+    body: "O and A Level coaching across five Karachi campuses, with subject specialists and weekly written practice.",
+    image:
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80",
+    href: "https://www.skh.com.pk/",
+    uptime: "99.8%",
+  },
+  {
+    name: "Veritas Schooling System",
+    problem: "Families want one school journey from early years through A Levels.",
+    kind: "Karachi school",
+    body: "A Karachi school from Early Years to A Levels, with Gulshan and Jauhar campuses and admissions on WhatsApp.",
+    image:
+      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1400&q=80",
+    href: "https://www.veritas.edu.pk/",
+    uptime: "99.8%",
   },
 ] as const;
 
@@ -362,7 +553,7 @@ export const dashboardRoles = [
 export const faqs = [
   {
     q: "What does ISTIQEME do?",
-    a: "ISTIQEME Technologies is the software arm of the ISTIQEME group. We build websites, online stores, mobile apps, AI assistants, and marketing systems for growing businesses — scoped to how you actually work, not a one-size-fits-all template.",
+    a: "ISTIQEME Technologies builds websites, online stores, mobile apps, AI assistants, and marketing systems for growing businesses — scoped to how you actually work, not a one-size-fits-all template.",
   },
   {
     q: "Which service fits my business?",

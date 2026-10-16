@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-display: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --color-paper: #f2ebe0;
-  --color-paper-deep: #e7ddd0;
-  --color-cream: #faf6ee;
-  --color-ink: #161310;
-  --color-ink-soft: #3c362f;
-  --color-muted: #6d6559;
-  --color-line: #d4cbbd;
-  --color-ember: #c2410c;
-  --color-ember-bright: #ea580c;
-  --color-forest: #16332c;
-  --color-forest-mid: #1f4a40;
-  --color-sand: #e8dfd0;
+  --color-paper: #ffffff;
+  --color-paper-deep: #f6f8fb;
+  --color-cream: #f7f9fc;
+  --color-ink: #102033;
+  --color-ink-soft: #24344a;
+  --color-muted: #5c6b80;
+  --color-line: #d7e0ea;
+  --color-ember: #1d4f91;
+  --color-ember-bright: #d6e6ff;
+  --color-forest: #0e3a66;
+  --color-forest-mid: #164e86;
+  --color-sand: #e8eef6;
   --color-whatsapp: #128c7e;
 }
 
@@ -45,6 +45,40 @@ input:focus-visible {
 .font-display {
   font-family: var(--font-display);
   font-optical-sizing: auto;
+  font-weight: 650;
+}
+
+.font-accent {
+  font-family: var(--font-fraunces), "Iowan Old Style", Palatino, serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.glow-field {
+  position: relative;
+  isolation: isolate;
+}
+
+.glow-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(520px 260px at 8% 10%, color-mix(in srgb, #7eb6ff 42%, transparent), transparent 70%),
+    radial-gradient(420px 280px at 92% 90%, color-mix(in srgb, var(--color-forest) 22%, transparent), transparent 72%);
+}
+
+.band-mist {
+  background: linear-gradient(180deg, #f4f7fb 0%, #e7eef7 100%);
+}
+
+.band-deep {
+  background:
+    radial-gradient(480px 220px at 80% 0%, color-mix(in srgb, #7eb6ff 28%, transparent), transparent 70%),
+    linear-gradient(180deg, #0b2744 0%, #0e3a66 100%);
+  color: #fff;
 }
 
 .grain {
@@ -134,6 +168,19 @@ input:focus-visible {
   animation: blink 1s step-end infinite;
 }
 
+@keyframes load-bar {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(220%);
+  }
+}
+
+.load-bar {
+  animation: load-bar 0.7s ease-in-out infinite;
+}
+
 .rule {
   height: 1px;
   background: var(--color-line);
@@ -147,7 +194,8 @@ input:focus-visible {
   .marquee-track,
   .pulse-ring,
   .rise-in,
-  .caret {
+  .caret,
+  .load-bar {
     animation: none !important;
     transition: none !important;
     opacity: 1;

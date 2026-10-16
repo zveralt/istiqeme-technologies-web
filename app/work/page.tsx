@@ -5,7 +5,8 @@ import { Guide } from "@/components/Guide";
 import { Intake } from "@/components/Intake";
 import { Eyebrow } from "@/components/Reveal";
 import { VoiceAgent } from "@/components/VoiceAgent";
-import { site, work } from "@/lib/site";
+import { WorkCard } from "@/components/WorkCard";
+import { site, work, workMenu } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-5 pb-10 pt-32 md:px-8 md:pt-40">
+      <section className="glow-field mx-auto max-w-7xl bg-white px-5 pb-12 pt-32 md:px-8 md:pt-40">
         <Eyebrow>Portfolio</Eyebrow>
         <h1 className="max-w-4xl font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.95]">
           Our work.
@@ -27,21 +28,21 @@ export default function WorkPage() {
         </p>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-12 md:px-8">
+      <section className="mx-auto max-w-7xl bg-black/[0.03] px-5 py-12 md:px-8">
         <Compare />
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+      <section className="mx-auto max-w-7xl bg-white px-5 py-20 md:px-8">
         <CommandCenter />
       </section>
 
-      <section className="px-5 py-8 md:px-8">
+      <section className="bg-black/[0.03] px-5 py-8 md:px-8">
         <div className="mx-auto max-w-7xl">
           <VoiceAgent />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
+      <section className="mx-auto max-w-7xl bg-white px-5 py-20 md:px-8">
         <Eyebrow>Demo guide</Eyebrow>
         <h2 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.05]">
           Tour our live work.
@@ -63,35 +64,47 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-12 md:px-8">
+      <section className="mx-auto max-w-7xl bg-white px-5 pb-8 md:px-8">
+        <Eyebrow>Solutions</Eyebrow>
+        <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)]">
+          What we have built for problems in the market.
+        </h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {workMenu.map((item) => (
+            <article
+              key={item.id}
+              id={item.id}
+              className="scroll-mt-28 rounded-[24px] bg-forest p-6 text-white"
+            >
+              <h3 className="font-display text-2xl">{item.title}</h3>
+              <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-white/55">
+                The problem
+              </p>
+              <p className="mt-1 text-[15px]">{item.problem}</p>
+              <p className="mt-4 text-[12px] uppercase tracking-[0.18em] text-ember-bright">
+                The system
+              </p>
+              <p className="mt-1 text-[15px] leading-relaxed text-white/85">
+                {item.solution}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl bg-black/[0.03] px-5 pb-12 md:px-8">
         <Eyebrow>Live client sites</Eyebrow>
         <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)]">
           Real websites we build and operate.
         </h2>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {work.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[24px] border border-line bg-cream p-6 transition hover:-translate-y-1"
-            >
-              <p className="text-[11px] uppercase tracking-[0.2em] text-muted">
-                {item.uptime} uptime
-              </p>
-              <h3 className="mt-3 font-display text-3xl">{item.name}</h3>
-              <p className="mt-1 text-[13px] text-muted">{item.kind}</p>
-              <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
-                {item.body}
-              </p>
-              <p className="mt-6 text-[13px] text-ember">Visit live site →</p>
-            </a>
+            <WorkCard key={item.name} {...item} />
           ))}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-5 py-20 md:grid-cols-[1fr_1.1fr] md:px-8">
+      <section className="mx-auto grid max-w-7xl gap-10 bg-white px-5 py-20 md:grid-cols-[1fr_1.1fr] md:px-8">
         <div>
           <Eyebrow>Correspondence</Eyebrow>
           <h2 className="font-display text-4xl">Corporate headquarters</h2>

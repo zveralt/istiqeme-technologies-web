@@ -14,10 +14,10 @@ export function ButtonLink({
 }) {
   const styles = {
     ember:
-      "bg-ember text-cream hover:bg-ember-bright shadow-[0_10px_30px_-12px_rgba(194,65,12,0.7)]",
-    ink: "bg-ink text-cream hover:bg-ink-soft",
+      "bg-forest text-white hover:bg-forest-mid shadow-[0_10px_30px_-12px_rgba(14,58,102,0.55)]",
+    ink: "bg-ember text-white hover:bg-ember-bright",
     ghost:
-      "bg-transparent text-ink border border-ink/15 hover:border-ink/40 hover:bg-cream/60",
+      "bg-transparent text-ink border border-ink/15 hover:border-ember/60 hover:bg-paper-deep",
     whatsapp: "bg-whatsapp text-white hover:brightness-110",
   }[variant];
 
