@@ -22,7 +22,17 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<MenuKey | null>(null);
   const [mobileGroup, setMobileGroup] = useState<MenuKey | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const timer = useRef<number | null>(null);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -48,10 +58,16 @@ export function Header() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-40 bg-[#07182c] text-white"
+      className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#07182c]/55 text-white backdrop-blur-xl backdrop-saturate-150"
       onMouseLeave={() => schedule(null, 180)}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 bg-[#07182c] transition-opacity duration-300 ${
+          scrolled ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
         <Logo />
         <nav className="relative hidden items-center gap-8 text-[13px] text-white/75 md:flex" aria-label="Primary">
           {nav.map((item) => {
@@ -111,7 +127,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#07182c] px-5 py-6 md:hidden">
+        <div className={`relative border-t border-white/10 px-5 py-6 md:hidden ${scrolled ? "bg-[#07182c]/40" : "bg-[#07182c]"}`}>
           <nav className="flex flex-col gap-4" aria-label="Mobile">
             {nav.map((item) => {
               const key = keyFor(item.href);
