@@ -2,6 +2,15 @@
 
 Marketing site for ISTIQEME Technologies. It presents services, live work, and a short intake, with optional Supabase accounts.
 
+## Stack (aligned with `skh-demo`)
+
+- Next.js 16 App Router (`src/app`), TypeScript, Tailwind CSS v4
+- Framer Motion (scroll reveals, service ticker), Lucide icons
+- `clsx` + `tailwind-merge` (`cn` in `src/lib/utils.ts`)
+- Supabase Auth (`@supabase/ssr`), Zod for future form validation
+- Vercel Analytics + Speed Insights
+- UI shell: theme toggle, grid background, glow buttons (`src/components/ui/`)
+
 ## Run locally
 
 ```bash
