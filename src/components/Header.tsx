@@ -384,7 +384,7 @@ function Column({
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
+              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground dark:hover:text-[#102033]"
             >
               {item.title}
             </a>
@@ -392,7 +392,7 @@ function Column({
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
+              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground dark:hover:text-[#102033]"
             >
               {item.title}
             </Link>

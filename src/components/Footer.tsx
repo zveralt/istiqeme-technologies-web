@@ -31,7 +31,7 @@ export function Footer() {
               <span className="h-2 w-2 rounded-full bg-whatsapp" aria-hidden />
               Replies within one business day
             </p>
-            <PillLink href={waLink()} external className="!bg-white !text-forest">
+            <PillLink href={waLink()} external className="!bg-white !text-[#0e3a66]">
               Message us on WhatsApp
             </PillLink>
           </div>

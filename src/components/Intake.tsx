@@ -38,7 +38,7 @@ WhatsApp: ${answers.phone || "—"}`;
 
   return (
     <div
-      className={`rounded-[28px] border border-line bg-white text-[#102033] shadow-[0_30px_80px_-40px_rgba(14,58,102,0.45)] ${
+      className={`rounded-[28px] border border-line bg-card text-foreground shadow-[0_30px_80px_-40px_rgba(14,58,102,0.45)] ${
         compact ? "" : "h-full w-full"
       }`}
     >

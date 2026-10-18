@@ -89,6 +89,49 @@
   color: var(--forest-ink);
 }
 
+/* @theme inline bakes light hex into these utilities, so .dark variable
+   overrides never reach them. Restate the dark tokens here. */
+.dark .text-ink {
+  color: #e8f0fa;
+}
+
+.dark .text-ink-soft {
+  color: #b8c8dc;
+}
+
+.dark .text-muted {
+  color: #8aa0b4;
+}
+
+.dark .bg-paper {
+  background-color: #0f1a24;
+}
+
+.dark .bg-paper-deep {
+  background-color: #121c28;
+}
+
+.dark .bg-cream {
+  background-color: #121c28;
+}
+
+.dark .bg-sand {
+  background-color: #1a2836;
+}
+
+.dark .bg-line {
+  background-color: rgba(126, 182, 255, 0.18);
+}
+
+.dark .border-line {
+  border-color: rgba(126, 182, 255, 0.18);
+}
+
+.dark .divide-line > :not([hidden]) ~ :not([hidden]),
+.dark .divide-line > :not(:last-child) {
+  border-color: rgba(126, 182, 255, 0.18);
+}
+
 .dark .hover\:text-white:hover {
   color: #ffffff;
 }
@@ -604,6 +647,12 @@ section.bg-paper-deep {
 :is(.band-deep, .on-dark) .itq-circle {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.32);
+}
+
+.dark #problems .group:hover .itq-circle {
+  background: #fff;
+  border-color: #fff;
+  color: #0e3a66;
 }
 
 :is(.band-deep, .on-dark) .hairline,
