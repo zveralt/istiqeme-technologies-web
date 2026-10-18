@@ -89,7 +89,7 @@ export default function HomePage() {
               onDark
               eyebrow="Problems we solve"
               title="Every system starts with a problem we already see"
-              description={`Since ${site.since} we have built practical tools for retailers, wholesalers, and local businesses in ${site.city}. These are the gaps we keep meeting — and the systems that close them.`}
+              description={`Since ${site.since} we have built useful tools for retailers, wholesalers, and local businesses in ${site.city}. These are the gaps we keep meeting — and the systems that close them.`}
             />
           </Reveal>
           <EditorialRows items={problemRows} variant="padded" className="mt-14 text-white md:mt-16" />
