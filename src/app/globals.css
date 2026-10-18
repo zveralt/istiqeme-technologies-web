@@ -138,6 +138,36 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #0e3a66 #f6f8fb;
+}
+
+.dark {
+  scrollbar-color: #8eb6e8 #070d14;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f6f8fb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0e3a66;
+  border: 2px solid #f6f8fb;
+  border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #070d14;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #8eb6e8;
+  border-color: #070d14;
 }
 
 body {
