@@ -15,16 +15,16 @@ export function Footer() {
   return (
     <footer
       data-header-theme="dark"
-      className="relative z-10 overflow-hidden bg-ink text-white dark:bg-[#05090f]"
+      className="relative z-10 overflow-hidden bg-ink text-white dark:bg-[#05090f] dark:shadow-[inset_0_1px_0_rgba(214,230,255,0.12)]"
     >
       <div className="itq-container relative">
         {/* Statement */}
         <div className="grid gap-10 border-b border-white/10 py-16 md:py-20 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-8">
+          <div className="itq-fill-type lg:col-span-8">
             <Logo inverted />
-            <p className="itq-display mt-10 max-w-[12ch] !text-[clamp(2.5rem,5.2vw,4.75rem)] text-white">
-              Complex systems.
-              <span className="block text-ember-bright">Beautifully simplified.</span>
+            <p className="itq-display mt-10 w-full max-w-none text-white">
+              <span className="block md:whitespace-nowrap">Complex systems.</span>
+              <span className="block text-ember-bright md:whitespace-nowrap">Beautifully simplified.</span>
             </p>
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">{site.tagline}</p>
           </div>

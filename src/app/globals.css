@@ -11,6 +11,7 @@
   --color-primary-foreground: #ffffff;
   --color-muted-foreground: var(--muted-foreground);
   --font-display: var(--font-outfit), "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-bebas-neue), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-dm: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --color-paper: #ffffff;
@@ -41,10 +42,10 @@
   --forest-fill: #0e3a66;
   --forest-ink: #0e3a66;
 
-  /* type scale — Outfit display, DM Sans text */
-  --fs-display: clamp(2.6rem, 5.4vw, 4.85rem);
-  --fs-h2: clamp(2rem, 3.9vw, 3.4rem);
-  --fs-h3: clamp(1.25rem, 1.5vw, 1.5rem);
+  /* type scale — Bebas Neue headings, DM Sans text */
+  --fs-display: clamp(3.1rem, 7.2vw, 5.75rem);
+  --fs-h2: clamp(2.65rem, 5.4vw, 4.4rem);
+  --fs-h3: clamp(1.125rem, 1.25vw, 1.3125rem);
   --fs-lead: clamp(1.0625rem, 1.15vw, 1.1875rem);
   --tracking-display: -0.035em;
   --tracking-h2: -0.03em;
@@ -86,15 +87,15 @@
 .dark {
   --background: #070d14;
   --foreground: #e8f0fa;
-  --card: #0f1a24;
+  --card: #13202c;
   --card-foreground: #e8f0fa;
-  --color-paper: #0f1a24;
-  --color-paper-deep: #121c28;
-  --color-cream: #121c28;
+  --color-paper: #13202c;
+  --color-paper-deep: #182838;
+  --color-cream: #182838;
   --color-ink: #e8f0fa;
   --color-ink-soft: #b8c8dc;
   --color-muted: #8aa0b4;
-  --color-line: rgba(126, 182, 255, 0.18);
+  --color-line: rgba(214, 230, 255, 0.22);
   --muted-foreground: #8aa0b4;
   --forest-fill: #0e3a66;
   --forest-ink: #d6e6ff;
@@ -118,27 +119,30 @@
 .dark .text-muted {
   color: #8aa0b4;
 }
+.dark .text-ember {
+  color: #c5d9ff;
+}
 .dark .bg-paper {
-  background-color: #0f1a24;
+  background-color: #13202c;
 }
 .dark .bg-paper-deep {
-  background-color: #121c28;
+  background-color: #182838;
 }
 .dark .bg-cream {
-  background-color: #121c28;
+  background-color: #182838;
 }
 .dark .bg-sand {
   background-color: #1a2836;
 }
 .dark .bg-line {
-  background-color: rgba(126, 182, 255, 0.18);
+  background-color: rgba(214, 230, 255, 0.22);
 }
 .dark .border-line {
-  border-color: rgba(126, 182, 255, 0.18);
+  border-color: rgba(214, 230, 255, 0.22);
 }
 .dark .divide-line > :not([hidden]) ~ :not([hidden]),
 .dark .divide-line > :not(:last-child) {
-  border-color: rgba(126, 182, 255, 0.18);
+  border-color: rgba(214, 230, 255, 0.22);
 }
 .dark .hover\:text-white:hover {
   color: #ffffff;
@@ -187,6 +191,20 @@ body {
   font-feature-settings: "ss01", "cv11";
 }
 
+.dark body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(214, 230, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 230, 255, 0.055) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%);
+}
+
 ::selection {
   background: color-mix(in srgb, var(--color-ember) 24%, transparent);
   color: var(--color-ink);
@@ -223,10 +241,50 @@ select:focus-visible,
   line-height: 1;
 }
 
+/* Section titles stay in Bebas Neue. Subheadings drop to DM Sans so they read lighter. */
+h1, h1.font-display, .itq-display,
+h2, h2.font-display, .itq-h2 {
+  font-family: var(--font-heading), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+h1, h1.font-display, .itq-display {
+  font-size: var(--fs-display);
+  letter-spacing: 0.015em;
+  line-height: 0.9;
+}
+h2, h2.font-display, .itq-h2 {
+  font-size: var(--fs-h2);
+  letter-spacing: 0.02em;
+  line-height: 0.92;
+}
+h3, h3.font-display, .itq-h3,
+h4, h4.font-display, h5, h6 {
+  font-family: var(--font-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+}
+h3, h3.font-display, .itq-h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+h4, h4.font-display, h5, h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .font-accent {
   font-family: var(--font-display);
   font-weight: 300;
   font-style: normal;
+}
+
+.itq-fill-type {
+  container-type: inline-size;
+}
+.itq-fill-type .itq-display {
+  font-size: clamp(2.65rem, 10.4cqi, 6.75rem);
 }
 
 .itq-hero-fade {
@@ -366,6 +424,15 @@ select:focus-visible,
     box-shadow: none;
   }
 
+  .dark .itq-sheet--deep {
+    background: linear-gradient(180deg, #0c1c30 0%, #0e3a66 100%);
+    box-shadow: inset 0 1px 0 rgba(214, 230, 255, 0.14);
+  }
+  .dark .itq-sheet--ember {
+    background: linear-gradient(180deg, #123056 0%, #0e3a66 100%);
+    box-shadow: inset 0 1px 0 rgba(214, 230, 255, 0.16);
+  }
+
   .itq-sheet--tint {
     background: var(--color-paper-deep);
   }
@@ -423,29 +490,29 @@ select:focus-visible,
   }
 
   .itq-display {
-    font-family: var(--font-display);
+    font-family: var(--font-heading), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-size: var(--fs-display);
-    line-height: 0.98;
-    letter-spacing: var(--tracking-display);
+    line-height: 0.9;
+    letter-spacing: 0.015em;
     text-wrap: balance;
   }
 
   .itq-h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-heading), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-size: var(--fs-h2);
-    line-height: 1.04;
-    letter-spacing: var(--tracking-h2);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
     text-wrap: balance;
   }
 
   .itq-h3 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
     font-size: var(--fs-h3);
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.018em;
   }
 
   .itq-lead {
@@ -615,7 +682,7 @@ select:focus-visible,
   .dark .itq-dotfield {
     background-image: radial-gradient(
       circle at 1px 1px,
-      color-mix(in srgb, var(--color-ember-bright) 34%, transparent) 1px,
+      color-mix(in srgb, var(--color-ember-bright) 18%, transparent) 1px,
       transparent 1.6px
     );
   }
@@ -999,6 +1066,66 @@ select:focus-visible,
 }
 
 /* =====================================================================
+   Portfolio plate (work cards only — does not change .itq-media)
+   ===================================================================== */
+
+.itq-plate {
+  position: relative;
+  overflow: hidden;
+}
+.itq-plate img {
+  object-position: center 10%;
+  transform: scale(1.045);
+  transform-origin: center 10%;
+  transition: transform 700ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .itq-plate img,
+  .group:focus-visible .itq-plate img {
+    transform: scale(1.07);
+  }
+}
+.itq-plate-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 12%, transparent 48%);
+  mask-image: linear-gradient(to top, #000 0%, #000 12%, transparent 48%);
+  pointer-events: none;
+}
+.itq-plate-scrim {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: 58%;
+  background: linear-gradient(
+    to top,
+    #070d14 0%,
+    #070d14 4.25rem,
+    rgba(7,13,20,0) 100%
+  );
+  transition: background 400ms ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .itq-plate-scrim,
+  .group:focus-visible .itq-plate-scrim {
+    background: linear-gradient(
+      to top,
+      #070d14 0%,
+      #070d14 4.25rem,
+      rgba(7,13,20,0) 100%
+    );
+  }
+}
+
+/* =====================================================================
    Reduced motion
    ===================================================================== */
 
@@ -1028,5 +1155,12 @@ select:focus-visible,
   .rise-in {
     opacity: 1;
     transform: none;
+  }
+  .itq-plate img,
+  .itq-plate-scrim {
+    transition: none !important;
+  }
+  .itq-plate img {
+    transform: scale(1.045) !important;
   }
 }

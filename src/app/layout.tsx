@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { DM_Sans, Outfit } from "next/font/google";
+import { Bebas_Neue, DM_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -11,8 +11,15 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { site } from "@/lib/site";
 
-/* Display face: Outfit at light–medium weights, tight tracking.
-   Text face: DM Sans for everything that has to be read. */
+/* Outfit stays on .font-display (stats, quotes).
+   Bebas Neue is the heading face. DM Sans is the text face. */
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas-neue",
+  display: "swap",
+});
+
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
@@ -56,7 +63,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${dmSans.variable} h-full`}
+      className={`${bebasNeue.variable} ${outfit.variable} ${dmSans.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

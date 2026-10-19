@@ -46,20 +46,17 @@ export function HomeHero() {
         <div className="itq-container flex flex-1 flex-col justify-center pb-6 pt-24 md:pt-28 lg:pb-8">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
             {/* Copy */}
-            <div className="lg:col-span-7">
+            <div className="itq-fill-type lg:col-span-7">
               <motion.p {...rise(0, 10)} className="itq-eyebrow">
                 Digital engineering studio · {site.city}
               </motion.p>
 
-              <h1 className="itq-display mt-6 max-w-[min(12ch,100%)] text-foreground md:mt-7">
-                <motion.span {...rise(1, 22)} className="block">
+              <h1 className="itq-display mt-6 w-full max-w-none text-foreground md:mt-7">
+                <motion.span {...rise(1, 22)} className="block md:whitespace-nowrap">
                   Complex systems.
                 </motion.span>
-                <motion.span {...rise(2, 22)} className="block text-forest">
-                  Beautifully
-                </motion.span>
-                <motion.span {...rise(3, 22)} className="block text-forest">
-                  simplified<span className="text-ember dark:text-ember-bright">.</span>
+                <motion.span {...rise(2, 22)} className="block text-forest md:whitespace-nowrap">
+                  Beautifully simplified<span className="text-ember dark:text-ember-bright">.</span>
                 </motion.span>
               </h1>
 

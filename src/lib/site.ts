@@ -304,6 +304,7 @@ export const pillars = [
 export const work = [
   {
     name: "istiqeme.net",
+    plate: "Clear data, direct to leadership",
     problem: "Leadership needs a clear view of data and a direct line to the business.",
     kind: "Enterprise telemetry corporate hub",
     body: "Corporate platform for clear data tracking, clean information mapping, and direct executive communication.",
@@ -313,6 +314,7 @@ export const work = [
   },
   {
     name: "Credo",
+    plate: "Workflows that hold on a phone",
     problem: "Complex workflows fall apart on a phone screen.",
     kind: "Interactive workflow business framework",
     body: "Multi-page corporate layout presenting complex operational workflows smoothly on any mobile screen.",
@@ -322,6 +324,7 @@ export const work = [
   },
   {
     name: "Pascale Agency",
+    plate: "High-end media without the lag",
     problem: "High-end work needs a fast showcase that does not lag.",
     kind: "High-velocity digital media showcase",
     body: "Fast digital media showcase for high-end brand assets and portfolios without local network lag.",
@@ -331,6 +334,7 @@ export const work = [
   },
   {
     name: "SKH Solutions",
+    plate: "Subjects, practice, five campuses",
     problem: "Students need one institute for subjects, practice, and a campus close to home.",
     kind: "O and A Level coaching",
     body: "O and A Level coaching across five Karachi campuses, with subject specialists and weekly written practice.",
@@ -340,6 +344,7 @@ export const work = [
   },
   {
     name: "Veritas Schooling System",
+    plate: "Early years through A Levels",
     problem: "Families want one school journey from early years through A Levels.",
     kind: "Karachi school",
     body: "A Karachi school from Early Years to A Levels, with Gulshan and Jauhar campuses and admissions on WhatsApp.",
