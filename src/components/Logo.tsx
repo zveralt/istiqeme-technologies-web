@@ -14,7 +14,7 @@ export function Logo({
         alt="ISTIQEME — Your Digital Partner"
         className={
           compact
-            ? "h-10 w-auto"
+            ? "h-9 w-auto md:h-10"
             : inverted
               ? "h-14 w-auto"
               : "h-12 w-auto md:h-14"

@@ -52,22 +52,18 @@ export function EditorialRows({
       {items.map((row, i) => {
         const inner = (
           <>
-            <span className="font-dm text-[12px] font-medium tabular-nums tracking-[0.18em] opacity-50 md:pt-2">
-              {row.index}
-            </span>
+            <span className="itq-index !text-current opacity-50 md:pt-2">{row.index}</span>
             <div className="min-w-0">
-              <TitleTag className="text-[clamp(1.25rem,2.2vw,1.6rem)] font-semibold leading-snug tracking-tight">
+              <TitleTag className="font-display text-[clamp(1.4rem,2.2vw,1.85rem)] leading-[1.1] tracking-[-0.02em]">
                 {row.title}
               </TitleTag>
               {row.kicker ? (
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] opacity-55">
+                <p className="mt-2.5 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] opacity-55">
                   {row.kicker}
                 </p>
               ) : null}
             </div>
-            <p className="max-w-md text-[15px] leading-relaxed opacity-75 md:justify-self-end md:pt-1">
-              {row.body}
-            </p>
+            <p className="max-w-md text-[15px] leading-relaxed opacity-75 md:pt-1">{row.body}</p>
             <span className="itq-circle hidden md:grid" aria-hidden>
               <Arrow />
             </span>
@@ -79,7 +75,7 @@ export function EditorialRows({
         );
 
         const rowClass =
-          "group grid gap-4 py-7 transition-colors duration-300 md:grid-cols-[3.5rem_minmax(0,1.1fr)_minmax(0,1fr)_auto] md:items-start md:gap-8 md:py-9 lg:gap-12";
+          "group grid gap-4 py-7 transition-colors duration-300 md:grid-cols-[3rem_minmax(0,1.05fr)_minmax(0,1fr)_auto] md:items-start md:gap-8 md:py-8 lg:gap-12";
 
         return (
           <Reveal as="li" key={row.id} delay={Math.min(i * 50, 200)}>

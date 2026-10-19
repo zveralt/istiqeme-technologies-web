@@ -4,7 +4,8 @@ import { HomeHero } from "@/components/HomeHero";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceRows } from "@/components/ServiceRows";
-import { WhyPinned } from "@/components/WhyPinned";
+import { TestimonialRow } from "@/components/TestimonialRow";
+import { WhyCompare } from "@/components/WhyCompare";
 import { WorkShowcase } from "@/components/WorkShowcase";
 import { AiHomeTeaser } from "@/components/ai/AiHomeTeaser";
 import { EditorialRows } from "@/components/ui/EditorialRows";
@@ -33,6 +34,8 @@ const problemRows = problems.map((p, i) => ({
   cta: "See the system",
 }));
 
+/* Page rhythm: light hero → white services → tinted work → deep comparison →
+   white AI → tinted problems/process → deep CTA → ink footer. */
 export default function HomePage() {
   return (
     <>
@@ -73,31 +76,38 @@ export default function HomePage() {
           <div className="mt-14 md:mt-20">
             <WorkShowcase limit={3} />
           </div>
+          <div className="mt-20 md:mt-28">
+            <TestimonialRow />
+          </div>
         </div>
       </Sheet>
 
-      <WhyPinned />
+      <WhyCompare />
 
       <Sheet id="ai">
         <AiHomeTeaser />
       </Sheet>
 
-      <Sheet id="problems" tone="deep">
+      <Sheet id="problems" tone="tint">
         <div className="itq-container">
           <Reveal>
             <SectionHeading
-              onDark
               eyebrow="Problems we solve"
               title="Every system starts with a problem we already see"
               description={`Since ${site.since} we have built useful tools for retailers, wholesalers, and local businesses in ${site.city}. These are the gaps we keep meeting — and the systems that close them.`}
             />
           </Reveal>
-          <EditorialRows items={problemRows} variant="padded" className="mt-14 text-white md:mt-16" />
-          <div className="mt-16 md:mt-20">
-            <p className="itq-eyebrow">How we close them</p>
-            <h3 className="mt-4 text-[1.5rem] font-semibold text-white">From a short interview to a system that runs.</h3>
-            <div className="mt-10">
-              <ProcessSteps compact onDark />
+          <EditorialRows items={problemRows} className="mt-14 md:mt-16" />
+
+          <div className="mt-20 grid gap-10 md:mt-24 lg:grid-cols-12 lg:gap-12">
+            <Reveal className="lg:col-span-4">
+              <p className="itq-eyebrow">How we close them</p>
+              <h3 className="itq-h2 mt-5 !text-[clamp(1.6rem,2.4vw,2.1rem)] text-foreground">
+                From a short interview to a system that runs<span className="text-ember dark:text-ember-bright">.</span>
+              </h3>
+            </Reveal>
+            <div className="lg:col-span-8">
+              <ProcessSteps compact />
             </div>
           </div>
         </div>

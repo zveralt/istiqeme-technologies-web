@@ -21,31 +21,31 @@ export function ClosingCta({
 }) {
   return (
     <Sheet id={id} tone="ember" className="scroll-mt-24">
-      <div className="itq-container grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
-        <Reveal>
+      <div className="itq-container grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <Reveal className="lg:col-span-6">
           <p className="itq-eyebrow">{eyebrow}</p>
-          <h2 className="itq-h2 mt-5 text-white">
+          <h2 className="itq-h2 mt-5 max-w-[14ch] text-white">
             {title}
             <span className="text-ember-bright">{mark}</span>
           </h2>
-          <p className="itq-lead mt-5 max-w-md text-white/75">{description}</p>
+          <p className="itq-lead mt-6 max-w-md text-white/75">{description}</p>
           {extra ?? (
-            <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-white/20 pt-6 text-white">
+            <dl className="mt-10 grid grid-cols-2 gap-8 border-t border-white/20 pt-7 text-white">
               <div>
-                <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">Call</dt>
-                <dd className="mt-2 space-y-1 text-[15px]">
+                <dt className="itq-micro !text-white/55">Call</dt>
+                <dd className="mt-3 space-y-1.5 text-[15px]">
                   {site.phones.map((p) => (
-                    <a key={p.href} href={p.href} className="block hover:text-ember-bright">
+                    <a key={p.href} href={p.href} className="itq-ulink block w-fit tabular-nums hover:text-ember-bright">
                       {p.label}
                     </a>
                   ))}
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">Email</dt>
-                <dd className="mt-2 text-[15px]">
+                <dt className="itq-micro !text-white/55">Email</dt>
+                <dd className="mt-3 text-[15px]">
                   {site.emails.map((e) => (
-                    <a key={e.href} href={e.href} className="block hover:text-ember-bright">
+                    <a key={e.href} href={e.href} className="itq-ulink block w-fit hover:text-ember-bright">
                       {e.label}
                     </a>
                   ))}
@@ -54,7 +54,7 @@ export function ClosingCta({
             </dl>
           )}
         </Reveal>
-        <Reveal delay={80}>
+        <Reveal delay={100} className="lg:col-span-6">
           <Intake />
         </Reveal>
       </div>

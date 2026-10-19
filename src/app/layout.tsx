@@ -1,31 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Anton, DM_Sans, Fraunces, Outfit } from "next/font/google";
+import { DM_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
-import { GridBackground } from "@/components/ui/GridBackground";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { site } from "@/lib/site";
 
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-anton",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  style: ["italic"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
+/* Display face: Outfit at light–medium weights, tight tracking.
+   Text face: DM Sans for everything that has to be read. */
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
@@ -69,16 +56,14 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${anton.variable} ${fraunces.variable} ${outfit.variable} ${dmSans.variable} h-full`}
+      className={`${outfit.variable} ${dmSans.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
-          <div className="grain" aria-hidden />
           <ScrollToTop />
-          <GridBackground />
           <Header />
           <main className="relative z-10 flex-1 overflow-x-clip">{children}</main>
           <Footer />

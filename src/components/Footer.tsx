@@ -9,6 +9,8 @@ const explore = [
   { href: "/login", label: "Login" },
 ];
 
+const linkClass = "itq-ulink text-[15px] text-white/80 hover:text-white";
+
 export function Footer() {
   return (
     <footer
@@ -16,83 +18,88 @@ export function Footer() {
       className="relative z-10 overflow-hidden bg-ink text-white dark:bg-[#05090f]"
     >
       <div className="itq-container relative">
-        <div className="grid gap-10 border-b border-white/10 py-16 md:grid-cols-12 md:py-24">
-          <div className="md:col-span-8">
+        {/* Statement */}
+        <div className="grid gap-10 border-b border-white/10 py-16 md:py-20 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-8">
             <Logo inverted />
-            <p className="mt-10 font-display text-[clamp(3rem,7vw,6rem)] leading-[0.92] text-white">
+            <p className="itq-display mt-10 max-w-[12ch] !text-[clamp(2.5rem,5.2vw,4.75rem)] text-white">
               Complex systems.
-              <br />
-              <span className="text-ember-bright">Beautifully simplified.</span>
+              <span className="block text-ember-bright">Beautifully simplified.</span>
             </p>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/70">{site.tagline}</p>
+            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">{site.tagline}</p>
           </div>
-          <div className="flex flex-col justify-end gap-5 md:col-span-4 md:items-end">
-            <p className="inline-flex items-center gap-2 text-[13px] text-white/75">
-              <span className="h-2 w-2 rounded-full bg-whatsapp" aria-hidden />
+          <div className="flex flex-col justify-end gap-5 lg:col-span-4 lg:items-end">
+            <p className="inline-flex items-center gap-2 text-[13px] text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-whatsapp" aria-hidden />
               Replies within one business day
             </p>
-            <PillLink href={waLink()} external className="!bg-white !text-[#0e3a66]">
+            <PillLink href={waLink()} external className="!bg-white !text-[#0e3a66] hover:!bg-ember-bright">
               Message us on WhatsApp
             </PillLink>
           </div>
         </div>
 
-        <div className="grid gap-10 py-12 md:grid-cols-12 md:py-16">
-          <div className="md:col-span-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Explore</p>
-            <ul className="mt-5 space-y-2.5 text-[15px]">
+        {/* Columns */}
+        <div className="grid gap-10 py-12 md:grid-cols-12 md:py-14">
+          <nav className="md:col-span-3" aria-label="Explore">
+            <p className="itq-micro !text-white/45">Explore</p>
+            <ul className="mt-5 space-y-2.5">
               {explore.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-white/85 transition-colors hover:text-white">
+                  <Link href={item.href} className={linkClass}>
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="md:col-span-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">AI & automation</p>
-            <ul className="mt-5 space-y-2.5 text-[15px]">
+          </nav>
+          <nav className="md:col-span-3" aria-label="AI and automation">
+            <p className="itq-micro !text-white/45">AI &amp; automation</p>
+            <ul className="mt-5 space-y-2.5">
               {aiMenu.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-white/85 transition-colors hover:text-white">
+                  <Link href={item.href} className={linkClass}>
                     {item.title}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="md:col-span-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Contact</p>
-            <ul className="mt-5 space-y-2.5 text-[15px]">
+          </nav>
+          <div className="md:col-span-6 lg:col-span-5 lg:col-start-8">
+            <p className="itq-micro !text-white/45">Contact</p>
+            <ul className="mt-5 space-y-2.5">
               {site.phones.map((p) => (
                 <li key={p.href}>
-                  <a href={p.href} className="text-white/85 transition-colors hover:text-white">
+                  <a href={p.href} className={`${linkClass} tabular-nums`}>
                     {p.label}
                   </a>
                 </li>
               ))}
               {site.emails.map((e) => (
                 <li key={e.href}>
-                  <a href={e.href} className="text-white/85 transition-colors hover:text-white">
+                  <a href={e.href} className={linkClass}>
                     {e.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <address className="mt-6 max-w-sm text-[13px] not-italic leading-relaxed text-white/60">
+            <address className="mt-6 max-w-sm text-[13.5px] not-italic leading-relaxed text-white/55">
               {site.address}
             </address>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-[12px] text-white/50 md:flex-row md:items-center md:justify-between">
+        {/* Legal */}
+        <div className="flex flex-col gap-3 border-t border-white/10 py-6 font-dm text-[12.5px] text-white/50 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>
-          <p>
-            Engineered in {site.city} · Premium digital systems
-          </p>
+          <div className="flex items-center gap-6">
+            <p>Engineered in {site.city}</p>
+            <a href="#top" className="itq-ulink text-white/70 hover:text-white">
+              Back to top ↑
+            </a>
+          </div>
         </div>
       </div>
     </footer>

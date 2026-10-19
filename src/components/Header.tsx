@@ -169,7 +169,7 @@ export function Header() {
                 className="absolute top-full left-1/2 z-50 hidden -translate-x-1/2 pt-2 md:block"
                 onMouseEnter={clearTimer}
               >
-                <div className="w-[40rem] max-w-[80vw] rounded-[1.25rem] border border-line bg-card p-7 text-foreground shadow-[0_30px_80px_-30px_rgba(14,58,102,0.45)]">
+                <div className="w-[40rem] max-w-[80vw] rounded-[var(--radius-card)] border border-line bg-card p-7 text-foreground shadow-[var(--shadow-float)]">
                   <MenuColumns menu={menu} />
                 </div>
               </motion.div>

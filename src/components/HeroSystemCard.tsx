@@ -5,109 +5,117 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { leadFlow } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* Step timeline (ms from loop start). 0 = idle/typing, 1 = customer, 2 = AI reply, 3 = CRM row. */
-const TIMELINE = [600, 2400, 4600, 8200];
+/* Scene timeline (ms from loop start).
+   0 = customer typing · 1 = customer message · 2 = assistant reply · 3 = record logged */
+const TIMELINE = [500, 2200, 4400, 7600];
+const LOOP_PAUSE = 4200;
 
 const customer = "Assalamualaikum — is the shop open? I want to order 40 units for Monday.";
 const agent =
   "Walaikum assalam. Yes — I can take the order now. May I have the item codes and a delivery address? I’ll log it and the team will confirm on WhatsApp first thing.";
 
+/* How far each pipeline step has got at each scene. */
+const STEP_STATE: Record<number, Array<"idle" | "active" | "done">> = {
+  0: ["active", "idle", "idle", "idle"],
+  1: ["done", "active", "idle", "idle"],
+  2: ["done", "done", "done", "active"],
+  3: ["done", "done", "done", "done"],
+};
+
+const STEP_LABEL = ["Received", "Qualified", "Replied", "Handed off"] as const;
+
 /**
  * The hero's visual object: a looping, DOM-built illustration of what ISTIQEME
- * actually ships — a WhatsApp inquiry at night, an AI reply, and a CRM record.
- * Not an image, not a screenshot of a client, no fabricated client data.
+ * ships — a WhatsApp inquiry at night, an assistant reply, and a logged lead.
+ * It is explicitly labelled as an illustration; nothing here is live data.
  */
 export function HeroSystemCard({ className }: { className?: string }) {
   const reduce = useReducedMotion();
-  const [step, setStep] = useState(0);
+  const [loopScene, setLoopScene] = useState(0);
+  /* Reduced-motion users see the finished state, no loop. */
+  const scene = reduce ? 3 : loopScene;
 
   useEffect(() => {
-    if (reduce) {
-      setStep(3);
-      return;
-    }
+    if (reduce) return;
     let timers: number[] = [];
     const run = () => {
-      setStep(0);
-      timers = TIMELINE.map((t, i) => window.setTimeout(() => setStep(i), t));
-      timers.push(window.setTimeout(run, TIMELINE[TIMELINE.length - 1] + 3200));
+      timers = [
+        window.setTimeout(() => setLoopScene(0), 0),
+        ...TIMELINE.map((t, i) => window.setTimeout(() => setLoopScene(i), t)),
+        window.setTimeout(run, TIMELINE[TIMELINE.length - 1] + LOOP_PAUSE),
+      ];
     };
     run();
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [reduce]);
 
-  const active = Math.min(step, 3);
+  const states = STEP_STATE[scene] ?? STEP_STATE[3];
 
   return (
     <div
       className={cn(
-        "relative isolate overflow-hidden rounded-[var(--radius-card)] text-white",
-        "bg-[linear-gradient(170deg,#0b2744_0%,#0e3a66_60%,#164e86_100%)]",
-        "shadow-[0_40px_120px_-40px_rgba(14,58,102,0.6)]",
+        "relative isolate overflow-hidden rounded-[var(--radius-card)] border border-white/10 text-white",
+        "bg-[linear-gradient(165deg,#0b2744_0%,#0e3a66_70%,#123f6f_100%)]",
+        "shadow-[0_40px_100px_-40px_rgba(14,58,102,0.55)]",
         className,
       )}
-      aria-label="Illustration: a late-night WhatsApp inquiry answered by an AI assistant and logged as a lead"
       role="img"
+      aria-label="Illustration: a late-night WhatsApp inquiry answered by an AI assistant and logged as a qualified lead for the team"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]"
-      />
-
       {/* top bar */}
-      <div className="relative flex items-center justify-between border-b border-white/10 px-5 py-3.5 md:px-6">
-        <p className="inline-flex items-center gap-2 font-dm text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
-          <span className="relative grid h-2 w-2 place-items-center">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-whatsapp pulse-ring" />
-            <span className="relative h-2 w-2 rounded-full bg-whatsapp" />
-          </span>
-          Lead flow · live
+      <div className="relative flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3.5 md:px-6">
+        <p className="inline-flex items-center gap-2.5 whitespace-nowrap font-dm text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-whatsapp" aria-hidden />
+          WhatsApp <span className="text-white/35">·</span>{" "}
+          <span className="tabular-nums tracking-[0.1em] text-white/50">02:14 AM</span>
         </p>
-        <p className="font-dm text-[11px] tabular-nums tracking-[0.2em] text-white/45">02:14 AM</p>
+        <p className="whitespace-nowrap font-dm text-[10.5px] uppercase tracking-[0.14em] text-white/45">
+          Illustrative demo
+        </p>
       </div>
 
-      <div className="relative grid gap-6 px-5 pb-5 pt-5 md:grid-cols-[1fr_8.5rem] md:gap-7 md:px-6 md:pb-6">
-        {/* chat column */}
-        <div className="flex min-h-[17rem] flex-col justify-end gap-3 md:min-h-[19rem]">
+      <div className="relative grid gap-6 px-5 pb-5 pt-5 md:grid-cols-[minmax(0,1fr)_9.5rem] md:gap-6 md:px-6 md:pb-6">
+        {/* conversation */}
+        <div className="flex min-h-[17.5rem] flex-col justify-end gap-2.5 md:min-h-[19.5rem]">
           <AnimatePresence initial={false}>
-            {active >= 1 && (
+            {scene >= 1 && (
               <motion.div
                 key="customer"
-                layout
-                initial={reduce ? false : { opacity: 0, y: 14, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                layout="position"
+                initial={reduce ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                transition={{ duration: 0.55, ease: EASE }}
-                className="ml-auto max-w-[88%] rounded-[1.1rem] rounded-br-[0.35rem] bg-white/10 px-4 py-3 text-[13.5px] leading-snug text-white/92 ring-1 ring-white/10"
+                transition={{ duration: 0.5, ease: EASE }}
+                className="ml-auto max-w-[86%] rounded-[1rem] rounded-br-[0.3rem] bg-white/[0.09] px-4 py-3 text-[13.5px] leading-snug text-white/92 ring-1 ring-white/10"
               >
                 {customer}
               </motion.div>
             )}
-            {active >= 2 && (
+            {scene >= 2 && (
               <motion.div
                 key="agent"
-                layout
-                initial={reduce ? false : { opacity: 0, y: 14, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                layout="position"
+                initial={reduce ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                transition={{ duration: 0.55, ease: EASE }}
-                className="max-w-[92%] rounded-[1.1rem] rounded-bl-[0.35rem] bg-white px-4 py-3 text-[13.5px] leading-snug text-ink"
+                transition={{ duration: 0.5, ease: EASE }}
+                className="max-w-[92%] rounded-[1rem] rounded-bl-[0.3rem] bg-white px-4 py-3 text-[13.5px] leading-snug text-ink"
               >
-                <span className="mb-1 block font-dm text-[10px] font-semibold uppercase tracking-[0.18em] text-forest/70">
+                <span className="mb-1 block font-dm text-[10px] font-semibold uppercase tracking-[0.16em] text-forest/70">
                   ISTIQEME assistant
                 </span>
                 {agent}
               </motion.div>
             )}
-            {active === 0 && (
+            {scene === 0 && (
               <motion.div
                 key="typing"
                 initial={reduce ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                className="ml-auto inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-2"
+                className="ml-auto inline-flex items-center gap-1 rounded-full bg-white/[0.09] px-3 py-2 ring-1 ring-white/10"
                 aria-hidden
               >
                 {[0, 1, 2].map((d) => (
@@ -119,70 +127,82 @@ export function HeroSystemCard({ className }: { className?: string }) {
                 ))}
               </motion.div>
             )}
-            {active >= 3 && (
+            {scene >= 3 && (
               <motion.div
                 key="crm"
-                layout
-                initial={reduce ? false : { opacity: 0, y: 18 }}
+                layout="position"
+                initial={reduce ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-                className="mt-2 rounded-[1rem] border border-ember-bright/25 bg-forest/40 p-3.5"
+                transition={{ duration: 0.55, ease: EASE, delay: 0.08 }}
+                className="mt-1.5 rounded-[0.9rem] border border-ember-bright/20 bg-white/[0.05] p-3.5"
               >
-                <div className="flex items-center justify-between">
-                  <p className="font-dm text-[10px] font-semibold uppercase tracking-[0.2em] text-ember-bright">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-dm text-[10px] font-semibold uppercase tracking-[0.18em] text-ember-bright">
                     CRM · new lead
                   </p>
-                  <span className="rounded-full bg-whatsapp/20 px-2 py-0.5 font-dm text-[10px] font-semibold uppercase tracking-[0.14em] text-[#9fe3d6]">
+                  <span className="rounded-full bg-whatsapp/20 px-2 py-0.5 font-dm text-[10px] font-semibold uppercase tracking-[0.12em] text-[#9fe3d6]">
                     Qualified
                   </span>
                 </div>
-                <div className="mt-2.5 grid grid-cols-3 gap-3 text-[12px]">
+                <dl className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2 text-[12px]">
                   <div>
-                    <p className="text-white/45">Need</p>
-                    <p className="mt-0.5 font-medium text-white">Wholesale order</p>
+                    <dt className="text-white/45">Need</dt>
+                    <dd className="mt-0.5 font-medium text-white">Wholesale order</dd>
                   </div>
                   <div>
-                    <p className="text-white/45">Timeline</p>
-                    <p className="mt-0.5 font-medium text-white">Monday</p>
+                    <dt className="text-white/45">Timeline</dt>
+                    <dd className="mt-0.5 font-medium text-white">Monday</dd>
                   </div>
-                  <div>
-                    <p className="text-white/45">Next</p>
-                    <p className="mt-0.5 font-medium text-white">Team confirms · 9 AM</p>
+                  <div className="col-span-2">
+                    <dt className="text-white/45">Next</dt>
+                    <dd className="mt-0.5 font-medium text-white">Team confirms at 9 AM</dd>
                   </div>
-                </div>
+                </dl>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* flow rail */}
-        <ol className="hidden border-l border-white/10 pl-4 md:block" aria-hidden>
+        {/* pipeline rail */}
+        <ol className="hidden md:block" aria-hidden>
           {leadFlow.map((s, i) => {
-            const on = i <= active && active > 0;
+            const st = states[i];
             return (
-              <li key={s.n} className="relative py-2.5">
+              <li
+                key={s.n}
+                className={cn(
+                  "relative border-l pl-4 pb-5 last:pb-0",
+                  st === "idle" ? "border-white/12" : "border-ember-bright/60",
+                  "transition-colors duration-500",
+                )}
+              >
                 <span
                   className={cn(
-                    "absolute -left-[1.3rem] top-[0.95rem] h-2 w-2 rounded-full transition-colors duration-500",
-                    on ? "bg-ember-bright" : "bg-white/20",
+                    "absolute -left-[4.5px] top-[0.3rem] h-2 w-2 rounded-full transition-colors duration-500",
+                    st === "done" && "bg-ember-bright",
+                    st === "active" && "bg-white ring-4 ring-white/15",
+                    st === "idle" && "bg-white/20",
                   )}
                 />
-                <p
-                  className={cn(
-                    "font-dm text-[10px] tabular-nums tracking-[0.18em] transition-colors duration-500",
-                    on ? "text-ember-bright" : "text-white/35",
-                  )}
-                >
-                  {s.n}
-                </p>
+                <p className="itq-index !text-[10px] !tracking-[0.16em] text-white/40">{s.n}</p>
                 <p
                   className={cn(
                     "mt-0.5 text-[12px] font-medium leading-tight transition-colors duration-500",
-                    on ? "text-white" : "text-white/40",
+                    st === "idle" ? "text-white/40" : "text-white",
                   )}
                 >
                   {s.title}
+                </p>
+                <p
+                  className={cn(
+                    "mt-1 font-dm text-[10px] uppercase tracking-[0.12em] transition-colors duration-500",
+                    st === "done" && "text-ember-bright",
+                    st === "active" && "text-white/70",
+                    st === "idle" && "text-white/25",
+                  )}
+                >
+                  {st === "idle" ? "Waiting" : st === "active" ? "In progress" : STEP_LABEL[i]}
                 </p>
               </li>
             );

@@ -12,20 +12,20 @@ export function AiHomeTeaser() {
           eyebrow="AI & automation"
           title="Agents that read your business and run one job"
           description={`Browse ${agents.length} ready-to-deploy agents by industry, or see eight product lines — from owner briefs to operations on WhatsApp.`}
-          align="stack"
-        />
+        >
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink href="/ai/products" variant="ember">
+              Browse products
+            </ButtonLink>
+            <ButtonLink href="/ai/agents" variant="ghost">
+              Agent library
+            </ButtonLink>
+          </div>
+        </SectionHeading>
       </Reveal>
-      <div className="mt-10 flex flex-wrap gap-3">
-        <ButtonLink href="/ai/products" variant="ember">
-          Browse products
-        </ButtonLink>
-        <ButtonLink href="/ai/agents" variant="ghost">
-          Agent library
-        </ButtonLink>
-      </div>
-      <div className="mt-14 md:mt-16">
+      <Reveal delay={80} className="mt-14 md:mt-16">
         <LeadDemo />
-      </div>
+      </Reveal>
     </div>
   );
 }
