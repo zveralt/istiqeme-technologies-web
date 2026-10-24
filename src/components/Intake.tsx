@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { intakeSteps, site, waLink } from "@/lib/site";
 import { Arrow } from "./Button";
-import { cn } from "@/lib/utils";
 
 type Answers = {
   need?: string;
@@ -13,46 +11,24 @@ type Answers = {
   phone: string;
 };
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-const TOTAL = intakeSteps.length + 1;
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" aria-hidden>
-      <path d="M3.5 8.5l3 3 6-7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export function Intake({ compact = false }: { compact?: boolean }) {
-  const reduce = useReducedMotion();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({ phone: "" });
-  const [error, setError] = useState<string | null>(null);
-  const [sent, setSent] = useState(false);
 
-  const current = intakeSteps[Math.min(step, intakeSteps.length - 1)];
+  const current = intakeSteps[step];
   const isContact = step === intakeSteps.length;
 
-  const picked = useMemo(
-    () => ({
-      need: intakeSteps[0].options.find((o) => o.id === answers.need)?.title,
-      stage: intakeSteps[1].options.find((o) => o.id === answers.stage)?.title,
-      when: intakeSteps[2].options.find((o) => o.id === answers.when)?.title,
-    }),
-    [answers],
-  );
-
   const message = useMemo(() => {
+    const need = intakeSteps[0].options.find((o) => o.id === answers.need)?.title;
+    const stage = intakeSteps[1].options.find((o) => o.id === answers.stage)?.title;
+    const when = intakeSteps[2].options.find((o) => o.id === answers.when)?.title;
     return `Hi ISTIQEME Technologies — I filled the quick intake.
 
-Need: ${picked.need ?? "—"}
-Stage: ${picked.stage ?? "—"}
-Timeline: ${picked.when ?? "—"}
+Need: ${need ?? "—"}
+Stage: ${stage ?? "—"}
+Timeline: ${when ?? "—"}
 WhatsApp: ${answers.phone || "—"}`;
-  }, [picked, answers.phone]);
-
-  const href = waLink(message);
+  }, [answers]);
 
   function pick(id: string) {
     const key = current.id as "need" | "stage" | "when";
@@ -60,175 +36,107 @@ WhatsApp: ${answers.phone || "—"}`;
     setStep((s) => s + 1);
   }
 
-  function back() {
-    setError(null);
-    setSent(false);
-    setStep((s) => Math.max(0, s - 1));
-  }
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    const digits = answers.phone.replace(/\D/g, "");
-    if (digits.length < 10) {
-      setError("Please enter a WhatsApp number with at least 10 digits.");
-      return;
-    }
-    setError(null);
-    window.open(href, "_blank", "noreferrer");
-    setSent(true);
-  }
-
-  const motionProps = {
-    initial: reduce ? false : { opacity: 0, y: 8 },
-    animate: { opacity: 1, y: 0 },
-    exit: reduce ? undefined : { opacity: 0, y: -6, transition: { duration: 0.14 } },
-    transition: { duration: 0.28, ease: EASE },
-  };
-
   return (
-    <div className={cn("itq-surface text-foreground", compact ? "" : "h-full w-full")}>
-      {/* header */}
-      <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4 md:px-6">
+    <div
+      className={`rounded-2xl border border-[#d1d1d5] bg-white text-[#111214] shadow-[0_24px_60px_-32px_rgba(10,10,12,0.4)] [--color-ink:#111214] [--color-ink-soft:#41424a] [--color-muted:#5a5b64] [--color-line:#d1d1d5] [--color-paper:#f5f5f6] [--color-sand:#f5f5f6] ${
+        compact ? "" : "h-full w-full"
+      }`}
+    >
+      <div className="flex items-center justify-between border-b border-line px-6 py-4">
         <div>
-          <p className="itq-micro">Quick intake · {TOTAL} steps</p>
-          <h3 className="itq-h3 mt-1.5">Find your fit</h3>
-        </div>
-        <p className="itq-index mt-1 whitespace-nowrap">
-          Step {Math.min(step + 1, TOTAL)} <span className="text-line">/</span> {TOTAL}
-        </p>
-      </div>
-
-      {/* segmented progress */}
-      <div className="flex gap-1.5 px-5 pt-4 md:px-6" aria-hidden>
-        {Array.from({ length: TOTAL }).map((_, i) => (
-          <span
-            key={i}
-            className={cn(
-              "h-1 flex-1 rounded-full transition-colors duration-500",
-              i <= step ? "bg-ember dark:bg-ember-bright" : "bg-sand",
-            )}
-          />
-        ))}
-      </div>
-
-      <div className="px-5 pb-6 pt-6 md:px-6">
-        <AnimatePresence mode="wait" initial={false}>
-          {!isContact ? (
-            <motion.div key={current.id} {...motionProps}>
-              <p className="text-[17px] font-medium leading-snug text-foreground">{current.prompt}</p>
-              <div className="mt-4 grid gap-2.5" role="group" aria-label={current.prompt}>
-                {current.options.map((opt) => {
-                  const key = current.id as "need" | "stage" | "when";
-                  const selected = answers[key] === opt.id;
-                  return (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => pick(opt.id)}
-                      aria-pressed={selected}
-                      className="itq-option"
-                    >
-                      <span className="min-w-0">
-                        <span className="block text-[15px] font-medium leading-tight">{opt.title}</span>
-                        <span className="mt-1 block text-[13px] text-muted">{opt.hint}</span>
-                      </span>
-                      <span className={cn("itq-option-arrow shrink-0", selected && "!opacity-100")}>
-                        {selected ? <CheckIcon /> : <Arrow />}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ) : (
-            <motion.form key="contact" {...motionProps} className="grid gap-4" onSubmit={submit} noValidate>
-              {/* summary of choices */}
-              <dl className="grid grid-cols-3 gap-3 rounded-[0.875rem] bg-paper-deep p-3.5 text-[12.5px]">
-                {(
-                  [
-                    ["Need", picked.need],
-                    ["Stage", picked.stage],
-                    ["Timeline", picked.when],
-                  ] as const
-                ).map(([k, v]) => (
-                  <div key={k} className="min-w-0">
-                    <dt className="itq-micro !text-[10px]">{k}</dt>
-                    <dd className="mt-1 truncate font-medium text-foreground">{v ?? "—"}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <p className="text-[17px] font-medium leading-snug text-foreground">
-                Leave a WhatsApp number.
-                <span className="block text-[14px] font-normal text-muted">We reply within one business day.</span>
-              </p>
-
-              <label className="grid gap-2 text-[13px] font-medium text-ink-soft">
-                WhatsApp number
-                <input
-                  required
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  placeholder="03xx xxx xxxx"
-                  value={answers.phone}
-                  aria-invalid={error ? "true" : undefined}
-                  aria-describedby={error ? "intake-phone-error" : undefined}
-                  onChange={(e) => {
-                    setError(null);
-                    setSent(false);
-                    setAnswers((prev) => ({ ...prev, phone: e.target.value }));
-                  }}
-                  className="itq-input font-normal"
-                />
-              </label>
-              {error ? (
-                <p id="intake-phone-error" role="alert" className="-mt-1 text-[13px] text-[#b4402e] dark:text-[#f0a89c]">
-                  {error}
-                </p>
-              ) : null}
-
-              <button
-                type="submit"
-                className="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-[14px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-[#0f7a6e] active:scale-[0.985]"
-              >
-                Send on WhatsApp
-                <Arrow />
-              </button>
-
-              {sent ? (
-                <p className="text-[13px] leading-relaxed text-muted" role="status">
-                  WhatsApp should have opened in a new tab. If it didn’t,{" "}
-                  <a href={href} target="_blank" rel="noreferrer" className="itq-ulink text-forest dark:text-ember-bright">
-                    open it here
-                  </a>
-                  .
-                </p>
-              ) : null}
-            </motion.form>
-          )}
-        </AnimatePresence>
-
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-          {step > 0 ? (
-            <button type="button" className="itq-ulink text-[13px] font-medium text-muted hover:text-foreground" onClick={back}>
-              ← Back
-            </button>
-          ) : (
-            <span />
-          )}
-          <p className="text-[12.5px] leading-relaxed text-muted">
-            Prefer to talk?{" "}
-            <a
-              className="itq-ulink text-forest dark:text-ember-bright"
-              href={waLink(site.whatsapp.discussText)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Discuss on WhatsApp
-            </a>
+          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
+            Qualify in 4 taps
           </p>
+          <h3 className="font-display text-2xl">Find your fit</h3>
         </div>
+        <span className="rounded-md bg-[#f5f5f6] px-3 py-1 font-mono text-[12px] text-[#41424a]">
+          {Math.min(step + 1, 4)} / 4
+        </span>
+      </div>
+      <div className="h-1 bg-sand">
+        <div
+          className="h-full bg-ember transition-all duration-500"
+          style={{ width: `${((Math.min(step, 3) + (isContact ? 1 : 0)) / 4) * 100}%` }}
+        />
+      </div>
+      <div className="px-6 py-7">
+        {!isContact ? (
+          <>
+            <p className="mb-5 text-[15px] text-ink-soft">{current.prompt}</p>
+            <div className="grid gap-3">
+              {current.options.map((opt) => (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => pick(opt.id)}
+                  className="group flex w-full items-center justify-between rounded-2xl border border-line bg-paper px-4 py-4 text-left transition hover:border-ember/50 hover:bg-card"
+                >
+                  <span>
+                    <span className="block text-[15px] font-medium">{opt.title}</span>
+                    <span className="block text-[13px] text-muted">{opt.hint}</span>
+                  </span>
+                  <span className="text-ember opacity-0 transition group-hover:opacity-100">
+                    <Arrow />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <form
+            className="grid gap-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              window.open(waLink(message), "_blank", "noreferrer");
+            }}
+          >
+            <p className="text-[15px] text-ink-soft">
+              Leave a WhatsApp number. We reply within one business day.
+            </p>
+            <label className="grid gap-2 text-[13px] text-muted">
+              WhatsApp number
+              <input
+                required
+                type="tel"
+                inputMode="tel"
+                placeholder="03xx xxx xxxx"
+                value={answers.phone}
+                onChange={(e) =>
+                  setAnswers((prev) => ({ ...prev, phone: e.target.value }))
+                }
+                className="rounded-2xl border border-line bg-paper px-4 py-3 text-[15px] text-ink outline-none focus:border-ember"
+              />
+            </label>
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-5 py-3 text-[13px] font-medium text-white"
+            >
+              Send on WhatsApp
+              <Arrow />
+            </button>
+          </form>
+        )}
+        {step > 0 && (
+          <button
+            type="button"
+            className="mt-5 text-[13px] text-muted hover:text-ink"
+            onClick={() => setStep((s) => Math.max(0, s - 1))}
+          >
+            ← Back
+          </button>
+        )}
+        <p className="mt-6 text-[12px] leading-relaxed text-muted">
+          Prefer a live conversation? Speak directly with our engineering team
+          to figure out the right solution for your business.{" "}
+          <a
+            className="text-ember underline-offset-2 hover:underline"
+            href={waLink(site.whatsapp.discussText)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Discuss on WhatsApp
+          </a>
+        </p>
       </div>
     </div>
   );

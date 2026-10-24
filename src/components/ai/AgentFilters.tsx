@@ -109,9 +109,9 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-3.5 py-2 text-[12px] transition-colors ${
+      className={`rounded-lg px-3.5 py-2 text-[12px] transition-colors ${
         active
-          ? "bg-forest text-white"
+          ? "bg-forest text-white dark:bg-[#f5f5f6] dark:text-[#111214]"
           : "border border-line bg-card text-ink-soft hover:border-forest/30"
       }`}
     >

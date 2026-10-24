@@ -1,34 +1,35 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Bebas_Neue, DM_Sans, Outfit } from "next/font/google";
+import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { GridBackground } from "@/components/ui/GridBackground";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { site } from "@/lib/site";
 
-/* Outfit stays on .font-display (stats, quotes).
-   Bebas Neue is the heading face. DM Sans is the text face. */
-const bebasNeue = Bebas_Neue({
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
   weight: "400",
-  subsets: ["latin"],
-  variable: "--font-bebas-neue",
+  variable: "--font-bebas",
   display: "swap",
 });
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -63,7 +64,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bebasNeue.variable} ${outfit.variable} ${dmSans.variable} h-full`}
+      className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
@@ -71,6 +72,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
           <ScrollToTop />
+          <GridBackground />
           <Header />
           <main className="relative z-10 flex-1 overflow-x-clip">{children}</main>
           <Footer />

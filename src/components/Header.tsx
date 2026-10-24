@@ -169,7 +169,7 @@ export function Header() {
                 className="absolute top-full left-1/2 z-50 hidden -translate-x-1/2 pt-2 md:block"
                 onMouseEnter={clearTimer}
               >
-                <div className="w-[40rem] max-w-[80vw] rounded-[var(--radius-card)] border border-line bg-card p-7 text-foreground shadow-[var(--shadow-float)]">
+                <div className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-card p-7 text-foreground shadow-[0_24px_60px_-28px_rgba(10,10,12,0.35)]">
                   <MenuColumns menu={menu} />
                 </div>
               </motion.div>
@@ -184,7 +184,7 @@ export function Header() {
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center rounded-full border md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-lg border md:hidden"
           style={{ borderColor: "var(--hdr-line)" }}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -384,7 +384,7 @@ function Column({
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground dark:hover:text-[#102033]"
+              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
             >
               {item.title}
             </a>
@@ -392,7 +392,7 @@ function Column({
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground dark:hover:text-[#102033]"
+              className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
             >
               {item.title}
             </Link>

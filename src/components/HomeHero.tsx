@@ -4,11 +4,13 @@ import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { PillLink } from "@/components/ui/Pill";
+import { DisplayTitle } from "@/components/ui/DisplayTitle";
 import { Recede } from "@/components/ui/Recede";
 import { HeroSystemCard } from "@/components/HeroSystemCard";
+import { ServiceTickerScroll } from "@/components/ServiceTickerScroll";
 import { site, waLink } from "@/lib/site";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+const EASE = [0.22, 0.61, 0.36, 1] as const;
 
 const facts = [
   { label: "Based in", value: site.city },
@@ -20,13 +22,11 @@ const facts = [
 export function HomeHero() {
   const reduce = useReducedMotion();
   const stageRef = useRef<HTMLElement>(null);
-  const off = reduce === true;
 
-  /* One stagger for the whole opening: label → headline lines → copy → actions → card → facts. */
-  const rise = (step: number, distance = 16) => ({
-    initial: off ? false : { opacity: 0, y: distance },
+  const fade = (delay: number) => ({
+    initial: { opacity: 0, y: 14 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: off ? 0 : 0.75, delay: off ? 0 : 0.08 + step * 0.09, ease: EASE },
+    transition: { duration: reduce === true ? 0 : 0.6, delay: reduce === true ? 0 : delay, ease: EASE },
   });
 
   return (
@@ -36,41 +36,46 @@ export function HomeHero() {
       data-header-theme="light"
       className="itq-stage flex min-h-svh flex-col overflow-x-clip"
     >
-      {/* Quiet background: a single brand-blue wash and a dot field that fades toward the seam. */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(60%_55%_at_82%_18%,color-mix(in_srgb,var(--color-ember-bright)_48%,transparent),transparent_70%)] dark:bg-[radial-gradient(60%_55%_at_82%_18%,color-mix(in_srgb,var(--color-forest)_70%,transparent),transparent_70%)]" />
-        <div className="itq-dotfield absolute inset-x-0 bottom-0 h-[46%] opacity-60" />
+        <div className="absolute inset-0 itq-grid" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0a0a0c]" />
       </div>
 
       <Recede target={stageRef} className="relative flex flex-1 flex-col">
-        <div className="itq-container flex flex-1 flex-col justify-center pb-6 pt-24 md:pt-28 lg:pb-8">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        <div className="itq-container flex flex-1 flex-col justify-center pb-6 pt-24 md:pt-28">
+          <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-8 lg:gap-12">
             {/* Copy */}
-            <div className="itq-fill-type lg:col-span-7">
-              <motion.p {...rise(0, 10)} className="itq-eyebrow">
+            <div className="max-w-[46rem]">
+              <motion.p
+                {...fade(0.05)}
+                className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#d1d1d5] bg-white/80 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#5a5b64] dark:border-white/15 dark:bg-transparent dark:text-[#a9aab0]"
+              >
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#2b63c8]" aria-hidden />
                 Digital engineering studio · {site.city}
               </motion.p>
 
-              <h1 className="itq-display mt-6 w-full max-w-none text-foreground md:mt-7">
-                <motion.span {...rise(1, 22)} className="block md:whitespace-nowrap">
-                  Complex systems.
-                </motion.span>
-                <motion.span {...rise(2, 22)} className="block text-forest md:whitespace-nowrap">
-                  Beautifully simplified<span className="text-ember dark:text-ember-bright">.</span>
-                </motion.span>
-              </h1>
+              <DisplayTitle
+                delay={0.08}
+                dense
+                className="itq-hero-title mt-6 text-[clamp(3.35rem,7.2vw,6.35rem)] leading-[0.84] !tracking-[-0.03em]"
+                lines={[
+                  { text: "Complex systems." },
+                  { text: "Beautifully", accent: true },
+                  { text: "Simplified." },
+                ]}
+              />
 
-              <motion.p {...rise(4)} className="itq-lead mt-8 max-w-[34rem] md:mt-9">
+              <motion.p {...fade(0.5)} className="mt-8 max-w-xl text-pretty text-[16px] leading-[1.65] text-[#5a5b64] md:text-[17px] dark:text-[#a9aab0]">
                 Websites, online stores, mobile apps, AI assistants and marketing — scoped to how your
                 business actually works, so visitors become customers and nothing slips through a
                 private chat.
               </motion.p>
 
               <motion.div
-                {...rise(5)}
-                className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center md:mt-10"
+                {...fade(0.6)}
+                className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
               >
-                <PillLink href="/start" className="h-12 w-full justify-between px-5 text-[15px] sm:w-auto sm:justify-center">
+                <PillLink href="/start" className="h-12 w-full justify-center px-5 text-[15px] sm:w-auto">
                   Start a project
                 </PillLink>
                 <GlowButton href={waLink()} variant="outline" size="lg" className="w-full sm:w-auto">
@@ -81,27 +86,31 @@ export function HomeHero() {
 
             {/* Visual object */}
             <motion.div
-              initial={off ? false : { opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: off ? 0 : 1, delay: off ? 0 : 0.42, ease: EASE }}
-              className="relative mx-auto w-full max-w-[32rem] lg:col-span-5 lg:max-w-none"
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: reduce === true ? 0 : 1.1, delay: reduce === true ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="relative mx-auto w-full max-w-[34rem] max-md:mt-2 md:max-w-none"
             >
               <HeroSystemCard />
             </motion.div>
           </div>
 
           {/* Fact bar */}
-          <motion.div {...rise(7, 10)} className="mt-10 border-t border-line pt-5 lg:mt-12">
+          <motion.div {...fade(0.8)} className="mt-12 border-t border-line pt-6 lg:mt-14">
             <dl className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-4 md:gap-x-10">
               {facts.map((f) => (
                 <div key={f.label}>
                   <dt className="itq-micro">{f.label}</dt>
-                  <dd className="mt-2 text-[15px] font-medium leading-snug text-foreground">{f.value}</dd>
+                  <dd className="mt-2 text-[15px] font-medium leading-snug text-foreground md:text-[16px]">
+                    {f.value}
+                  </dd>
                 </div>
               ))}
             </dl>
           </motion.div>
         </div>
+
+        <ServiceTickerScroll className="pb-4" />
       </Recede>
     </section>
   );

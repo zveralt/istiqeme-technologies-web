@@ -9,6 +9,8 @@ export function DisplayTitle({
   className,
   underlineAccent = false,
   fade = false,
+  tight = false,
+  dense = false,
 }: {
   lines: TitleLine[];
   className?: string;
@@ -16,16 +18,21 @@ export function DisplayTitle({
   underlineAccent?: boolean;
   fade?: boolean;
   tight?: boolean;
+  dense?: boolean;
 }) {
   return (
-    <h1 className={cn("itq-display text-foreground", className)}>
+    <h1 className={cn("font-display text-foreground", className)}>
       {lines.map((line, i) => (
         <span key={`${line.text}-${i}`} className="block">
-          <span className={cn("block", fade && "itq-hero-fade", line.accent && "text-forest")}>{line.text}</span>
+          <span className={cn("block", dense ? "py-0" : tight ? "pb-[0.06em] pt-[0.16em]" : "py-[0.04em]")}>
+            <span className={cn("block", fade && "itq-hero-fade", line.accent && "text-ember")}>
+              {line.text}
+            </span>
+          </span>
           {underlineAccent && line.accent ? (
             <span
               aria-hidden
-              className="mt-3 block h-[2px] w-[min(10rem,40%)] origin-left rounded-full bg-forest dark:bg-ember-bright"
+              className="mt-1 block h-[2px] w-[min(12rem,46%)] origin-left bg-ember"
             />
           ) : null}
         </span>

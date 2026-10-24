@@ -68,7 +68,7 @@ export function CommandCenter() {
               key={r.id}
               type="button"
               onClick={() => setRole(r.id)}
-              className={`rounded-full px-4 py-2 text-[13px] ${
+              className={`rounded-lg px-4 py-2 text-[13px] ${
                 role === r.id ? "bg-ink text-cream" : "border border-line bg-cream"
               }`}
             >
@@ -90,7 +90,7 @@ export function CommandCenter() {
           Discuss a dashboard like this <Arrow />
         </a>
       </div>
-      <div className="rounded-[28px] border border-line bg-cream p-4 shadow-[0_30px_70px_-40px_rgba(22,19,16,0.45)] md:p-6">
+      <div className="rounded-2xl border border-line bg-cream p-4 md:p-6">
         <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-muted">
           <span>Interface snapshot</span>
           <span>Synthetic showcase data</span>

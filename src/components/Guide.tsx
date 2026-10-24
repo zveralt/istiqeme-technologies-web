@@ -62,7 +62,7 @@ export function Guide({
   }
 
   return (
-    <div className="grid overflow-hidden rounded-[28px] border border-line bg-cream shadow-[0_30px_80px_-48px_rgba(22,19,16,0.5)] lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid overflow-hidden rounded-2xl border border-line bg-cream lg:grid-cols-[1.1fr_0.9fr]">
       <div className="flex min-h-[420px] flex-col">
         <div className="flex items-center justify-between border-b border-line px-6 py-4">
           <div>
@@ -71,7 +71,7 @@ export function Guide({
             </p>
             <h3 className="font-display text-2xl">{title}</h3>
           </div>
-          <span className="flex items-center gap-2 rounded-full bg-sand px-3 py-1 text-[12px] text-forest">
+          <span className="flex items-center gap-2 rounded-md bg-sand px-3 py-1 font-mono text-[12px] text-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-whatsapp" />
             Ready
           </span>
@@ -101,11 +101,11 @@ export function Guide({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask in English or Urdu…"
-            className="flex-1 rounded-full border border-line bg-paper px-4 py-3 text-[14px] outline-none focus:border-ember"
+            className="flex-1 rounded-xl border border-line bg-paper px-4 py-3 text-[14px] outline-none focus:border-ember"
           />
           <button
             type="submit"
-            className="rounded-full bg-ink px-4 text-[13px] text-cream"
+            className="rounded-xl bg-ink px-4 text-[13px] text-cream"
           >
             Send
           </button>

@@ -85,7 +85,7 @@ export default function ServicesPage() {
                       {s.architecture.map((a) => (
                         <span
                           key={a}
-                          className="rounded-full border border-line px-3 py-1 text-[12px] text-ink-soft"
+                          className="rounded-md border border-line px-3 py-1 font-mono text-[12px] text-ink-soft"
                         >
                           {a}
                         </span>
