@@ -43,9 +43,9 @@ export function HeroSystemCard({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative isolate overflow-hidden rounded-[var(--radius-card)] text-white",
-        "bg-[linear-gradient(170deg,#0b2744_0%,#0e3a66_60%,#164e86_100%)]",
-        "shadow-[0_40px_120px_-40px_rgba(14,58,102,0.6)]",
+        "relative isolate overflow-hidden rounded-[var(--radius-card)] border border-white/10 text-white",
+        "bg-[linear-gradient(170deg,#1b1c20_0%,#111214_62%,#0a0a0c_100%)]",
+        "shadow-[0_40px_80px_-36px_rgba(10,10,12,0.55)]",
         className,
       )}
       aria-label="Illustration: a late-night WhatsApp inquiry answered by an AI assistant and logged as a lead"
@@ -93,9 +93,9 @@ export function HeroSystemCard({ className }: { className?: string }) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, transition: { duration: 0.15 } }}
                 transition={{ duration: 0.55, ease: EASE }}
-                className="max-w-[92%] rounded-[1.1rem] rounded-bl-[0.35rem] bg-white px-4 py-3 text-[13.5px] leading-snug text-ink"
+                className="max-w-[92%] rounded-xl rounded-bl-md bg-white px-4 py-3 text-[13.5px] leading-snug text-[#111214]"
               >
-                <span className="mb-1 block font-dm text-[10px] font-semibold uppercase tracking-[0.18em] text-forest/70">
+                <span className="mb-1 block font-dm text-[10px] font-medium uppercase tracking-[0.12em] text-[#2b63c8]">
                   ISTIQEME assistant
                 </span>
                 {agent}

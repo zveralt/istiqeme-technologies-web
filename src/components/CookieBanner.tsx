@@ -28,14 +28,14 @@ export function CookieBanner() {
           <button
             type="button"
             onClick={() => choose("decline")}
-            className="rounded-full border border-line px-4 py-2 text-[13px]"
+            className="rounded-xl border border-line px-4 py-2 text-[13px]"
           >
             Decline
           </button>
           <button
             type="button"
             onClick={() => choose("accept")}
-            className="rounded-full bg-forest px-4 py-2 text-[13px] text-white"
+            className="rounded-xl bg-forest px-4 py-2 text-[13px] text-white dark:bg-[#f5f5f6] dark:text-[#111214]"
           >
             Accept
           </button>

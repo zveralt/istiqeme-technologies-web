@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 export default function StartPage() {
   return (
     <section data-header-theme="light" className="relative min-h-dvh pb-24 pt-32 md:pt-40">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 itq-dotfield opacity-60" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 itq-grid" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0a0a0c]" aria-hidden />
       <div className="itq-container relative grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
         <div>
           <p className="itq-eyebrow">Quick intake</p>

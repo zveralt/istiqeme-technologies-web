@@ -75,7 +75,7 @@ export default function AiHubPage() {
         </div>
       </section>
 
-      <section className="bg-paper px-5 py-16 md:px-8">
+      <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <Eyebrow>Proof</Eyebrow>
           <h2 className="mt-3 font-display text-3xl text-forest">Systems already in the field</h2>
@@ -125,7 +125,7 @@ export default function AiHubPage() {
         </div>
       </section>
 
-      <section className="bg-paper px-5 py-16 md:px-8">
+      <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <Eyebrow>How we work</Eyebrow>
           <div className="mt-10 grid gap-6 md:grid-cols-4">
@@ -151,7 +151,7 @@ export default function AiHubPage() {
         </div>
       </section>
 
-      <section className="bg-paper px-5 py-16 md:px-8">
+      <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <Eyebrow>Who this is for</Eyebrow>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -172,7 +172,7 @@ export default function AiHubPage() {
         </div>
       </section>
 
-      <section className="bg-paper px-5 py-16 md:px-8">
+      <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <Guide
             title="Ask about AI for your business"

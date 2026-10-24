@@ -37,12 +37,12 @@ export function Compare() {
           if (e.buttons === 1) move(e.clientX);
         }}
       >
-        <div className="absolute inset-0 bg-[#1b3a6e] p-6 text-white">
+        <div className="absolute inset-0 bg-[#1b1c20] p-6 text-[#f5f5f6]">
           <p className="text-[10px] tracking-[0.3em] text-white/50">
             SPECIMEN A · LEGACY TEMPLATE
           </p>
           <div className="mt-6 font-serif text-3xl">Welcome to our Website!!!</div>
-          <p className="mt-3 max-w-sm font-serif text-sm text-cyan-100">
+          <p className="mt-3 max-w-sm font-serif text-sm text-[#a9aab0]">
             Click here for more information. Home | About | Contact | Sitemap
           </p>
           <div className="mt-8 grid gap-3 md:grid-cols-3">
@@ -81,7 +81,7 @@ export function Compare() {
           className="absolute inset-y-0 z-10 w-px bg-ember"
           style={{ left: `${pos}%` }}
         >
-          <div className="absolute top-1/2 left-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-ember text-cream shadow-lg">
+          <div className="absolute top-1/2 left-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-lg bg-ember text-white">
             ↔
           </div>
         </div>

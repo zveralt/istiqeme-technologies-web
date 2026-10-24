@@ -61,7 +61,7 @@ export function LeadDemo() {
               key={s.id}
               type="button"
               onClick={() => setActive(i)}
-              className={`shrink-0 rounded-full px-3 py-1.5 text-[12px] ${
+              className={`shrink-0 rounded-lg px-3 py-1.5 text-[12px] ${
                 i === active ? "bg-ink text-cream" : "bg-sand text-ink-soft"
               }`}
             >
@@ -100,7 +100,7 @@ export function LeadDemo() {
             <li key={step.n} className="flex gap-4">
               <span
                 className={`grid h-9 w-9 shrink-0 place-items-center rounded-full text-[12px] ${
-                  i === 0 ? "bg-ember text-cream" : "bg-sand text-ink"
+                  i === 0 ? "bg-ember text-white" : "bg-sand text-ink"
                 }`}
               >
                 {step.n}
@@ -117,8 +117,8 @@ export function LeadDemo() {
             <p className="text-[12px] text-muted">Without AI</p>
             <p className="font-display text-3xl">14 hours</p>
           </div>
-          <div className="rounded-2xl bg-forest p-4 text-cream">
-            <p className="text-[12px] text-cream/60">With our AI</p>
+          <div className="rounded-2xl bg-forest p-4 text-[#f5f5f6]">
+            <p className="text-[12px] text-white/60">With our AI</p>
             <p className="font-display text-3xl">Instant</p>
           </div>
         </div>

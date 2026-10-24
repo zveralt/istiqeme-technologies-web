@@ -35,7 +35,7 @@ export const nav = [
   { href: "/work", label: "Work", menu: "work" },
   { href: "/services", label: "Services", menu: "services" },
   { href: "/ai", label: "AI", menu: "ai" },
-  { href: "/#problems", label: "Problems" },
+  { href: "/#process", label: "Problems" },
 ] as const;
 
 export const aiMenu = [
@@ -403,25 +403,74 @@ export const team = [
 
 export const testimonials = [
   {
+    id: "ahmed",
+    headline: "Systems we actually rely on",
+    summary:
+      "Wholesale orders, night leads, and manager roll-ups finally live in one workspace instead of six WhatsApp threads.",
     quote: "Some systems we install. Others we rely on.",
+    detail:
+      "We replaced spreadsheet trackers with a single dashboard. Field staff log visits on mobile; leadership sees the same numbers by morning.",
+    rating: 5,
     name: "Ahmed R.",
     org: "Karachi Wholesale Group",
     title: "Retail Operations Director",
     date: "March 12, 2025",
   },
   {
+    id: "sana",
+    headline: "Growth without the chaos",
+    summary:
+      "A new storefront and WhatsApp intake went live in weeks — our team answers from one queue, not three phones.",
     quote: "Growth should feel simple — not overwhelming.",
+    detail:
+      "ISTIQEME scoped the shop, payment handoff, and after-hours bot together. Conversion improved because nothing waits until opening hours.",
+    rating: 5,
     name: "Sana K.",
     org: "Urban Commerce Collective",
     title: "Founder",
     date: "August 3, 2025",
   },
   {
+    id: "bilal",
+    headline: "Security that staff will use",
+    summary:
+      "Role-based access and audit trails without the enterprise software bill or month-long training.",
     quote: "Security without the enterprise headache.",
+    detail:
+      "Sales, warehouse, and finance each see what they need. We passed our distributor audit with clear logs — no more shared passwords.",
+    rating: 4.9,
     name: "Bilal M.",
     org: "Faisal District Traders",
     title: "Managing Partner",
     date: "January 4, 2026",
+  },
+  {
+    id: "hira",
+    headline: "After-hours leads answered",
+    summary:
+      "Medical supply inquiries at 11 PM now get a qualified WhatsApp handoff before our desk opens.",
+    quote: "Patients' families message at odd hours. We still respond like we were awake.",
+    detail:
+      "The voice and chat assistant knows our stock rules and routes urgent cases to the on-call manager with a short summary.",
+    rating: 5,
+    name: "Hira N.",
+    org: "MedEquip Karachi",
+    title: "Operations Lead",
+    date: "November 18, 2025",
+  },
+  {
+    id: "omar",
+    headline: "Menu clarity that converts",
+    summary:
+      "Corporate catering quotes used to stall in email. Now prospects pick a package and book a call in one flow.",
+    quote: "Our site finally explains what we sell to offices — not just what we post on Instagram.",
+    detail:
+      "Photography, bilingual copy, and a simple CRM mean we know which company opened the menu and who to call back.",
+    rating: 4.8,
+    name: "Omar T.",
+    org: "Clifton Fine Foods",
+    title: "Head of B2B Sales",
+    date: "June 9, 2025",
   },
 ] as const;
 

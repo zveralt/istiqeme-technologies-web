@@ -52,7 +52,7 @@ export default function SignupPage() {
         </label>
         {error && <p className="text-[13px] text-red-700">{error}</p>}
         {notice && <p className="text-[13px] text-forest">{notice}</p>}
-        <button type="submit" disabled={pending} className="rounded-full bg-forest px-5 py-3 text-[13px] text-white">
+        <button type="submit" disabled={pending} className="rounded-xl bg-forest px-5 py-3 text-[13px] text-white dark:bg-[#f5f5f6] dark:text-[#111214]">
           {pending ? "Creating account…" : "Create account"}
         </button>
       </form>

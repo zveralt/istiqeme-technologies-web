@@ -1,7 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { aiMenu, nav, site, waLink } from "@/lib/site";
-import { Logo } from "./Logo";
-import { PillLink } from "@/components/ui/Pill";
+import { aiMenu, nav, site } from "@/lib/site";
+import { useTheme } from "@/components/ui/ThemeProvider";
 
 const explore = [
   ...nav.map((item) => ({ href: item.href, label: item.label })),
@@ -10,40 +11,27 @@ const explore = [
 ];
 
 export function Footer() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <footer
-      data-header-theme="dark"
-      className="relative z-10 overflow-hidden bg-ink text-white dark:bg-[#05090f]"
+      data-header-theme={isDark ? "dark" : "light"}
+      className="itq-blueprint relative z-10 overflow-hidden border-t border-ink-200/80 bg-white text-ink-900 dark:border-transparent dark:bg-[#0a0a0c] dark:text-[#e8e8ea]"
     >
-      <div className="itq-container relative">
-        <div className="grid gap-10 border-b border-white/10 py-16 md:grid-cols-12 md:py-24">
-          <div className="md:col-span-8">
-            <Logo inverted />
-            <p className="mt-10 font-display text-[clamp(3rem,7vw,6rem)] leading-[0.92] text-white">
-              Complex systems.
-              <br />
-              <span className="text-ember-bright">Beautifully simplified.</span>
-            </p>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/70">{site.tagline}</p>
-          </div>
-          <div className="flex flex-col justify-end gap-5 md:col-span-4 md:items-end">
-            <p className="inline-flex items-center gap-2 text-[13px] text-white/75">
-              <span className="h-2 w-2 rounded-full bg-whatsapp" aria-hidden />
-              Replies within one business day
-            </p>
-            <PillLink href={waLink()} external className="!bg-white !text-forest">
-              Message us on WhatsApp
-            </PillLink>
-          </div>
-        </div>
-
+      <div className="itq-container relative z-[1]">
         <div className="grid gap-10 py-12 md:grid-cols-12 md:py-16">
           <div className="md:col-span-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Explore</p>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-ink-400 dark:text-white/45">
+              Explore
+            </p>
             <ul className="mt-5 space-y-2.5 text-[15px]">
               {explore.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-white/85 transition-colors hover:text-white">
+                  <Link
+                    href={item.href}
+                    className="text-ink-700 transition-colors hover:text-ink-900 dark:text-white/85 dark:hover:text-white"
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -51,11 +39,16 @@ export function Footer() {
             </ul>
           </div>
           <div className="md:col-span-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">AI & automation</p>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-ink-400 dark:text-white/45">
+              AI & automation
+            </p>
             <ul className="mt-5 space-y-2.5 text-[15px]">
               {aiMenu.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-white/85 transition-colors hover:text-white">
+                  <Link
+                    href={item.href}
+                    className="text-ink-700 transition-colors hover:text-ink-900 dark:text-white/85 dark:hover:text-white"
+                  >
                     {item.title}
                   </Link>
                 </li>
@@ -63,30 +56,40 @@ export function Footer() {
             </ul>
           </div>
           <div className="md:col-span-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Contact</p>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-ink-400 dark:text-white/45">
+              Contact
+            </p>
             <ul className="mt-5 space-y-2.5 text-[15px]">
               {site.phones.map((p) => (
                 <li key={p.href}>
-                  <a href={p.href} className="text-white/85 transition-colors hover:text-white">
+                  <a
+                    href={p.href}
+                    className="text-ink-700 transition-colors hover:text-ink-900 dark:text-white/85 dark:hover:text-white"
+                  >
                     {p.label}
                   </a>
                 </li>
               ))}
               {site.emails.map((e) => (
                 <li key={e.href}>
-                  <a href={e.href} className="text-white/85 transition-colors hover:text-white">
+                  <a
+                    href={e.href}
+                    className="text-ink-700 transition-colors hover:text-ink-900 dark:text-white/85 dark:hover:text-white"
+                  >
                     {e.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <address className="mt-6 max-w-sm text-[13px] not-italic leading-relaxed text-white/60">
+            <address className="mt-6 max-w-sm text-[13px] not-italic leading-relaxed text-ink-500 dark:text-white/60">
               {site.address}
             </address>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/10 py-6 text-[12px] text-white/50 md:flex-row md:items-center md:justify-between">
+        <div
+          className="flex flex-col gap-3 border-t border-ink-200/80 py-6 text-[12px] text-ink-400 dark:border-white/10 dark:text-white/50 md:flex-row md:items-center md:justify-between"
+        >
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>

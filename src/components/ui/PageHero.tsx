@@ -31,7 +31,8 @@ export function PageHero({
       data-header-theme="light"
       className="itq-stage relative overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 itq-dotfield opacity-60" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 itq-grid" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0a0a0c]" aria-hidden />
       <div className="itq-container relative">
         <p className="itq-eyebrow">{eyebrow}</p>
         <DisplayTitle

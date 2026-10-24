@@ -11,14 +11,14 @@ export function WorkShowcase({ limit }: { limit?: number }) {
   const [first, ...rest] = items;
 
   return (
-    <div className="space-y-14 md:space-y-20">
+    <div className="space-y-16 md:space-y-20">
       {first ? (
         <Reveal>
           <WorkCard {...first} index="01" featured />
         </Reveal>
       ) : null}
       {rest.length ? (
-        <div className="grid gap-x-8 gap-y-14 md:grid-cols-2">
+        <div className="grid items-start gap-x-8 gap-y-16 md:grid-cols-2">
           {rest.map((item, i) => (
             <Reveal key={item.name} delay={(i % 2) * 70}>
               <WorkCard {...item} index={String(i + 2).padStart(2, "0")} />

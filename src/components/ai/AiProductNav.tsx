@@ -63,7 +63,7 @@ export function AiProductNavMobile() {
         <Link
           key={item.id}
           href={`#${item.id}`}
-          className="shrink-0 rounded-full border border-line px-3 py-1.5 text-[12px] text-forest"
+          className="shrink-0 rounded-lg border border-line px-3 py-1.5 text-[12px] text-foreground"
         >
           {item.num} {item.label}
         </Link>

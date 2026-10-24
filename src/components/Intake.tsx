@@ -38,18 +38,18 @@ WhatsApp: ${answers.phone || "—"}`;
 
   return (
     <div
-      className={`rounded-[28px] border border-line bg-white text-[#102033] shadow-[0_30px_80px_-40px_rgba(14,58,102,0.45)] ${
+      className={`rounded-2xl border border-[#d1d1d5] bg-white text-[#111214] shadow-[0_24px_60px_-32px_rgba(10,10,12,0.4)] [--color-ink:#111214] [--color-ink-soft:#41424a] [--color-muted:#5a5b64] [--color-line:#d1d1d5] [--color-paper:#f5f5f6] [--color-sand:#f5f5f6] ${
         compact ? "" : "h-full w-full"
       }`}
     >
       <div className="flex items-center justify-between border-b border-line px-6 py-4">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-muted">
+          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
             Qualify in 4 taps
           </p>
           <h3 className="font-display text-2xl">Find your fit</h3>
         </div>
-        <span className="rounded-full bg-sand px-3 py-1 text-[12px] text-ink-soft">
+        <span className="rounded-md bg-[#f5f5f6] px-3 py-1 font-mono text-[12px] text-[#41424a]">
           {Math.min(step + 1, 4)} / 4
         </span>
       </div>
@@ -109,7 +109,7 @@ WhatsApp: ${answers.phone || "—"}`;
             </label>
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-[13px] font-medium text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-5 py-3 text-[13px] font-medium text-white"
             >
               Send on WhatsApp
               <Arrow />

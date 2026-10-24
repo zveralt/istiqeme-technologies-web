@@ -19,7 +19,7 @@ export function ButtonLink({
 }) {
   if (variant === "whatsapp") {
     const styles =
-      "inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-[13px] font-medium tracking-wide text-white transition hover:brightness-110";
+      "inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-5 py-3 text-[13px] font-medium tracking-wide text-white transition hover:brightness-110";
     return (
       <a href={href} target="_blank" rel="noreferrer" className={cn(styles, className)}>
         {children}

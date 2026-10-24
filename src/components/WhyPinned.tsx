@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
-import { pillars, testimonials } from "@/lib/site";
+import { Testimonials } from "@/components/Testimonials";
+import { pillars } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -28,7 +29,6 @@ export function WhyPinned() {
   });
 
   const pillar = pillars[active] ?? pillars[0];
-  const quote = testimonials[active] ?? testimonials[0];
 
   return (
     <section
@@ -106,28 +106,10 @@ export function WhyPinned() {
                 ))}
               </div>
             </div>
-
-          <figure className="mx-auto mt-10 max-w-2xl border-t border-white/15 pt-6 md:mt-12">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={quote.name}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                transition={{ duration: 0.35 }}
-              >
-                <blockquote className="font-display text-[clamp(1.35rem,2.8vw,2rem)] leading-[1.1] text-white">
-                  “{quote.quote}”
-                </blockquote>
-                <figcaption className="mt-4 text-[13px] text-white/65">
-                  <span className="font-medium text-white">{quote.name}</span>
-                  <span aria-hidden> · </span>
-                  {quote.org} · {quote.title}
-                </figcaption>
-              </motion.div>
-            </AnimatePresence>
-          </figure>
         </div>
+      </div>
+      <div className="itq-container mx-auto max-w-6xl pb-20 pt-4 md:pb-28">
+        <Testimonials />
       </div>
     </section>
   );

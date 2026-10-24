@@ -3,16 +3,16 @@ import { Arrow } from "./Button";
 
 export function VoiceAgent() {
   return (
-    <div className="overflow-hidden rounded-[32px] bg-forest text-cream">
+    <div className="overflow-hidden rounded-2xl bg-forest text-[#f5f5f6]">
       <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
         <div className="p-8 md:p-12">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-cream/45">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-[#f5f5f6]/45">
             Always on
           </p>
           <h2 className="mt-3 font-display text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.05]">
             Your AI voice agent.
           </h2>
-          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-cream/75">
+          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[#f5f5f6]/75">
             Watch a real demo: our AI receptionist answers customers, asks the
             right questions, and hands warm leads to your team — day or night.
             It sounds natural, follows your script, and never sleeps.
@@ -21,7 +21,7 @@ export function VoiceAgent() {
             {voiceCapabilities.map((c) => (
               <li key={c.title}>
                 <p className="font-medium">{c.title}</p>
-                <p className="mt-1 text-[13px] leading-relaxed text-cream/60">
+                <p className="mt-1 text-[13px] leading-relaxed text-[#f5f5f6]/60">
                   {c.body}
                 </p>
               </li>
@@ -31,7 +31,7 @@ export function VoiceAgent() {
             href={waLink(site.whatsapp.receptionistText)}
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-cream px-5 py-3 text-[13px] font-medium text-forest"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#f5f5f6] px-5 py-3 text-[13px] font-medium text-[#111214]"
           >
             Discuss AI receptionist <Arrow />
           </a>
@@ -56,7 +56,7 @@ export function VoiceAgent() {
               </svg>
             </div>
           </div>
-          <p className="absolute bottom-8 text-center text-[12px] text-cream/55">
+          <p className="absolute bottom-8 text-center text-[12px] text-[#f5f5f6]/55">
             English + Urdu · WhatsApp handoff · Your brand voice
           </p>
         </div>

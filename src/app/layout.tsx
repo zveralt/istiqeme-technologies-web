@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Anton, DM_Sans, Fraunces, Outfit } from "next/font/google";
+import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -12,29 +12,24 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { site } from "@/lib/site";
 
-const anton = Anton({
+const bebas = Bebas_Neue({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-anton",
+  variable: "--font-bebas",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const inter = Inter({
   subsets: ["latin"],
-  style: ["italic"],
-  variable: "--font-fraunces",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const outfit = Outfit({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -69,14 +64,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${anton.variable} ${fraunces.variable} ${outfit.variable} ${dmSans.variable} h-full`}
+      className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} h-full`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
-          <div className="grain" aria-hidden />
           <ScrollToTop />
           <GridBackground />
           <Header />

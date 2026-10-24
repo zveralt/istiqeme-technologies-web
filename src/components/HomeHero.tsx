@@ -36,10 +36,9 @@ export function HomeHero() {
       data-header-theme="light"
       className="itq-stage flex min-h-svh flex-col overflow-x-clip"
     >
-      {/* Background — brand navy only, fades toward the sheet seam */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-x-0 bottom-0 h-[55%] itq-dotfield opacity-70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_85%_30%,color-mix(in_srgb,var(--color-ember-bright)_55%,transparent),transparent_70%)] dark:bg-[radial-gradient(ellipse_70%_50%_at_85%_30%,color-mix(in_srgb,var(--color-forest)_70%,transparent),transparent_70%)]" />
+        <div className="absolute inset-0 itq-grid" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0a0a0c]" />
       </div>
 
       <Recede target={stageRef} className="relative flex flex-1 flex-col">
@@ -47,21 +46,26 @@ export function HomeHero() {
           <div className="grid items-center gap-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-8 lg:gap-12">
             {/* Copy */}
             <div className="max-w-[46rem]">
-              <motion.p {...fade(0.05)} className="itq-eyebrow">
+              <motion.p
+                {...fade(0.05)}
+                className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#d1d1d5] bg-white/80 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#5a5b64] dark:border-white/15 dark:bg-transparent dark:text-[#a9aab0]"
+              >
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#2b63c8]" aria-hidden />
                 Digital engineering studio · {site.city}
               </motion.p>
 
               <DisplayTitle
                 delay={0.08}
-                tight
-                className="mt-7 text-[length:var(--fs-display)] leading-[0.9]"
+                dense
+                className="itq-hero-title mt-6 text-[clamp(3.35rem,7.2vw,6.35rem)] leading-[0.84] !tracking-[-0.03em]"
                 lines={[
                   { text: "Complex systems." },
-                  { text: "Beautifully simplified.", accent: true },
+                  { text: "Beautifully", accent: true },
+                  { text: "Simplified." },
                 ]}
               />
 
-              <motion.p {...fade(0.5)} className="itq-lead mt-8 max-w-xl text-pretty">
+              <motion.p {...fade(0.5)} className="mt-8 max-w-xl text-pretty text-[16px] leading-[1.65] text-[#5a5b64] md:text-[17px] dark:text-[#a9aab0]">
                 Websites, online stores, mobile apps, AI assistants and marketing — scoped to how your
                 business actually works, so visitors become customers and nothing slips through a
                 private chat.

@@ -169,7 +169,7 @@ export function Header() {
                 className="absolute top-full left-1/2 z-50 hidden -translate-x-1/2 pt-2 md:block"
                 onMouseEnter={clearTimer}
               >
-                <div className="w-[40rem] max-w-[80vw] rounded-[1.25rem] border border-line bg-card p-7 text-foreground shadow-[0_30px_80px_-30px_rgba(14,58,102,0.45)]">
+                <div className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-card p-7 text-foreground shadow-[0_24px_60px_-28px_rgba(10,10,12,0.35)]">
                   <MenuColumns menu={menu} />
                 </div>
               </motion.div>
@@ -184,7 +184,7 @@ export function Header() {
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center rounded-full border md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-lg border md:hidden"
           style={{ borderColor: "var(--hdr-line)" }}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
