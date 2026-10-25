@@ -7,7 +7,6 @@ import { PillLink } from "@/components/ui/Pill";
 import { DisplayTitle } from "@/components/ui/DisplayTitle";
 import { Recede } from "@/components/ui/Recede";
 import { HeroSystemCard } from "@/components/HeroSystemCard";
-import { ServiceTickerScroll } from "@/components/ServiceTickerScroll";
 import { site, waLink } from "@/lib/site";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
@@ -110,7 +109,6 @@ export function HomeHero() {
           </motion.div>
         </div>
 
-        <ServiceTickerScroll className="pb-4" />
       </Recede>
     </section>
   );
