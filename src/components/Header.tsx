@@ -7,15 +7,14 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { aiMenu, nav, problems, serviceMenu, site, waLink, work, workMenu } from "@/lib/site";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/components/ui/ThemeProvider";
 import { PillLink } from "@/components/ui/Pill";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const HEADER_H = 72;
-const THEME_PROBE = 88;
 
 type MenuKey = "home" | "services" | "work" | "ai" | "problems";
-type Theme = "light" | "dark";
 
 const homeLinks = [
   { href: "/#top", title: "Opening", line: "The standard for technology inquiries." },
@@ -25,28 +24,14 @@ const homeLinks = [
   { href: "/start", title: "Intake", line: "A few taps to the right next step." },
 ];
 
-/** Which `[data-header-theme]` section currently sits under the header bar. */
-function readTheme(): Theme {
-  const probeY = THEME_PROBE;
-  const nodes = document.querySelectorAll<HTMLElement>("[data-header-theme]");
-  let theme: Theme = "light";
-  for (const node of nodes) {
-    const r = node.getBoundingClientRect();
-    if (r.top <= probeY && r.bottom > probeY) {
-      theme = (node.dataset.headerTheme as Theme) ?? "light";
-    }
-  }
-  return theme;
-}
-
 export function Header() {
   const pathname = usePathname();
+  const { theme: siteTheme } = useTheme();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<MenuKey | null>(null);
   const [mobileGroup, setMobileGroup] = useState<MenuKey | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<Theme>("light");
   const timer = useRef<number | null>(null);
 
   // Scroll state + section theme (rAF-throttled, passive).
@@ -55,7 +40,6 @@ export function Header() {
     const update = () => {
       raf = 0;
       setScrolled(window.scrollY > 24);
-      setTheme(readTheme());
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -124,7 +108,7 @@ export function Header() {
   return (
     <header
       className="itq-header fixed inset-x-0 top-0 z-40"
-      data-theme={theme}
+      data-theme={siteTheme}
       data-scrolled={scrolled}
       data-open={open}
       onMouseLeave={() => schedule(null, 180)}

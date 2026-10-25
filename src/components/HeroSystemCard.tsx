@@ -43,7 +43,7 @@ export function HeroSystemCard({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative isolate overflow-hidden rounded-[var(--radius-card)] border border-white/10 text-white",
+        "theme-preserve relative isolate overflow-hidden rounded-[var(--radius-card)] border border-white/10 text-white",
         "bg-[linear-gradient(170deg,#1b1c20_0%,#111214_62%,#0a0a0c_100%)]",
         "shadow-[0_40px_80px_-36px_rgba(10,10,12,0.55)]",
         className,

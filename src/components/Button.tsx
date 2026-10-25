@@ -27,17 +27,13 @@ export function ButtonLink({
     );
   }
 
-  const onDark = variant === "light";
   return (
     <GlowButton
       href={href}
-      variant={variant === "ghost" || onDark ? "outline" : "primary"}
+      variant={variant === "ghost" || variant === "light" ? "outline" : "primary"}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className={cn(
-        onDark && "!border-white/35 !bg-white/10 !text-white hover:!border-white",
-        className,
-      )}
+      className={className}
     >
       {children}
     </GlowButton>

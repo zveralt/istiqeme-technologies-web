@@ -8,18 +8,18 @@ export function AiIndustryGrid({ items }: { items: AiIndustry[] }) {
         <Link
           key={ind.slug}
           href={`/ai/agents?industry=${ind.slug}`}
-          className="group rounded-2xl border border-white/15 bg-white/5 p-6 transition-colors hover:border-white/35 hover:bg-white/10"
+          className="group rounded-2xl border border-line bg-paper p-6 transition-colors hover:border-ember/40"
         >
-          <p className="text-[11px] uppercase tracking-[0.16em] text-white/50">
+          <p className="text-[11px] uppercase tracking-[0.16em] text-muted">
             {ind.agentCount} agents
           </p>
-          <h3 className="mt-2 font-display text-xl text-white">{ind.label}</h3>
-          <ul className="mt-4 space-y-1 text-[13px] text-white/65">
+          <h3 className="mt-2 font-display text-xl text-foreground">{ind.label}</h3>
+          <ul className="mt-4 space-y-1 text-[13px] text-ink-soft">
             {ind.featuredNames.slice(0, 3).map((name) => (
               <li key={name} className="truncate">· {name}</li>
             ))}
           </ul>
-          <span className="mt-4 inline-block text-[13px] font-medium text-white group-hover:underline">
+          <span className="mt-4 inline-block text-[13px] font-medium text-foreground group-hover:underline">
             Open {ind.label} →
           </span>
         </Link>

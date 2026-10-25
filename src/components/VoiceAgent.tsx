@@ -3,7 +3,7 @@ import { Arrow } from "./Button";
 
 export function VoiceAgent() {
   return (
-    <div className="overflow-hidden rounded-2xl bg-forest text-[#f5f5f6]">
+    <div className="theme-preserve overflow-hidden rounded-2xl bg-forest text-[#f5f5f6]">
       <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
         <div className="p-8 md:p-12">
           <p className="text-[11px] uppercase tracking-[0.24em] text-[#f5f5f6]/45">

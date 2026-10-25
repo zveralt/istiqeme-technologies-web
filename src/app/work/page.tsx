@@ -64,29 +64,29 @@ export default function WorkPage() {
           <Reveal>
             <SectionHeading onDark eyebrow="Solutions" title="What we have built for problems in the market" />
           </Reveal>
-          <div className="mt-14 border-t border-white/15 md:mt-16">
+          <div className="mt-14 border-t border-line md:mt-16">
             {workMenu.map((item, i) => (
               <Reveal
                 as="article"
                 key={item.id}
                 id={item.id}
-                className="grid scroll-mt-28 gap-5 border-b border-white/15 py-8 text-white md:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10 md:py-10"
+                className="grid scroll-mt-28 gap-5 border-b border-line py-8 text-foreground md:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10 md:py-10"
               >
-                <span className="font-dm text-[12px] tabular-nums tracking-[0.18em] text-white/50">
+                <span className="font-dm text-[12px] tabular-nums tracking-[0.18em] text-muted">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
                   <h3 className="text-[clamp(1.35rem,2.4vw,1.75rem)] font-semibold leading-snug">{item.title}</h3>
-                  <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                  <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
                     The problem
                   </p>
-                  <p className="mt-1 max-w-sm text-[15px] text-white/80">{item.problem}</p>
+                  <p className="mt-1 max-w-sm text-[15px] text-ink-soft">{item.problem}</p>
                 </div>
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ember-bright">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ember">
                     The system
                   </p>
-                  <p className="mt-1 max-w-xl text-[15px] leading-relaxed text-white/85">{item.solution}</p>
+                  <p className="mt-1 max-w-xl text-[15px] leading-relaxed text-ink-soft">{item.solution}</p>
                 </div>
               </Reveal>
             ))}
@@ -123,22 +123,22 @@ export default function WorkPage() {
         mark="."
         description={site.address}
         extra={
-          <dl className="mt-8 grid gap-6 border-t border-white/20 pt-6 sm:grid-cols-2">
+          <dl className="mt-8 grid gap-6 border-t border-line pt-6 sm:grid-cols-2">
             <div>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">Direct phone lines</dt>
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Direct phone lines</dt>
               <dd className="mt-2 space-y-1 text-[15px]">
                 {site.phones.map((p) => (
-                  <a key={p.href} href={p.href} className="block text-white hover:text-ember-bright">
+                  <a key={p.href} href={p.href} className="block text-foreground hover:text-ember">
                     {p.label}
                   </a>
                 ))}
               </dd>
             </div>
             <div>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">Corporate inquiries</dt>
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Corporate inquiries</dt>
               <dd className="mt-2 text-[15px]">
                 {site.emails.map((e) => (
-                  <a key={e.href} href={e.href} className="block text-white hover:text-ember-bright">
+                  <a key={e.href} href={e.href} className="block text-foreground hover:text-ember">
                     {e.label}
                   </a>
                 ))}

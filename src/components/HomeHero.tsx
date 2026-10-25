@@ -57,7 +57,7 @@ export function HomeHero() {
               <DisplayTitle
                 delay={0.08}
                 dense
-                className="itq-hero-title mt-6 text-[clamp(3.35rem,7.2vw,6.35rem)] leading-[0.84] !tracking-[-0.03em]"
+                className="itq-hero-title mt-6"
                 lines={[
                   { text: "Complex systems." },
                   { text: "Beautifully", accent: true },

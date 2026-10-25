@@ -121,7 +121,7 @@ export function InquiryForm() {
                       Thank you, {data.name.split(' ')[0]}. We've noted your request about{' '}
                       {data.service.toLowerCase()}. Our team will reach out within one business day.
                     </p>
-                    <p className="mt-4 text-xs text-ink-400 dark:text-ink-500">
+                    <p className="mt-4 text-xs text-ink-400 dark:text-ink-400">
                       Want to speed things up? Continue on WhatsApp now.
                     </p>
                     <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -223,7 +223,7 @@ export function InquiryForm() {
                     </Field>
 
                     <div className="flex items-center justify-between pt-2">
-                      <p className="text-xs text-ink-400 dark:text-ink-500">
+                      <p className="text-xs text-ink-400 dark:text-ink-400">
                         We reply within one business day.
                       </p>
                       <button

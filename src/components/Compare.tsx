@@ -37,7 +37,7 @@ export function Compare() {
           if (e.buttons === 1) move(e.clientX);
         }}
       >
-        <div className="absolute inset-0 bg-[#1b1c20] p-6 text-[#f5f5f6]">
+        <div className="theme-preserve absolute inset-0 bg-[#1b1c20] p-6 text-[#f5f5f6]">
           <p className="text-[10px] tracking-[0.3em] text-white/50">
             SPECIMEN A · LEGACY TEMPLATE
           </p>

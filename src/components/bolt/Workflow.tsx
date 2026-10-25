@@ -37,7 +37,7 @@ export function Workflow() {
                     </div>
                     <div className="mt-4 text-center">
                       <p className="text-sm font-semibold text-ink-800 dark:text-ink-100">{node.label}</p>
-                      <p className="mt-1 text-xs text-ink-400 dark:text-ink-500 font-mono">{node.sublabel}</p>
+                      <p className="mt-1 text-xs text-ink-400 dark:text-ink-400 font-mono">{node.sublabel}</p>
                     </div>
                   </div>
 
@@ -46,7 +46,7 @@ export function Workflow() {
                     <div className="relative flex items-center px-2">
                       <div className="h-px w-16 bg-ink-200 dark:bg-ink-700" />
                       <div className="absolute h-px w-8 bg-accent-500/60 animate-flow" style={{ animationDelay: `${i * 0.4}s` }} />
-                      <ArrowRight size={14} className="absolute right-0 text-ink-300 dark:text-ink-600" />
+                      <ArrowRight size={14} className="absolute right-0 text-ink-300 dark:text-ink-400" />
                     </div>
                   )}
                 </div>
@@ -62,7 +62,7 @@ export function Workflow() {
                   </div>
                   <div className="mt-3 text-center">
                     <p className="text-sm font-semibold text-ink-800 dark:text-ink-100">{node.label}</p>
-                    <p className="mt-0.5 text-xs text-ink-400 dark:text-ink-500 font-mono">{node.sublabel}</p>
+                    <p className="mt-0.5 text-xs text-ink-400 dark:text-ink-400 font-mono">{node.sublabel}</p>
                   </div>
                   {i < workflowNodes.length - 1 && (
                     <div className="my-3 flex flex-col items-center">
@@ -81,10 +81,10 @@ export function Workflow() {
           <div className="mt-20 grid sm:grid-cols-2 gap-px rounded-2xl border border-ink-200 dark:border-ink-800 overflow-hidden bg-ink-200 dark:bg-ink-800 max-w-3xl mx-auto">
             <div className="bg-white dark:bg-ink-900 p-8">
               <p className="text-xs font-mono uppercase tracking-wide2 text-ink-400 mb-4">Without ISTIQEME</p>
-              <p className="font-display text-3xl tracking-wide text-ink-400 dark:text-ink-600 line-through decoration-ink-300 dark:decoration-ink-700">
+              <p className="font-display text-3xl tracking-wide text-ink-400 dark:text-ink-400 line-through decoration-ink-300 dark:decoration-ink-500">
                 Spreadsheets & private chats
               </p>
-              <p className="mt-3 text-sm text-ink-400 dark:text-ink-500">
+              <p className="mt-3 text-sm text-ink-400 dark:text-ink-400">
                 Leads lost. Follow-ups forgotten. No one sees the full picture.
               </p>
             </div>

@@ -6,7 +6,6 @@ export function SectionHeading({
   title,
   description,
   children,
-  onDark = false,
   align = "split",
   className,
 }: {
@@ -29,12 +28,12 @@ export function SectionHeading({
     >
       <div className="max-w-3xl">
         <p className="itq-eyebrow">{eyebrow}</p>
-        <h2 className={cn("itq-h2 mt-5", onDark ? "text-white" : "text-foreground")}>
+        <h2 className="itq-h2 mt-5 text-foreground">
           {title}
-          <span className={onDark ? "text-ember-bright" : "text-ember"}>.</span>
+          <span className="text-ember">.</span>
         </h2>
         {description ? (
-          <p className={cn("itq-lead mt-5 max-w-2xl", onDark && "text-white/68")}>{description}</p>
+          <p className="itq-lead mt-5 max-w-2xl">{description}</p>
         ) : null}
       </div>
       {children ? <div className="shrink-0">{children}</div> : null}

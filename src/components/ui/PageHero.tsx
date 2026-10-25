@@ -35,7 +35,7 @@ export function PageHero({
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-[#0a0a0c]" aria-hidden />
       <div className="itq-container relative">
         <p className="itq-eyebrow">{eyebrow}</p>
-        <DisplayTitle lines={lines} className="mt-6 max-w-5xl" />
+        <DisplayTitle lines={lines} className="itq-hero-title mt-6 max-w-5xl" />
         {description ? <p className="itq-lead mt-7 max-w-2xl text-balance">{description}</p> : null}
         {children ? <div className="mt-10">{children}</div> : null}
       </div>

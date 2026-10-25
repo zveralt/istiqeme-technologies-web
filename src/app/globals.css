@@ -14,18 +14,18 @@
   --font-sans: var(--font-inter), Inter, system-ui, sans-serif;
   --font-dm: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
-  --color-paper: #ffffff;
-  --color-paper-deep: #f5f5f6;
-  --color-cream: #f5f5f6;
-  --color-ink: #111214;
-  --color-ink-soft: #41424a;
-  --color-muted: #5a5b64;
-  --color-line: #d1d1d5;
+  --color-paper: var(--surface-paper);
+  --color-paper-deep: var(--surface-paper-deep);
+  --color-cream: var(--surface-cream);
+  --color-ink: var(--fg);
+  --color-ink-soft: var(--fg-soft);
+  --color-muted: var(--fg-muted);
+  --color-line: var(--border);
   --color-ember: #2b63c8;
   --color-ember-bright: #4a81de;
   --color-forest: #111214;
   --color-forest-mid: #1b1c20;
-  --color-sand: #f5f5f6;
+  --color-sand: var(--surface-sand);
   --color-whatsapp: #128c7e;
   --color-gold: #e8c468;
   --color-ink-50: #f5f5f6;
@@ -52,6 +52,14 @@
 }
 
 :root {
+  --surface-paper: #ffffff;
+  --surface-paper-deep: #f5f5f6;
+  --surface-cream: #f5f5f6;
+  --surface-sand: #f5f5f6;
+  --fg: #111214;
+  --fg-soft: #41424a;
+  --fg-muted: #5a5b64;
+  --border: #d1d1d5;
   --background: #ffffff;
   --foreground: #111214;
   --card: color-mix(in srgb, #ffffff 84%, transparent);
@@ -95,18 +103,19 @@
 }
 
 .dark {
+  --surface-paper: #141518;
+  --surface-paper-deep: #101114;
+  --surface-cream: #1c1d22;
+  --surface-sand: #1c1d22;
+  --fg: #f3f4f6;
+  --fg-soft: #c6c7cc;
+  --fg-muted: #a3a4ab;
+  --border: #3a3b42;
   --background: #0a0a0c;
-  --foreground: #f5f5f6;
-  --card: color-mix(in srgb, #111214 72%, transparent);
-  --card-foreground: #f5f5f6;
-  --color-paper: #111214;
-  --color-paper-deep: #1b1c20;
-  --color-cream: #1b1c20;
-  --color-ink: #f5f5f6;
-  --color-ink-soft: #a9aab0;
-  --color-muted: #7d7e87;
-  --color-line: #1b1c20;
-  --muted-foreground: #7d7e87;
+  --foreground: #f3f4f6;
+  --card: #141518;
+  --card-foreground: #f3f4f6;
+  --muted-foreground: #a3a4ab;
   --glow-cursor: rgba(74, 129, 222, 0.1);
   --grid-line: rgba(255, 255, 255, 0.021);
   --grid-line-bright: rgba(74, 129, 222, 0.28);
@@ -118,6 +127,11 @@
 
 .dark .text-forest {
   color: var(--forest-ink);
+}
+
+.dark .text-accent-500,
+.dark .text-ember {
+  color: #9dbeff;
 }
 
 .dark .hover\:text-white:hover {
@@ -173,6 +187,9 @@ input:focus-visible {
 }
 
 .itq-hero-title {
+  font-size: var(--fs-display);
+  line-height: 0.84;
+  letter-spacing: -0.03em;
   -webkit-text-stroke: 0;
 }
 
@@ -197,7 +214,7 @@ input:focus-visible {
 }
 
 .band-mist {
-  background: #f5f5f6;
+  background: var(--surface-cream);
 }
 
 section.bg-paper-deep {
@@ -206,12 +223,8 @@ section.bg-paper-deep {
 
 .band-deep {
   position: relative;
-  background-color: #0a0a0c;
-  background-image: radial-gradient(480px 220px at 80% 0%, rgba(74, 129, 222, 0.08), transparent 70%);
-  color: #f5f5f6;
-  --grid-line: rgba(255, 255, 255, 0.021);
-  --grid-line-bright: rgba(74, 129, 222, 0.28);
-  --glow-cursor: rgba(74, 129, 222, 0.1);
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 .grain {
@@ -353,6 +366,10 @@ section.bg-paper-deep {
 /* ---------- Sheets: sections that ride over the previous one ---------- */
 
 .on-dark {
+  color: var(--foreground);
+}
+
+.dark .on-dark {
   color: #f5f5f6;
 }
 
@@ -427,9 +444,7 @@ footer.itq-blueprint::after {
   }
 }
 
-.itq-sheet--deep,
-.itq-sheet--ember,
-.band-deep,
+.dark :is(.itq-sheet--deep, .itq-sheet--ember, .band-deep),
 footer.itq-blueprint[data-header-theme="dark"] {
   --grid-line: rgba(255, 255, 255, 0.021);
   --grid-line-bright: rgba(74, 129, 222, 0.28);
@@ -452,15 +467,48 @@ footer.itq-blueprint[data-header-theme="light"] {
 }
 
 .itq-sheet--deep {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.itq-sheet--ember {
+  background-color: var(--surface-cream);
+  color: var(--foreground);
+}
+
+.dark .band-deep,
+.dark .itq-sheet--deep {
   background-color: #0a0a0c;
   background-image: radial-gradient(480px 220px at 80% 0%, rgba(74, 129, 222, 0.08), transparent 70%);
   color: #f5f5f6;
 }
 
-.itq-sheet--ember {
+.dark .itq-sheet--ember {
   background-color: #111214;
   background-image: radial-gradient(600px 320px at 90% 100%, rgba(43, 99, 200, 0.1), transparent 70%);
   color: #f5f5f6;
+}
+
+/* Copy written for the old always-dark bands follows the section color in light mode. */
+html:not(.dark) :is(.band-deep, .itq-sheet--deep, .itq-sheet--ember) [class*="text-white"] {
+  color: var(--fg-soft);
+}
+
+html:not(.dark) :is(.band-deep, .itq-sheet--deep, .itq-sheet--ember) :is(.text-white, .\!text-white) {
+  color: var(--foreground) !important;
+}
+
+html:not(.dark) :is(.band-deep, .itq-sheet--deep, .itq-sheet--ember) [class*="border-white"] {
+  border-color: var(--border);
+}
+
+html:not(.dark) .theme-preserve,
+html:not(.dark) .theme-preserve [class*="text-white"] {
+  color: #f5f5f6;
+}
+
+html:not(.dark) .theme-preserve [class*="border-white"] {
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .itq-sheet--tint {
@@ -525,11 +573,11 @@ footer.itq-blueprint[data-header-theme="light"] {
   background: var(--color-ember);
 }
 
-:is(.band-deep, .on-dark) .itq-eyebrow {
+.dark :is(.band-deep, .on-dark) .itq-eyebrow {
   color: rgba(255, 255, 255, 0.62);
 }
 
-:is(.band-deep, .on-dark) .itq-eyebrow::before {
+.dark :is(.band-deep, .on-dark) .itq-eyebrow::before {
   background: var(--color-ember-bright);
 }
 
@@ -558,7 +606,7 @@ footer.itq-blueprint[data-header-theme="light"] {
   color: var(--color-ink-soft);
 }
 
-:is(.band-deep, .on-dark) .itq-lead {
+.dark :is(.band-deep, .on-dark) .itq-lead {
   color: rgba(255, 255, 255, 0.68);
 }
 
@@ -573,7 +621,7 @@ footer.itq-blueprint[data-header-theme="light"] {
   color: var(--color-muted);
 }
 
-:is(.band-deep, .on-dark) .itq-micro {
+.dark :is(.band-deep, .on-dark) .itq-micro {
   color: rgba(255, 255, 255, 0.55);
 }
 
@@ -1135,15 +1183,15 @@ footer.itq-blueprint[data-header-theme="light"] {
 } /* end @layer components */
 
 /* Dark band overrides — unlayered so they win over border utilities. */
-:is(.band-deep, .on-dark) .itq-circle {
+.dark :is(.band-deep, .on-dark) .itq-circle {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.32);
 }
 
-:is(.band-deep, .on-dark) .hairline,
-:is(.band-deep, .on-dark) .hairline > :not(:last-child),
-:is(.band-deep, .on-dark) .border-line,
-:is(.band-deep, .on-dark) .divide-line > :not(:last-child) {
+.dark :is(.band-deep, .on-dark) .hairline,
+.dark :is(.band-deep, .on-dark) .hairline > :not(:last-child),
+.dark :is(.band-deep, .on-dark) .border-line,
+.dark :is(.band-deep, .on-dark) .divide-line > :not(:last-child) {
   border-color: var(--line-on-dark);
 }
 

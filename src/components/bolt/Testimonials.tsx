@@ -130,7 +130,7 @@ export function Testimonials() {
                   <ChevronRight size={18} />
                 </button>
               </div>
-              <p className="text-xs font-mono text-ink-400">{testimonials[selected].name} <span className="mx-2 text-ink-300 dark:text-ink-700">·</span> {testimonials[selected].company}</p>
+              <p className="text-xs font-mono text-ink-400">{testimonials[selected].name} <span className="mx-2 text-ink-300 dark:text-ink-400">·</span> {testimonials[selected].company}</p>
             </div>
           </div>
         </Reveal>

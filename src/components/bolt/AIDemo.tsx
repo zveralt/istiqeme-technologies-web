@@ -75,7 +75,7 @@ export function AIDemo() {
                         <span className="font-mono text-xs text-accent-500">{step.number}</span>
                         <span className="text-sm font-semibold text-ink-800 dark:text-ink-100">{step.title}</span>
                       </div>
-                      <p className="mt-0.5 text-xs text-ink-400 dark:text-ink-500 font-mono">{step.detail}</p>
+                      <p className="mt-0.5 text-xs text-ink-400 dark:text-ink-400 font-mono">{step.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -87,7 +87,7 @@ export function AIDemo() {
               <div className="mt-8 flex items-center gap-6">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-wide2 text-ink-400">Without AI</p>
-                  <p className="font-display text-3xl tracking-wide text-ink-400 dark:text-ink-600">14 hours</p>
+                  <p className="font-display text-3xl tracking-wide text-ink-400 dark:text-ink-300">14 hours</p>
                 </div>
                 <div className="h-10 w-px bg-ink-200 dark:bg-ink-700" />
                 <div>
@@ -152,7 +152,7 @@ export function AIDemo() {
 
                 {/* Chat input — decorative */}
                 <div className="flex items-center gap-2 px-4 py-3 border-t border-ink-100 dark:border-ink-800">
-                  <div className="flex-1 h-9 rounded-lg bg-ink-50 dark:bg-ink-800/50 px-3 flex items-center text-sm text-ink-400 dark:text-ink-500">
+                  <div className="flex-1 h-9 rounded-lg bg-ink-50 dark:bg-ink-800/50 px-3 flex items-center text-sm text-ink-400 dark:text-ink-400">
                     Type a message...
                   </div>
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-500 text-white">

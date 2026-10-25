@@ -30,7 +30,7 @@ export function Process() {
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-200 dark:border-ink-700 text-ink-500 dark:text-ink-400 group-hover:border-accent-500/50 group-hover:text-accent-500 transition-colors">
                     <step.icon size={20} />
                   </span>
-                  <span className="font-display text-4xl tracking-wide text-ink-200 dark:text-ink-700 group-hover:text-accent-500/30 transition-colors">
+                  <span className="font-display text-4xl tracking-wide text-ink-200 dark:text-ink-400 group-hover:text-accent-500/30 transition-colors">
                     {step.number}
                   </span>
                 </div>

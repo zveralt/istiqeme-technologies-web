@@ -46,18 +46,18 @@ export default function AiHubPage() {
 
       <section data-header-theme="dark" className="band-deep glow-field px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <Eyebrow className="text-white/60">Products</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Eight ways we run your business</h2>
+          <Eyebrow>Products</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl text-foreground md:text-4xl">Eight ways we run your business</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {aiProductsFull.map((p) => (
               <Link
                 key={p.id}
                 href={`/ai/products#${p.id}`}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:bg-white/10"
+                className="rounded-2xl border border-line bg-paper p-5 transition-colors hover:border-ember/40"
               >
-                <span className="font-display text-lg text-white">{p.num}</span>
-                <p className="mt-2 text-[15px] font-medium text-white">{p.title}</p>
-                <p className="mt-2 line-clamp-2 text-[13px] text-white/60">{p.summary}</p>
+                <span className="font-display text-lg text-foreground">{p.num}</span>
+                <p className="mt-2 text-[15px] font-medium text-foreground">{p.title}</p>
+                <p className="mt-2 line-clamp-2 text-[13px] text-muted">{p.summary}</p>
               </Link>
             ))}
           </div>
@@ -103,8 +103,8 @@ export default function AiHubPage() {
 
       <section data-header-theme="dark" className="band-deep glow-field px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <Eyebrow className="text-white/60">Agent library</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl text-white">
+          <Eyebrow>Agent library</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl text-foreground">
             {agents.length} agents · {industryGrid.length} industries
           </h2>
           <AiIndustryGrid items={industryGrid} />
@@ -188,10 +188,10 @@ export default function AiHubPage() {
 
       <section data-header-theme="dark" className="band-deep glow-field px-5 py-20 md:px-8">
         <div className="mx-auto max-w-7xl text-center">
-          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-white">
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-foreground">
             Ready when you are
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/65">
+          <p className="mx-auto mt-4 max-w-xl text-ink-soft">
             Pick an industry in the library or start the intake — we reply on WhatsApp within one business day.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

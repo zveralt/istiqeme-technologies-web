@@ -69,7 +69,7 @@ export function Hero() {
             <DisplayTitle
               delay={0.08}
               dense
-              className="itq-hero-title mt-6 text-[clamp(3.35rem,7.2vw,6.35rem)] leading-[0.84] !tracking-[-0.03em]"
+              className="itq-hero-title mt-6"
               lines={[
                 { text: "Complex systems." },
                 { text: "Beautifully", accent: true },
@@ -130,7 +130,7 @@ export function Hero() {
                     }
                   >
                     <span
-                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink-100 font-mono text-[10px] text-ink-500 dark:bg-ink-800 dark:text-ink-400"
+                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink-100 font-mono text-[10px] text-ink-500 dark:bg-ink-800 dark:text-ink-200"
                     >
                       {step.n}
                     </span>
@@ -160,7 +160,7 @@ export function Hero() {
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
               key={`${item}-${i}`}
-              className="flex items-center gap-4 whitespace-nowrap px-6 font-mono text-sm uppercase tracking-wide2 text-ink-400 dark:text-ink-500"
+              className="flex items-center gap-4 whitespace-nowrap px-6 font-mono text-sm uppercase tracking-wide2 text-ink-400 dark:text-ink-400"
             >
               {item}
               <span className="text-accent-500/40" aria-hidden>•</span>

@@ -20,7 +20,7 @@ export default function StartPage() {
         <div>
           <p className="itq-eyebrow">Quick intake</p>
           <DisplayTitle
-            className="mt-6 max-w-xl text-[clamp(2.5rem,5.5vw,4.5rem)]"
+            className="itq-hero-title mt-6 max-w-xl"
             lines={[{ text: "Find your fit" }, { text: "in four taps.", accent: true }]}
           />
           <p className="itq-lead mt-7 max-w-md">

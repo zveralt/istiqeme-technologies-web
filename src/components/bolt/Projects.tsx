@@ -60,7 +60,7 @@ function ClientSiteCard({ site, featured }: { site: ClientSite; featured: boolea
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
-            <span className="ml-2 truncate rounded bg-ink-100 px-2 py-1 text-[9px] font-mono text-ink-400 dark:bg-ink-800 dark:text-ink-500">
+            <span className="ml-2 truncate rounded bg-ink-100 px-2 py-1 text-[9px] font-mono text-ink-400 dark:bg-ink-800 dark:text-ink-400">
               {site.domain}
             </span>
             <ExternalLink size={12} className="ml-auto text-ink-400 transition-colors group-hover:text-accent-500" />

@@ -117,7 +117,7 @@ export function LeadDemo() {
             <p className="text-[12px] text-muted">Without AI</p>
             <p className="font-display text-3xl">14 hours</p>
           </div>
-          <div className="rounded-2xl bg-forest p-4 text-[#f5f5f6]">
+          <div className="theme-preserve rounded-2xl bg-forest p-4 text-[#f5f5f6]">
             <p className="text-[12px] text-white/60">With our AI</p>
             <p className="font-display text-3xl">Instant</p>
           </div>

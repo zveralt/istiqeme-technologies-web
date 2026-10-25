@@ -38,7 +38,7 @@ export function AiProductSection({ product }: { product: Product }) {
         ))}
       </ul>
       {"showIndustryGrid" in product && product.showIndustryGrid ? (
-        <div className="mt-10 rounded-2xl bg-forest px-6 py-10 md:px-10">
+        <div className="theme-preserve mt-10 rounded-2xl bg-forest px-6 py-10 md:px-10">
           <p className="text-[11px] uppercase tracking-[0.18em] text-white/50">Agent library</p>
           <h3 className="mt-2 font-display text-2xl text-white md:text-3xl">
             {industryGrid.reduce((s, i) => s + i.agentCount, 0)}+ agents across industries

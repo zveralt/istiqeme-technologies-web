@@ -34,7 +34,7 @@ export function Services() {
                 className="group relative flex items-center gap-4 lg:gap-8 border-b border-ink-200 dark:border-ink-800 py-6 lg:py-8 hover:bg-ink-50/50 dark:hover:bg-ink-900/30 transition-colors -mx-5 lg:-mx-8 px-5 lg:px-8"
               >
                 {/* Number */}
-                <span className="hidden sm:block w-12 shrink-0 font-mono text-sm text-ink-300 dark:text-ink-600 group-hover:text-accent-500 transition-colors">
+                <span className="hidden sm:block w-12 shrink-0 font-mono text-sm text-ink-300 dark:text-ink-400 group-hover:text-accent-500 transition-colors">
                   {service.number}
                 </span>
 
@@ -59,7 +59,7 @@ export function Services() {
                 {/* Arrow */}
                 <ArrowUpRight
                   size={20}
-                  className="shrink-0 text-ink-300 dark:text-ink-600 group-hover:text-accent-500 group-hover:rotate-45 transition-all duration-300"
+                  className="shrink-0 text-ink-300 dark:text-ink-400 group-hover:text-accent-500 group-hover:rotate-45 transition-all duration-300"
                 />
               </Link>
             </Reveal>
