@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Bot, User } from "lucide-react";
 import { aiDemoSteps } from "@/lib/bolt-home-data";
 import { Reveal } from "./Reveal";
@@ -18,8 +18,46 @@ const conversation: Message[] = [
 ];
 
 export function AIDemo() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
   const [visibleCount, setVisibleCount] = useState(0);
   const [typing, setTyping] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
+    let frame = 0;
+    let lastFilled = -1;
+    const update = () => {
+      frame = 0;
+      const rect = el.getBoundingClientRect();
+      const view = window.innerHeight;
+      const raw = (view - rect.top) / Math.max(1, el.offsetHeight);
+      const reachedEnd = rect.bottom <= view + 1 && rect.top < view * 0.5;
+      const next = reachedEnd ? 1 : Math.min(1, Math.max(0, raw));
+      track.style.setProperty("--lead-progress", String(next));
+      const count = next >= 1 ? aiDemoSteps.length : Math.floor(next * aiDemoSteps.length);
+      if (count !== lastFilled) {
+        lastFilled = count;
+        setProgress(next >= 1 ? 1 : count / aiDemoSteps.length);
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const filled = progress >= 1 ? aiDemoSteps.length : Math.round(progress * aiDemoSteps.length);
 
   useEffect(() => {
     if (visibleCount >= conversation.length) {
@@ -41,7 +79,7 @@ export function AIDemo() {
   }, [visibleCount]);
 
   return (
-    <section id="ai-demo" className="relative py-28 lg:py-40 border-y border-ink-200/60 dark:border-ink-800/60">
+    <section ref={sectionRef} id="ai-demo" className="relative py-28 lg:py-40 border-y border-ink-200/60 dark:border-ink-800/60">
       <div className="absolute inset-0 grid-bg opacity-50" />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
@@ -60,16 +98,27 @@ export function AIDemo() {
 
             {/* Steps timeline */}
             <Reveal delay={150}>
-              <div className="mt-10 space-y-1">
-                {aiDemoSteps.map((step, i) => (
+              <div ref={trackRef} className="relative mt-10 space-y-1">
+                <div className="pointer-events-none absolute bottom-2 left-0 top-2 w-0.5 bg-ink-200 dark:bg-ink-800" aria-hidden />
+                <div
+                  className="pointer-events-none absolute left-0 top-2 w-0.5 bg-accent-500"
+                  style={{ height: "calc((100% - 1rem) * var(--lead-progress, 0))" }}
+                  aria-hidden
+                />
+                {aiDemoSteps.map((step, i) => {
+                  const on = i < filled;
+                  return (
                   <div
                     key={step.number}
-                    className="flex gap-4 py-3 border-l-2 pl-5 border-ink-200 dark:border-ink-800 relative"
-                    style={{
-                      borderColor: i < (visibleCount > 0 ? 2 : 0) ? 'rgb(42 157 88 / 0.4)' : undefined,
-                    }}
+                    className="relative flex gap-4 py-3 pl-5"
                   >
-                    <span className="absolute -left-[9px] top-4 h-4 w-4 rounded-full border-2 border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-950" />
+                    <span
+                      className={`absolute -left-[7px] top-4 h-4 w-4 rounded-full border-2 transition-colors duration-200 ${
+                        on
+                          ? "border-accent-500 bg-accent-500"
+                          : "border-ink-200 bg-white dark:border-ink-700 dark:bg-ink-950"
+                      }`}
+                    />
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-mono text-xs text-accent-500">{step.number}</span>
@@ -78,7 +127,8 @@ export function AIDemo() {
                       <p className="mt-0.5 text-xs text-ink-400 dark:text-ink-400 font-mono">{step.detail}</p>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </Reveal>
 

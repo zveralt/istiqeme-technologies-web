@@ -129,10 +129,9 @@
   color: var(--forest-ink);
 }
 
-.dark .text-accent-500,
-.dark .text-ember {
-  color: #9dbeff;
-}
+/* Decorative heading/label accents keep primary brand blue (--color-ember /
+ * --color-accent-500 = #2b63c8) in both themes. Do not lighten them here —
+ * interactive hover blues use ember-bright / accent-400 separately. */
 
 .dark .hover\:text-white:hover {
   color: #ffffff;
@@ -1060,6 +1059,141 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
   );
 }
 
+/* ---------- Portfolio before/after (copied from istiqeme-website) ---------- */
+
+.portfolio-before-after {
+  --font-heritage-display: var(--font-display), "Bebas Neue", Georgia, serif;
+  --font-heritage-body: var(--font-sans), Inter, system-ui, sans-serif;
+  --font-heritage-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+  --noir-ink: #ffffff;
+  --noir-body: #e2e8f0;
+  --noir-muted: #94a3b8;
+  --noir-panel: #121a2e;
+  color: var(--noir-body);
+}
+
+.portfolio-before-after .tech-masthead {
+  font-family: var(--font-heritage-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  color: var(--noir-ink);
+}
+
+.portfolio-before-after .tech-body {
+  font-family: var(--font-heritage-body);
+  color: var(--noir-body);
+  line-height: 1.85;
+}
+
+.portfolio-before-after .tech-body-muted {
+  color: var(--noir-muted);
+}
+
+.portfolio-before-after .tech-meta {
+  font-family: var(--font-heritage-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(203 213 225 / 0.88);
+}
+
+.portfolio-before-after .tech-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--noir-panel);
+  border: 1px solid rgb(255 255 255 / 0.15);
+  color: #7da4d4;
+  font-family: var(--font-heritage-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    border-color 0.25s,
+    color 0.25s,
+    background-color 0.25s,
+    transform 0.2s;
+}
+
+.portfolio-before-after .tech-cta:hover,
+.portfolio-before-after .tech-cta:focus-visible {
+  border-color: rgb(125 164 212 / 0.5);
+  color: var(--noir-ink);
+  background-color: #1a2540;
+}
+
+.portfolio-before-after .heritage-reveal {
+  animation: portfolio-heritage-reveal 0.7s ease-out both;
+}
+
+.portfolio-before-after .heritage-reveal[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: none;
+}
+
+.portfolio-before-after .heritage-reveal[data-reveal="ready"] {
+  animation: portfolio-heritage-reveal 0.7s ease-out both;
+}
+
+@keyframes portfolio-heritage-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.noir-before-after-clip {
+  contain: layout style paint;
+}
+
+.noir-before-after-clip-transition {
+  transition: clip-path 0.45s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-before-after .heritage-reveal,
+  .noir-before-after-clip-transition {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .portfolio-before-after .heritage-reveal[data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .noir-before-after__handle-touch {
+    width: 3.5rem;
+    min-width: 44px;
+  }
+
+  .noir-before-after__handle-touch .noir-before-after__grip {
+    height: 4.5rem;
+    width: 2.25rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .noir-before-after__handle-touch .noir-before-after__grip {
+    height: 5rem;
+    width: 2.5rem;
+  }
+}
+
 /* ---------- White browser frames for live-site previews ---------- */
 
 .itq-browser {
@@ -1507,10 +1641,10 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
 
   .reveal-bolt {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(22px);
     transition:
-      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal-bolt.is-visible {
@@ -1518,30 +1652,12 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
     transform: translateY(0);
   }
 
-  .site-preview-frame {
-    transform: translateY(0);
-    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .group:hover .site-preview-frame,
-    .group:focus-visible .site-preview-frame {
-      transform: translateY(var(--preview-shift));
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .reveal-bolt,
-    .reveal-bolt.is-visible,
-    .site-preview-frame {
+    .reveal-bolt.is-visible {
       transition: none;
       transform: none;
       opacity: 1;
-    }
-
-    .group:hover .site-preview-frame,
-    .group:focus-visible .site-preview-frame {
-      transform: none;
     }
   }
 
@@ -1576,7 +1692,7 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
     min-height: 2.75rem;
     white-space: nowrap;
     box-shadow: none;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease;
   }
 
   .dark .itq-glow-btn:not(.itq-glow-btn-outline) {

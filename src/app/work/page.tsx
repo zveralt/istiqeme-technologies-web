@@ -8,7 +8,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Sheet } from "@/components/ui/Sheet";
 import { VoiceAgent } from "@/components/VoiceAgent";
-import { WorkShowcase } from "@/components/WorkShowcase";
+import { Projects } from "@/components/bolt/Projects";
 import { site, workMenu } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -26,24 +26,13 @@ export default function WorkPage() {
         description="See real sites we have built, try our live demos, and reach our team directly when you are ready to talk."
       />
 
-      <Sheet>
-        <div className="itq-container">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Live client sites"
-              title="Real websites we build and operate"
-              description="Every preview below opens the live site. These are running today, not mockups."
-            />
-          </Reveal>
-          <div className="mt-14 md:mt-20">
-            <WorkShowcase />
-          </div>
-        </div>
-      </Sheet>
+      <Projects />
 
-      <Sheet tone="tint">
+      <Sheet tone="deep">
         <div className="itq-container">
-          <Compare />
+          <div className="portfolio-before-after">
+            <Compare />
+          </div>
         </div>
       </Sheet>
 

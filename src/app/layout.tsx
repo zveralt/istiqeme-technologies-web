@@ -9,6 +9,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { GridBackground } from "@/components/ui/GridBackground";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { site } from "@/lib/site";
 
@@ -65,12 +66,14 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} h-full`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
+          <SmoothScroll />
           <ScrollToTop />
           <GridBackground />
           <Header />

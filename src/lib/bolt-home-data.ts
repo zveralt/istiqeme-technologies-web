@@ -62,6 +62,7 @@ export type ClientSite = {
   description: string;
   category: string;
   url: string;
+  image: string;
   scrollDistance: string;
 };
 
@@ -83,6 +84,7 @@ export const clientSites: ClientSite[] = work.map((w, i) => {
     description: w.body,
     category: w.kind,
     url: w.href,
+    image: w.image,
     scrollDistance: scrollByHost[host] ?? scrollByHost[`www.${host}`] ?? "-380px",
   };
 });

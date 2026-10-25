@@ -1,7 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { ArrowUpRight, ExternalLink, MousePointer2 } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { clientSites, type ClientSite } from "@/lib/bolt-home-data";
 import { Reveal } from "./Reveal";
 
@@ -25,10 +24,6 @@ export function Projects() {
               <p className="text-base leading-relaxed text-ink-500 dark:text-ink-400 text-balance">
                 Real websites and systems we build and run — designed for speed, clarity, and trust.
               </p>
-              <div className="hidden items-center gap-2 text-xs font-mono uppercase tracking-wide2 text-ink-400 sm:flex">
-                <MousePointer2 size={14} className="text-accent-500" />
-                Hover to preview the page
-              </div>
             </div>
           </div>
         </Reveal>
@@ -46,40 +41,27 @@ export function Projects() {
 }
 
 function ClientSiteCard({ site, featured }: { site: ClientSite; featured: boolean }) {
-  return (
-    <a
-      href={site.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block"
-      aria-label={`Open ${site.title} in a new tab`}
-    >
+  const linked = site.url.length > 0;
+  const frame = (
       <article className="overflow-hidden rounded-2xl border border-ink-200/80 bg-white/80 shadow-[0_18px_60px_rgba(17,28,49,0.06)] transition-all duration-500 hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-[0_24px_80px_rgba(43,99,200,0.14)] dark:border-ink-800/90 dark:bg-ink-900/70 dark:shadow-[0_18px_60px_rgba(0,0,0,0.18)] dark:hover:border-accent-400/50">
         <div className={`relative overflow-hidden bg-ink-100 dark:bg-ink-950 ${featured ? 'h-[300px] sm:h-[420px] lg:h-[520px]' : 'h-[260px] sm:h-[320px]'}`}>
           <div className="absolute inset-x-0 top-0 z-20 flex h-9 items-center gap-1.5 border-b border-ink-200/70 bg-white/90 px-3 backdrop-blur-md dark:border-ink-800/80 dark:bg-ink-900/90">
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />
-            <span className="ml-2 truncate rounded bg-ink-100 px-2 py-1 text-[9px] font-mono text-ink-400 dark:bg-ink-800 dark:text-ink-400">
-              {site.domain}
-            </span>
-            <ExternalLink size={12} className="ml-auto text-ink-400 transition-colors group-hover:text-accent-500" />
+            {site.domain ? (
+              <span className="ml-2 truncate rounded bg-ink-100 px-2 py-1 text-[9px] font-mono text-ink-400 dark:bg-ink-800 dark:text-ink-400">
+                {site.domain}
+              </span>
+            ) : null}
+            {linked ? <ExternalLink size={12} className="ml-auto text-ink-400 transition-colors group-hover:text-accent-500" /> : null}
           </div>
 
-          <iframe
-            src={site.url}
-            title={`${site.title} live preview`}
-            loading="lazy"
-            tabIndex={-1}
-            className="site-preview-frame pointer-events-none absolute left-0 top-9 h-[980px] w-full border-0 transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-            style={{ '--preview-shift': site.scrollDistance } as CSSProperties}
+          <img
+            src={site.image}
+            alt=""
+            className="pointer-events-none absolute inset-x-0 top-9 bottom-0 h-[calc(100%-2.25rem)] w-full object-cover object-center"
           />
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-ink-950/55 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
-          <div className="pointer-events-none absolute bottom-4 left-4 z-20 flex items-center gap-2 rounded-full border border-white/20 bg-ink-950/60 px-3 py-1.5 text-[10px] font-mono uppercase tracking-wide2 text-white/80 opacity-0 backdrop-blur-md transition-opacity duration-500 group-hover:opacity-100">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-400" />
-            Scroll preview
-          </div>
         </div>
 
         <div className="p-5 sm:p-6 lg:p-7">
@@ -93,15 +75,30 @@ function ClientSiteCard({ site, featured }: { site: ClientSite; featured: boolea
               <h3 className="font-display text-3xl tracking-wide text-ink-900 transition-colors duration-300 group-hover:text-accent-500 dark:text-ink-50 sm:text-4xl">
                 {site.title}
               </h3>
-              <p className="mt-1 font-mono text-xs text-ink-400">{site.domain}</p>
+              {site.domain ? <p className="mt-1 font-mono text-xs text-ink-400">{site.domain}</p> : null}
             </div>
+            {linked ? (
             <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink-200 text-ink-500 transition-all duration-300 group-hover:border-accent-500 group-hover:bg-accent-500 group-hover:text-white dark:border-ink-700 dark:text-ink-300">
               <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
+            ) : null}
           </div>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-500 dark:text-ink-400">{site.description}</p>
         </div>
       </article>
+  );
+
+  if (!linked) return <div className="block">{frame}</div>;
+
+  return (
+    <a
+      href={site.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block"
+      aria-label={`Open ${site.title} in a new tab`}
+    >
+      {frame}
     </a>
   );
 }
