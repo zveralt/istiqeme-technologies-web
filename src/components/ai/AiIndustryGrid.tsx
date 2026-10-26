@@ -8,7 +8,7 @@ export function AiIndustryGrid({ items }: { items: AiIndustry[] }) {
         <Link
           key={ind.slug}
           href={`/ai/agents?industry=${ind.slug}`}
-          className="group rounded-2xl border border-line bg-paper p-6 transition-colors hover:border-ember/40"
+          className="itq-surface group rounded-2xl border border-line bg-paper p-6"
         >
           <p className="text-[11px] uppercase tracking-[0.16em] text-muted">
             {ind.agentCount} agents

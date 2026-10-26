@@ -8,7 +8,7 @@ export function AgentCard({ agent }: { agent: AiAgent }) {
   );
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-line bg-card p-6 text-card-foreground shadow-sm transition duration-300 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-md">
+    <article className="itq-surface itq-surface-lift flex h-full flex-col rounded-2xl border border-line bg-card p-6 text-card-foreground shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <h3 className="font-display text-[1.35rem] leading-snug text-forest">{agent.name}</h3>
         <span

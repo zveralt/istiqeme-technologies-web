@@ -4,6 +4,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { AiProductNav, AiProductNavMobile } from "@/components/ai/AiProductNav";
 import { AiProductSection } from "@/components/ai/AiProductSection";
 import { aiProductIntro, aiProductsFull } from "@/lib/ai-automation";
+import { heroMedia } from "@/lib/hero-media";
 
 export const metadata: Metadata = {
   title: "AI Products",
@@ -18,6 +19,9 @@ export default function AiProductsPage() {
         eyebrow={aiProductIntro.eyebrow}
         title={aiProductIntro.title}
         description={aiProductIntro.body}
+        imageSrc={heroMedia.aiProducts.src}
+        imageAlt={heroMedia.aiProducts.alt}
+        imagePosition={heroMedia.aiProducts.objectPosition}
       >
         <AiProductNavMobile />
       </PageHero>

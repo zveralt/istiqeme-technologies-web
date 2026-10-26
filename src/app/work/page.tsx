@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Sheet } from "@/components/ui/Sheet";
 import { VoiceAgent } from "@/components/VoiceAgent";
 import { Projects } from "@/components/bolt/Projects";
+import { heroMedia } from "@/lib/hero-media";
 import { site, workMenu } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -24,6 +25,9 @@ export default function WorkPage() {
         eyebrow="Portfolio"
         title="Our work."
         description="See real sites we have built, try our live demos, and reach our team directly when you are ready to talk."
+        imageSrc={heroMedia.work.src}
+        imageAlt={heroMedia.work.alt}
+        imagePosition={heroMedia.work.objectPosition}
       />
 
       <Projects />

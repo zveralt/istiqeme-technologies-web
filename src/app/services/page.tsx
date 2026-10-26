@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceGlyph, type ServiceGlyphId } from "@/components/ui/ServiceGlyph";
 import { Sheet } from "@/components/ui/Sheet";
 import { WhatsAppLink } from "@/components/Button";
+import { heroMedia } from "@/lib/hero-media";
 import { serviceMenu, services, site, waLink } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -36,6 +37,9 @@ export default function ServicesPage() {
         title="Five ways to get"
         accent="your business online."
         description="From a simple landing page to a full mobile app. Every project is quoted individually. Chat with us to find the right fit."
+        imageSrc={heroMedia.services.src}
+        imageAlt={heroMedia.services.alt}
+        imagePosition={heroMedia.services.objectPosition}
       />
 
       <Sheet>

@@ -20,19 +20,28 @@ export function Process() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border border-ink-200 dark:border-ink-800 overflow-hidden bg-ink-200 dark:bg-ink-800">
           {processSteps.map((step, i) => (
             <Reveal key={step.number} delay={i * 100}>
-              <div className="group relative h-full bg-white dark:bg-ink-900 p-8 hover:bg-ink-50/50 dark:hover:bg-ink-800/30 transition-colors">
-                {/* Connecting line on desktop */}
-                {i < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 right-0 h-px w-full bg-ink-200 dark:bg-ink-800 -translate-y-1/2" />
-                )}
-
+              <div className="itq-surface group relative h-full bg-white p-8 dark:bg-ink-900">
                 <div className="relative flex items-center gap-3 mb-6">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-200 dark:border-ink-700 text-ink-500 dark:text-ink-400 group-hover:border-accent-500/50 group-hover:text-accent-500 transition-colors">
+                  {/* Lead-in from cell edge up to the icon (never under it) */}
+                  {i > 0 && (
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute left-0 top-1/2 hidden h-px w-8 -translate-x-full -translate-y-1/2 bg-ink-200 dark:bg-ink-800 lg:block"
+                    />
+                  )}
+                  <span className="relative z-[1] flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-200 bg-white text-ink-500 transition-colors group-hover:border-accent-500/50 group-hover:text-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-400">
                     <step.icon size={20} />
                   </span>
-                  <span className="font-display text-4xl tracking-wide text-ink-200 dark:text-ink-400 group-hover:text-accent-500/30 transition-colors">
+                  <span className="relative z-[1] shrink-0 bg-white px-1 font-display text-4xl tracking-wide text-ink-200 transition-colors group-hover:text-accent-500/30 dark:bg-ink-900 dark:text-ink-400">
                     {step.number}
                   </span>
+                  {/* Trail after the number to the next cell */}
+                  {i < processSteps.length - 1 && (
+                    <span
+                      aria-hidden
+                      className="ml-1 hidden h-px min-w-4 flex-1 self-center bg-ink-200 dark:bg-ink-800 lg:-mr-8 lg:block"
+                    />
+                  )}
                 </div>
 
                 <h3 className="font-display text-2xl tracking-wide text-ink-900 dark:text-ink-50 mb-2">

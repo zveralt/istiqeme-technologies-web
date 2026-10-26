@@ -1,0 +1,12 @@
+Interior hero photography — Unsplash License (https://unsplash.com/license).
+Free for commercial use. Files stored locally under /public/images/heroes (optimized ~1920px JPEG).
+
+services.jpg     — Unsplash photo-1497366216548-37526070297c (Nastuh Abootalebi)
+work.jpg         — Unsplash photo-1460925895917-afdab827c52f (Carlos Muza)
+ai.jpg           — Unsplash photo-1677442136019-21780ecad995 (Google DeepMind)
+ai-products.jpg  — Unsplash photo-1551288049-bebda4e38f71 (Luke Chesser)
+ai-agents.jpg    — Unsplash photo-1531746790731-6c087fecd65a (Andrea Piacquadio)
+start.jpg        — Unsplash photo-1600880292203-757bb62b4baf (Amy Hirschi)
+contact.jpg      — Unsplash photo-1423666639041-f56000c27a9a (Nordwood Themes)
+
+Downloaded from images.unsplash.com with auto=format&fit=crop&w=2000, then scaled to 1920px.

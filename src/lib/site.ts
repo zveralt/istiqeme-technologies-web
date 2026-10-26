@@ -36,6 +36,7 @@ export const nav = [
   { href: "/services", label: "Services", menu: "services" },
   { href: "/ai", label: "AI", menu: "ai" },
   { href: "/#process", label: "Problems" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const aiMenu = [

@@ -5,6 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgentLibrary } from "@/components/ai/AgentLibrary";
 import { agents } from "@/lib/ai-agents";
+import { heroMedia } from "@/lib/hero-media";
 
 export const metadata: Metadata = {
   title: "Agent library",
@@ -19,6 +20,9 @@ export default function AiAgentsPage() {
         eyebrow="Agent library"
         title="Agents built for your industry"
         description={`Each agent reads your tools, owns one outcome end to end, and sends exceptions to a human — usually on WhatsApp. ${agents.length} agents ready to scope for Karachi operators.`}
+        imageSrc={heroMedia.aiAgents.src}
+        imageAlt={heroMedia.aiAgents.alt}
+        imagePosition={heroMedia.aiAgents.objectPosition}
       >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="/start" variant="ember">

@@ -7,6 +7,7 @@ import { LeadDemo } from "@/components/LeadDemo";
 import { Eyebrow, Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { AiIndustryGrid } from "@/components/ai/AiIndustryGrid";
+import { heroMedia } from "@/lib/hero-media";
 import {
   aiBuildingBlocks,
   aiCaseStudies,
@@ -29,7 +30,14 @@ export const metadata: Metadata = {
 export default function AiHubPage() {
   return (
     <>
-      <PageHero eyebrow={aiHero.eyebrow} title={aiHero.title} description={aiHero.subtitle}>
+      <PageHero
+        eyebrow={aiHero.eyebrow}
+        title={aiHero.title}
+        description={aiHero.subtitle}
+        imageSrc={heroMedia.ai.src}
+        imageAlt={heroMedia.ai.alt}
+        imagePosition={heroMedia.ai.objectPosition}
+      >
         <p className="max-w-2xl text-[16px] leading-relaxed text-ink-soft">{aiHero.body}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="/ai/products" variant="ember">
@@ -53,7 +61,7 @@ export default function AiHubPage() {
               <Link
                 key={p.id}
                 href={`/ai/products#${p.id}`}
-                className="rounded-2xl border border-line bg-paper p-5 transition-colors hover:border-ember/40"
+                className="itq-surface rounded-2xl border border-line bg-paper p-5"
               >
                 <span className="font-display text-lg text-foreground">{p.num}</span>
                 <p className="mt-2 text-[15px] font-medium text-foreground">{p.title}</p>
@@ -84,7 +92,7 @@ export default function AiHubPage() {
               <Link
                 key={c.title}
                 href={c.href}
-                className="rounded-2xl border border-line bg-card p-6 text-card-foreground transition-shadow hover:shadow-md"
+                className="itq-surface itq-surface-lift rounded-2xl border border-line bg-card p-6 text-card-foreground"
               >
                 <p className="text-[11px] uppercase tracking-wider text-muted">{c.meta}</p>
                 <h3 className="mt-2 font-display text-xl text-forest">{c.title}</h3>
@@ -156,7 +164,7 @@ export default function AiHubPage() {
           <Eyebrow>Who this is for</Eyebrow>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {aiProfiles.map((p) => (
-              <div key={p.id} className="rounded-2xl border border-line bg-card p-6 text-card-foreground">
+              <div key={p.id} className="itq-surface rounded-2xl border border-line bg-card p-6 text-card-foreground">
                 <span className="text-[11px] text-muted">Profile {p.id}</span>
                 <h3 className="mt-2 font-display text-xl text-forest">{p.title}</h3>
                 <p className="mt-3 text-[14px] text-ink-soft">{p.body}</p>

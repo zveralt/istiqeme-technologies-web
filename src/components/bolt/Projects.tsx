@@ -43,7 +43,7 @@ export function Projects() {
 function ClientSiteCard({ site, featured }: { site: ClientSite; featured: boolean }) {
   const linked = site.url.length > 0;
   const frame = (
-      <article className="overflow-hidden rounded-2xl border border-ink-200/80 bg-white/80 shadow-[0_18px_60px_rgba(17,28,49,0.06)] transition-all duration-500 hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-[0_24px_80px_rgba(43,99,200,0.14)] dark:border-ink-800/90 dark:bg-ink-900/70 dark:shadow-[0_18px_60px_rgba(0,0,0,0.18)] dark:hover:border-accent-400/50">
+      <article className="itq-surface itq-surface-lift group overflow-hidden rounded-2xl border border-ink-200/80 bg-white/80 shadow-[0_18px_60px_rgba(17,28,49,0.06)] dark:border-ink-800/90 dark:bg-ink-900/70 dark:shadow-[0_18px_60px_rgba(0,0,0,0.18)]">
         <div className={`relative overflow-hidden bg-ink-100 dark:bg-ink-950 ${featured ? 'h-[300px] sm:h-[420px] lg:h-[520px]' : 'h-[260px] sm:h-[320px]'}`}>
           <div className="absolute inset-x-0 top-0 z-20 flex h-9 items-center gap-1.5 border-b border-ink-200/70 bg-white/90 px-3 backdrop-blur-md dark:border-ink-800/80 dark:bg-ink-900/90">
             <span className="h-2 w-2 rounded-full bg-ink-300 dark:bg-ink-700" />

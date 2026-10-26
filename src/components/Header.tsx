@@ -97,12 +97,14 @@ export function Header() {
     timer.current = window.setTimeout(() => setMenu(next), delay);
   }
 
-  function keyFor(href: string): MenuKey {
+  function keyFor(href: string): MenuKey | null {
+    if (href === "/contact" || href === "/start") return null;
     if (href.startsWith("/work")) return "work";
     if (href.startsWith("/services")) return "services";
     if (href.startsWith("/ai")) return "ai";
     if (href.includes("problems")) return "problems";
-    return "home";
+    if (href === "/") return "home";
+    return null;
   }
 
   return (
@@ -132,9 +134,9 @@ export function Header() {
                     href={item.href}
                     className="itq-nav-link block"
                     aria-current={active ? "page" : undefined}
-                    data-active={menu === key || undefined}
-                    onMouseEnter={() => schedule(key, 140)}
-                    onFocus={() => schedule(key, 0)}
+                    data-active={key && menu === key ? true : undefined}
+                    onMouseEnter={() => (key ? schedule(key, 140) : schedule(null, 0))}
+                    onFocus={() => (key ? schedule(key, 0) : schedule(null, 0))}
                   >
                     {item.label}
                   </Link>
@@ -216,7 +218,7 @@ export function Header() {
             >
               {nav.map((item, idx) => {
                 const key = keyFor(item.href);
-                const expanded = mobileGroup === key;
+                const expanded = Boolean(key && mobileGroup === key);
                 const rows =
                   key === "services"
                     ? serviceMenu.map((entry) => ({ href: `/services#${entry.id}`, title: entry.title }))
@@ -226,7 +228,9 @@ export function Header() {
                         ? aiMenu.map((entry) => ({ href: entry.href, title: entry.title }))
                         : key === "problems"
                           ? problems.map((entry) => ({ href: entry.href, title: entry.problem }))
-                          : homeLinks;
+                          : key === "home"
+                            ? homeLinks
+                            : [];
                 return (
                   <motion.div
                     key={item.href}
@@ -239,9 +243,11 @@ export function Header() {
                       <Link
                         href={item.href}
                         className="flex-1 py-4 font-display text-[2rem] leading-none text-foreground"
+                        onClick={() => setOpen(false)}
                       >
                         {item.label}
                       </Link>
+                      {key ? (
                       <button
                         type="button"
                         className="itq-circle h-10 w-10"
@@ -258,6 +264,7 @@ export function Header() {
                           +
                         </span>
                       </button>
+                      ) : null}
                     </div>
                     <AnimatePresence initial={false}>
                       {expanded && (
