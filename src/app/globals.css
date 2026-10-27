@@ -1502,6 +1502,37 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
   }
 }
 
+/* Footer closing marquee — two identical spans; -50% = seamless loop */
+.itq-footer-marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: itq-footer-marquee 40s linear infinite;
+}
+
+.itq-footer-marquee.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes itq-footer-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itq-footer-marquee {
+    animation: none;
+    transform: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .itq-footer-marquee > :last-child {
+    display: none;
+  }
+}
+
 @keyframes marquee-bolt {
   0% {
     transform: translateX(0);

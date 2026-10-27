@@ -1,44 +1,44 @@
 /**
- * Local Unsplash-licensed hero photography for interior PageHero banners.
+ * Local hero photography for interior PageHero banners.
  * Home page stays on its existing bolt Hero (no image swap here).
  *
- * Sources verified downloaded from images.unsplash.com (Unsplash License).
+ * Source files from Downloads/hero banner images (Unsplash).
  * See public/images/heroes/ATTRIBUTION.txt
  */
 export const heroMedia = {
   services: {
-    src: "/images/heroes/services.jpg",
-    alt: "Bright modern office with glass walls and collaborative desks",
-    objectPosition: "center 40%",
+    src: "/images/heroes/services-meeting.jpg",
+    alt: "Modern conference room with a long meeting table and chairs",
+    objectPosition: "center 45%",
   },
   work: {
-    src: "/images/heroes/work.jpg",
-    alt: "Laptop on a desk showing analytics charts and website work",
-    objectPosition: "center center",
+    src: "/images/heroes/work-nasa.jpg",
+    alt: "Earth at night from orbit, city lights glowing against deep space",
+    objectPosition: "center 65%",
   },
   ai: {
-    src: "/images/heroes/ai.jpg",
-    alt: "Abstract digital interface suggesting artificial intelligence systems",
-    objectPosition: "center center",
+    src: "/images/heroes/ai-office.jpg",
+    alt: "Team working late at monitors in a warm, modern open office",
+    objectPosition: "center 40%",
   },
   aiProducts: {
-    src: "/images/heroes/ai-products.jpg",
-    alt: "Product analytics dashboard on a laptop screen",
+    src: "/images/heroes/contact-payment.jpg",
+    alt: "Digital product interface on a tablet during a contactless checkout",
     objectPosition: "center 35%",
   },
   aiAgents: {
     src: "/images/heroes/ai-agents.jpg",
-    alt: "Person interacting with a digital assistant interface",
+    alt: "Futuristic metallic humanoid head suggesting an AI agent",
     objectPosition: "center 30%",
   },
   start: {
     src: "/images/heroes/start.jpg",
-    alt: "Professionals collaborating across a meeting table",
+    alt: "Modern conference room with a long meeting table and chairs",
     objectPosition: "center 45%",
   },
   contact: {
-    src: "/images/heroes/contact.jpg",
-    alt: "Close-up of a smartphone used for business communication",
-    objectPosition: "center center",
+    src: "/images/heroes/contact-payment.jpg",
+    alt: "Hands using a phone for payment next to a business tablet",
+    objectPosition: "center 55%",
   },
 } as const;

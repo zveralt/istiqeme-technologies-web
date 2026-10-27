@@ -1,5 +1,4 @@
 import { AIDemo } from "@/components/bolt/AIDemo";
-import { FinalCTA } from "@/components/bolt/FinalCTA";
 import { Hero } from "@/components/bolt/Hero";
 import { InquiryForm } from "@/components/bolt/InquiryForm";
 import { Process } from "@/components/bolt/Process";
@@ -19,7 +18,6 @@ export default function HomePage() {
       <AIDemo />
       <Process />
       <InquiryForm />
-      <FinalCTA />
     </>
   );
 }

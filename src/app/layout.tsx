@@ -54,7 +54,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const themeInitScript = `(function(){try{var t=localStorage.getItem('istiqeme-theme-v1');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}})();`;
+const themeInitScript = `(function(){try{var t=localStorage.getItem('istiqeme-theme-v1');if(t==='light')document.documentElement.classList.remove('dark');else document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({
   children,
@@ -65,7 +65,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} h-full`}
+      className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} dark h-full`}
       data-scroll-behavior="smooth"
     >
       <head>
