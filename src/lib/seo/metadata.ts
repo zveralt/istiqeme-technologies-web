@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl, SITE_URL } from "@/lib/seo/site";
 import { keywordForPath } from "@/lib/seo/keywords";
+import { openGraphImages } from "@/lib/seo/social";
 
 export function pageMetadata(
   path: string,
@@ -24,11 +25,13 @@ export function pageMetadata(
       siteName: "ISTIQEME Technologies",
       locale: "en_PK",
       type: "website",
+      images: openGraphImages(),
     },
     twitter: {
       card: "summary_large_image",
       title: title ?? undefined,
       description: description ?? undefined,
+      images: openGraphImages(),
     },
     ...overrides,
   };

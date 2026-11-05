@@ -175,7 +175,7 @@ export function Testimonials() {
       </p>
       <h2
         id={labelId}
-        className="font-display text-5xl leading-[0.95] tracking-tightest text-ink-900 dark:text-ink-50 sm:text-6xl"
+        className="itq-section-title text-ink-900 dark:text-ink-50"
       >
         Systems people actually use.
       </h2>
@@ -189,7 +189,7 @@ export function Testimonials() {
     return (
       <section
         id="testimonials"
-        className="relative overflow-hidden border-y border-ink-200/70 bg-ink-50 py-28 dark:border-ink-800/80 dark:bg-ink-950 lg:py-36"
+        className="relative overflow-x-clip border-y border-ink-200/70 bg-ink-50 py-[clamp(4.5rem,11vw,9rem)] dark:border-ink-800/80 dark:bg-ink-950"
         aria-labelledby={labelId}
       >
         <div className="absolute inset-0 grid-faint pointer-events-none" />
@@ -231,11 +231,11 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="itq-coverflow-section relative overflow-x-hidden border-y border-ink-200/70 bg-ink-50 py-28 dark:border-ink-800/80 dark:bg-ink-950 lg:py-36"
+      className="itq-coverflow-section relative overflow-x-clip border-y border-ink-200/70 bg-ink-50 py-[clamp(4.5rem,11vw,9rem)] dark:border-ink-800/80 dark:bg-ink-950"
       aria-labelledby={labelId}
     >
       <div className="absolute inset-0 grid-faint pointer-events-none" />
-      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center lg:px-10">
+      <div className="relative z-10 itq-container text-center">
         <Reveal>{header}</Reveal>
 
         <Reveal delay={120} className="relative mx-auto mt-14 max-w-5xl sm:mt-20">

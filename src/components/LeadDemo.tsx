@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { leadFlow, waLink, site } from "@/lib/site";
+import { AiInteractionNotice } from "@/components/legal/AiInteractionNotice";
 import { Arrow } from "./Button";
 
 const scenarios = [
@@ -11,7 +12,17 @@ const scenarios = [
     customer:
       "Assalamualaikum — is admission still open? My son’s documents are ready but it’s 2 AM.",
     agent:
-      "Walaikum assalam. Yes, we can take the inquiry now. May I have the student’s name and the programme you’re asking about? I’ll log this and a counsellor will follow up on WhatsApp first thing.",
+      "Walaikum assalam. Yes, we can take the inquiry now. Which campus and grade are you asking about?",
+    followUps: [
+      {
+        q: "Gulshan campus, O Levels.",
+        a: "Noted — Gulshan, O Levels. I’ve logged this for the admissions desk; a counsellor will message you on WhatsApp at 9 AM with the document checklist and a visit slot.",
+      },
+      {
+        q: "What is the fee structure?",
+        a: "Fee details depend on the subject combination. I’ve flagged your chat so the counsellor sends the current Gulshan O Level fee sheet first thing.",
+      },
+    ],
   },
   {
     id: "quote",
@@ -19,7 +30,17 @@ const scenarios = [
     customer:
       "We need a custom dashboard for 40 field staff. Who can I speak to about scope and security?",
     agent:
-      "I can take that. Are you looking at salesman, manager, and leadership views, or a single workspace? I’ll capture the brief and route a warm summary to the engineering team on WhatsApp.",
+      "I can take that. Are you looking at salesman, manager, and leadership views, or a single workspace?",
+    followUps: [
+      {
+        q: "Separate views for sales, managers, and leadership.",
+        a: "Got it — three role-based views for ~40 staff. I’ve created a lead brief for the engineering team; they’ll send a scope outline on WhatsApp within one business day.",
+      },
+      {
+        q: "Can it connect to WhatsApp leads?",
+        a: "Yes — we wire WhatsApp inquiries into the same workspace so every lead has an owner and a status. Added to your brief.",
+      },
+    ],
   },
   {
     id: "support",
@@ -27,17 +48,29 @@ const scenarios = [
     customer:
       "Checkout is failing for a customer in DHA and our shop is closed. Can someone help tonight?",
     agent:
-      "I’ve flagged this as after-hours support. Please share the order ID if you have it — I’ll notify the on-call team on WhatsApp so they can recover the sale.",
+      "I’ve flagged this as after-hours support. Do you have the customer’s phone number or cart total?",
+    followUps: [
+      {
+        q: "Cart is PKR 18,500 — customer is on WhatsApp.",
+        a: "Logged as a priority order recovery (PKR 18,500, DHA). I’ve sent a confirmation template to hold the order and alerted your on-call staff on WhatsApp.",
+      },
+      {
+        q: "Switch them to cash on delivery.",
+        a: "Done — marked for COD confirmation and queued at the top of the morning dispatch list.",
+      },
+    ],
   },
 ];
 
 export function LeadDemo() {
   const [active, setActive] = useState(0);
   const [tick, setTick] = useState(0);
+  const [picked, setPicked] = useState<number | null>(null);
   const scene = scenarios[active];
 
   useEffect(() => {
     setTick(0);
+    setPicked(null);
     const t1 = window.setTimeout(() => setTick(1), 280);
     const t2 = window.setTimeout(() => setTick(2), 1100);
     return () => {
@@ -54,6 +87,7 @@ export function LeadDemo() {
             Live intercept
           </p>
           <h3 className="font-display text-2xl">Test our AI assistant</h3>
+          <AiInteractionNotice className="mt-4" />
         </div>
         <div className="flex gap-2 overflow-x-auto px-4 py-3">
           {scenarios.map((s, i) => (
@@ -78,6 +112,34 @@ export function LeadDemo() {
           {tick >= 2 && (
             <div className="rise-in max-w-[90%] rounded-2xl bg-paper px-4 py-3 text-[14px] leading-relaxed text-ink-soft">
               {scene.agent}
+            </div>
+          )}
+          {tick >= 2 && picked !== null && scene.followUps[picked] && (
+            <>
+              <div className="rise-in ml-auto max-w-[85%] rounded-2xl bg-ink px-4 py-3 text-[14px] text-cream">
+                {scene.followUps[picked].q}
+              </div>
+              <div className="rise-in max-w-[90%] rounded-2xl bg-paper px-4 py-3 text-[14px] leading-relaxed text-ink-soft">
+                {scene.followUps[picked].a}
+              </div>
+            </>
+          )}
+          {tick >= 2 && (
+            <div className="flex flex-wrap gap-2 pt-2">
+              {scene.followUps.map((f, idx) => (
+                <button
+                  key={f.q}
+                  type="button"
+                  onClick={() => setPicked(idx)}
+                  className={`rounded-xl border px-3 py-1.5 text-left text-[12px] transition-colors ${
+                    picked === idx
+                      ? "border-ember bg-ember/10 text-foreground"
+                      : "border-line bg-paper text-ink-soft hover:border-ember/40"
+                  }`}
+                >
+                  {f.q}
+                </button>
+              ))}
             </div>
           )}
           {tick < 2 && (

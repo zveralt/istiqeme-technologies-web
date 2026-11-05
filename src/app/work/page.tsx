@@ -3,14 +3,13 @@ import { CommandCenter } from "@/components/CommandCenter";
 import { Compare } from "@/components/Compare";
 import { Guide } from "@/components/Guide";
 import { Reveal } from "@/components/ui/Reveal";
-import { ClosingCta } from "@/components/ui/ClosingCta";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Sheet } from "@/components/ui/Sheet";
 import { VoiceAgent } from "@/components/VoiceAgent";
 import { Projects } from "@/components/bolt/Projects";
 import { heroMedia } from "@/lib/hero-media";
-import { site, workMenu } from "@/lib/site";
+import { workMenu } from "@/lib/site";
 
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -22,7 +21,7 @@ export default function WorkPage() {
       <PageHero
         eyebrow="Portfolio"
         title="Our work."
-        description="See real sites we have built, try our live demos, and reach our team directly when you are ready to talk."
+        description="Client sites, our own corporate and CRM platforms, and concept builds — each labelled clearly, alongside interactive demos of the systems we ship."
         imageSrc={heroMedia.work.src}
         imageAlt={heroMedia.work.alt}
         imagePosition={heroMedia.work.objectPosition}
@@ -107,37 +106,6 @@ export default function WorkPage() {
           </div>
         </div>
       </Sheet>
-
-      <ClosingCta
-        eyebrow="Correspondence"
-        title="Corporate headquarters"
-        mark="."
-        description={site.address}
-        extra={
-          <dl className="mt-8 grid gap-6 border-t border-line pt-6 sm:grid-cols-2">
-            <div>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Direct phone lines</dt>
-              <dd className="mt-2 space-y-1 text-[15px]">
-                {site.phones.map((p) => (
-                  <a key={p.href} href={p.href} className="block text-foreground hover:text-ember">
-                    {p.label}
-                  </a>
-                ))}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Corporate inquiries</dt>
-              <dd className="mt-2 text-[15px]">
-                {site.emails.map((e) => (
-                  <a key={e.href} href={e.href} className="block text-foreground hover:text-ember">
-                    {e.label}
-                  </a>
-                ))}
-              </dd>
-            </div>
-          </dl>
-        }
-      />
     </>
   );
 }

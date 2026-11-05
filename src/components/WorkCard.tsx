@@ -80,7 +80,7 @@ export function WorkCard({
         </h3>
         <p className={cn("mt-2 text-[15px] leading-relaxed text-ink-soft", featured && "max-w-2xl")}>{body}</p>
         <span className="itq-link-arrow mt-4 text-[13px] font-medium text-forest dark:text-ember-bright">
-          Visit live site · {uptime} uptime
+          {uptime ? `Visit live site · ${uptime} uptime` : "Visit live site"}
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" aria-hidden>
             <path
               d="M4 12L12 4M12 4H5M12 4V11"

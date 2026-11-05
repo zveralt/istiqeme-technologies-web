@@ -1,51 +1,27 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Guide } from "@/components/Guide";
-import { LeadDemo } from "@/components/LeadDemo";
+import { GlowButton } from "@/components/ui/GlowButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { ClosingCta } from "@/components/ui/ClosingCta";
 import { PageHero } from "@/components/ui/PageHero";
-import { EditorialRows } from "@/components/ui/EditorialRows";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ServiceGlyph, type ServiceGlyphId } from "@/components/ui/ServiceGlyph";
+import { ServiceGlyph } from "@/components/ui/ServiceGlyph";
 import { Sheet } from "@/components/ui/Sheet";
-import { WhatsAppLink } from "@/components/Button";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import { ServiceGuideCard } from "@/components/seo/ServiceGuideCard";
+import { TechEcosystem } from "@/components/TechEcosystem";
 import { heroMedia } from "@/lib/hero-media";
 import { pageMetadata } from "@/lib/seo/metadata";
-import { servicePages } from "@/lib/seo/services";
-import { serviceMenu, services, site, waLink } from "@/lib/site";
+import { serviceGroups, services, waLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata("/services");
-
-const catalogLinks: Record<string, string> = {
-  landing: "/services/web-design-development",
-  corporate: "/services/web-design-development",
-  shop: "/services/ecommerce-development",
-  app: "/services/mobile-app-development",
-  marketing: "/services/digital-marketing",
-};
-
-const menuRows = serviceMenu.map((item, i) => ({
-  id: item.id,
-  index: String(i + 1).padStart(2, "0"),
-  title: item.title,
-  kicker: item.problem,
-  body: item.solution,
-  href: item.href,
-  cta: "View service",
-  external: false,
-}));
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Product catalogue"
-        title="Five ways to get"
-        accent="your business online."
-        description="From a simple landing page to a full mobile app. Every project is quoted individually. Chat with us to find the right fit."
+        eyebrow="Services"
+        title="Six services,"
+        accent="one connected system."
+        description="We build what your customers and staff use, automate it with AI, and send the right traffic into it. Every project is quoted individually."
         imageSrc={heroMedia.services.src}
         imageAlt={heroMedia.services.alt}
         imagePosition={heroMedia.services.objectPosition}
@@ -64,132 +40,114 @@ export default function ServicesPage() {
         <div className="itq-container">
           <Reveal>
             <SectionHeading
-              eyebrow="Service guides"
-              title="Dedicated pages for each practice"
-              description="In-depth pages for web, commerce, software, mobile, AI, and marketing — written for buyers who want substance before they talk to the team."
+              eyebrow="Catalogue"
+              title="Build, automate, grow"
+              description="Four build services, one AI practice that sits on top of them, and marketing that sends traffic in. Each has a dedicated guide."
               align="stack"
             />
           </Reveal>
-          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {servicePages.map((page) => (
-              <li key={page.slug} className="h-full">
-                <ServiceGuideCard
-                  href={page.path}
-                  title={page.eyebrow}
-                  description={page.intro}
-                  cta="Open guide"
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Sheet>
 
-      <Sheet tone="tint">
-        <div className="itq-container">
-          <Reveal>
-            <SectionHeading eyebrow="Catalogue" title="Five ways to get the work online" align="stack" />
-          </Reveal>
-          <div className="mt-14 md:mt-16">
-            {services.map((s) => (
-              <Reveal
-                as="article"
-                key={s.id}
-                id={s.id}
-                className="grid scroll-mt-28 gap-8 border-t border-line py-12 md:grid-cols-12 md:gap-10 md:py-16"
-              >
-                <div className="md:col-span-5">
-                  <ServiceGlyph id={s.id as ServiceGlyphId} className="mb-8 max-w-sm" />
-                  <p className="font-dm text-[12px] font-medium tabular-nums tracking-[0.18em] text-muted">
-                    Tier {s.tier}
-                  </p>
-                  <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-forest dark:text-ember-bright">
-                    {s.category}
-                  </p>
-                  <h3 className="mt-4 font-display text-[clamp(2rem,3.6vw,3.2rem)] leading-[0.95] text-foreground">
-                    {s.title}
-                  </h3>
-                  <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-muted">{s.problem}</p>
-                </div>
-                <div className="md:col-span-7">
-                  <p className="itq-lead max-w-2xl">{s.summary}</p>
-                  <ul className="mt-8 grid gap-4 border-t hairline pt-6 sm:grid-cols-2">
-                    {s.points.map((point) => (
-                      <li key={point} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-soft">
-                        <span
-                          aria-hidden
-                          className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-forest dark:bg-ember-bright"
-                        />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                  {"addons" in s && s.addons?.length ? (
-                    <p className="mt-6 text-[13px] text-muted">Optional: {s.addons.join(", ")}</p>
-                  ) : null}
-                  {"architecture" in s && s.architecture?.length ? (
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {s.architecture.map((a) => (
-                        <span
-                          key={a}
-                          className="rounded-md border border-line px-3 py-1 font-mono text-[12px] text-ink-soft"
-                        >
-                          {a}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                  <div className="mt-8 flex flex-wrap gap-4">
-                    {catalogLinks[s.id] ? (
-                      <Link
-                        href={catalogLinks[s.id]}
-                        className="itq-link-arrow text-[13px] font-medium text-forest dark:text-ember-bright"
-                      >
-                        Read the full service page
-                      </Link>
-                    ) : null}
-                    <a
-                      href={waLink(`Hi ISTIQEME Technologies — I'd like to discuss ${s.title} for my business.`)}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="itq-link-arrow text-[13px] font-medium text-forest dark:text-ember-bright"
-                    >
-                      Discuss on WhatsApp
-                    </a>
-                  </div>
-                </div>
+          {serviceGroups.map((group) => (
+            <div key={group.id} className="mt-14 md:mt-16">
+              <Reveal className="flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-4">
+                <p className="font-display text-[clamp(1.6rem,2.6vw,2.2rem)] leading-none text-foreground">
+                  {group.label}
+                </p>
+                <p className="text-[14px] text-muted">{group.line}</p>
               </Reveal>
-            ))}
-          </div>
+              {services
+                .filter((s) => s.group === group.id)
+                .map((s) => (
+                  <Reveal
+                    as="article"
+                    key={s.id}
+                    id={s.id}
+                    className="grid scroll-mt-28 gap-8 border-b border-line py-10 md:grid-cols-12 md:gap-10 md:py-14"
+                  >
+                    <div className="md:col-span-5">
+                      <ServiceGlyph id={s.glyph} className="mb-7 max-w-sm" />
+                      <p className="font-dm text-[12px] font-medium tabular-nums tracking-[0.18em] text-muted">
+                        {s.tier} · {s.category}
+                      </p>
+                      <h3 className="mt-3 font-display text-[clamp(2rem,3.6vw,3.2rem)] leading-[0.95] text-foreground">
+                        {s.title}
+                      </h3>
+                      <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-muted">{s.problem}</p>
+                    </div>
+                    <div className="md:col-span-7">
+                      <p className="itq-lead max-w-2xl">{s.summary}</p>
+                      <ul className="mt-8 grid gap-4 border-t hairline pt-6 sm:grid-cols-2">
+                        {s.points.map((point) => (
+                          <li key={point} className="flex gap-3 text-[14.5px] leading-relaxed text-ink-soft">
+                            <span
+                              aria-hidden
+                              className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-forest dark:bg-ember-bright"
+                            />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                      {"architecture" in s && s.architecture?.length ? (
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {s.architecture.map((a) => (
+                            <span
+                              key={a}
+                              className="rounded-md border border-line px-3 py-1 font-mono text-[12px] text-ink-soft"
+                            >
+                              {a}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
+                      <div className="mt-8 flex flex-wrap gap-3">
+                        <GlowButton href={s.href} size="sm">
+                          Read the {s.title.toLowerCase()} guide
+                        </GlowButton>
+                        <GlowButton
+                          href={waLink(`Hi ISTIQEME Technologies — I'd like to discuss ${s.title} for my business.`)}
+                          variant="outline"
+                          size="sm"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Discuss on WhatsApp
+                        </GlowButton>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+            </div>
+          ))}
         </div>
       </Sheet>
 
-      <Sheet tone="tint">
+      <Sheet tone="deep">
         <div className="itq-container">
           <Reveal>
             <SectionHeading
-              eyebrow="What we provide"
-              title="A solution for each job"
-              description="Every line below starts a WhatsApp conversation with the engineering team."
+              onDark
+              eyebrow="How it connects"
+              title="One system, not six vendors"
+              description="Most clients start with one service. This is how the pieces connect when you add the next one."
             />
           </Reveal>
-          <EditorialRows items={menuRows} className="mt-14 md:mt-16" />
+          <TechEcosystem className="mt-12 md:mt-14" />
         </div>
       </Sheet>
 
-      <Sheet>
+      <Sheet tone="tint">
         <div className="itq-container">
           <Reveal>
             <SectionHeading
-              eyebrow="AI matcher"
-              title="Find your best package"
-              description="Answer a few questions in English or Urdu. The assistant recommends the right ISTIQEME package, then sends you to WhatsApp for a custom quote."
+              eyebrow="Not sure yet"
+              title="Find your starting point"
+              description="Describe the business in English or Urdu. The assistant suggests where to start, then hands you to WhatsApp for a quote."
             />
           </Reveal>
           <div className="mt-12 md:mt-14">
             <Guide
-              title="Find your package"
-              intro="Tell me what you need in English or Urdu. I’ll recommend a package, then you can continue on WhatsApp for a custom quote."
+              title="Find your starting point"
+              intro="Tell me what you need in English or Urdu. I’ll suggest a service, then you can continue on WhatsApp for a quote."
               suggestions={[
                 "I need a website that gets leads",
                 "We want an online store",
@@ -199,25 +157,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </Sheet>
-
-      <Sheet tone="tint">
-        <div className="itq-container">
-          <LeadDemo />
-        </div>
-      </Sheet>
-
-      <ClosingCta
-        eyebrow="Get in touch"
-        title="Ready to get started"
-        description="Whether you want to talk on WhatsApp or tap through a quick intake, our engineering team is here to help."
-        extra={
-          <div className="mt-8">
-            <WhatsAppLink text={site.whatsapp.discussText} variant="light">
-              Discuss your project on WhatsApp
-            </WhatsAppLink>
-          </div>
-        }
-      />
     </>
   );
 }

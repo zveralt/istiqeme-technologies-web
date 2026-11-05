@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AlertCircle, ArrowUpRight, Loader2 } from "lucide-react";
+import { submitSiteForm } from "@/lib/contact-form-client";
 import { site, waLink } from "@/lib/site";
 
 type Fields = {
@@ -15,14 +16,12 @@ type Errors = Partial<Record<keyof Fields, string>>;
 
 const initial: Fields = { name: "", email: "", subject: "", message: "" };
 
-/**
- * Honest contact form — there is no server mail endpoint.
- * Valid submissions open WhatsApp with a prefilled brief (same channel as Intake).
- */
 export function ContactForm() {
   const [data, setData] = useState<Fields>(initial);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "opening" | "opened">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [websiteHp, setWebsiteHp] = useState("");
 
   const validate = (): boolean => {
     const next: Errors = {};
@@ -44,45 +43,48 @@ export function ContactForm() {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (!validate()) return;
-    setStatus("opening");
+    setStatus("submitting");
+    setSubmitError(null);
 
-    const body = [
-      `Hi ISTIQEME — contact form from the website.`,
-      ``,
-      `Name: ${data.name.trim()}`,
-      `Email: ${data.email.trim()}`,
-      `Subject: ${data.subject.trim()}`,
-      ``,
-      data.message.trim(),
-    ].join("\n");
+    const result = await submitSiteForm({
+      form: "contact",
+      name: data.name.trim(),
+      email: data.email.trim(),
+      subject: data.subject.trim(),
+      message: data.message.trim(),
+      website: websiteHp,
+    });
 
-    const href = waLink(body);
-    window.open(href, "_blank", "noopener,noreferrer");
-    setStatus("opened");
+    if (!result.ok) {
+      setStatus("idle");
+      setSubmitError(result.error);
+      return;
+    }
+
+    setStatus("success");
   };
 
-  if (status === "opened") {
+  if (status === "success") {
     return (
       <div className="itq-surface rounded-2xl border border-line bg-card p-8 text-card-foreground md:p-10">
-        <p className="font-mono text-xs uppercase tracking-wide2 text-accent-500">WhatsApp opened</p>
+        <p className="font-mono text-xs uppercase tracking-wide2 text-accent-500">Message sent</p>
         <h3 className="mt-3 font-display text-3xl tracking-wide text-ink-900 dark:text-ink-50">
-          Finish sending in WhatsApp
+          We received your note
         </h3>
         <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-500 dark:text-ink-400">
-          Your message was prepared with your details. Confirm and send it in WhatsApp so it reaches
-          our team — nothing was emailed automatically (we do not have a mail API wired yet).
+          Your message was emailed to our team at {site.emails[0].label}. We reply within one business day.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             href={waLink()}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-forest px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-ink-800 dark:bg-[#f5f5f6] dark:text-[#111214]"
+            className="inline-flex items-center gap-2 rounded-xl border border-line px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent-500/50"
           >
-            Open WhatsApp again
+            Continue on WhatsApp
             <ArrowUpRight size={16} />
           </a>
           <button
@@ -90,6 +92,7 @@ export function ContactForm() {
             onClick={() => {
               setData(initial);
               setErrors({});
+              setSubmitError(null);
               setStatus("idle");
             }}
             className="rounded-xl border border-line px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent-500/50"
@@ -97,12 +100,6 @@ export function ContactForm() {
             Write another message
           </button>
         </div>
-        <p className="mt-6 text-xs text-ink-400">
-          Prefer email?{" "}
-          <a className="underline decoration-ink-300 underline-offset-2 hover:text-accent-500" href={site.emails[0].href}>
-            {site.emails[0].label}
-          </a>
-        </p>
       </div>
     );
   }
@@ -111,8 +108,22 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="itq-surface rounded-2xl border border-line bg-card p-6 text-card-foreground md:p-10"
+      className="itq-surface relative rounded-2xl border border-line bg-card p-6 text-card-foreground md:p-10"
     >
+      <div
+        className="pointer-events-none absolute left-[-9999px] h-px w-px overflow-hidden opacity-0"
+        aria-hidden="true"
+      >
+        <label htmlFor="contact-website-hp">Website</label>
+        <input
+          id="contact-website-hp"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={websiteHp}
+          onChange={(e) => setWebsiteHp(e.target.value)}
+        />
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           id="contact-name"
@@ -165,23 +176,33 @@ export function ContactForm() {
         ) : null}
       </div>
 
+      {submitError ? (
+        <p className="mt-5 flex items-start gap-2 rounded-xl border border-red-500/40 bg-red-500/5 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+          <AlertCircle size={16} className="mt-0.5 shrink-0" aria-hidden />
+          {submitError}
+        </p>
+      ) : null}
+
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-xs leading-relaxed text-ink-400">
-          Submitting opens WhatsApp with your message ready to send. We reply within one business day.
+          Submitting sends your message to our team by email. We reply within one business day.{" "}
+          <a href="/legal/privacy-policy" className="underline-offset-2 hover:underline">
+            Privacy Policy
+          </a>
         </p>
         <button
           type="submit"
-          disabled={status === "opening"}
+          disabled={status === "submitting"}
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-forest px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-ink-800 disabled:opacity-60 dark:bg-[#f5f5f6] dark:text-[#111214] dark:hover:bg-white"
         >
-          {status === "opening" ? (
+          {status === "submitting" ? (
             <>
               <Loader2 size={16} className="animate-spin" />
-              Opening WhatsApp…
+              Sending…
             </>
           ) : (
             <>
-              Continue on WhatsApp
+              Send message
               <ArrowUpRight size={16} />
             </>
           )}

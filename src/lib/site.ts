@@ -35,7 +35,7 @@ export const nav = [
   { href: "/work", label: "Work", menu: "work" },
   { href: "/services", label: "Services", menu: "services" },
   { href: "/ai", label: "AI", menu: "ai" },
-  { href: "/#process", label: "Problems" },
+  { href: "/#process", label: "Process" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -154,7 +154,7 @@ export const workMenu = [
     title: "Websites",
     problem: "A business has no clear site that converts visitors.",
     solution:
-      "Landing pages and corporate sites built for speed, clarity, and trust — including istiqeme.net, Credo, and Pascale Agency.",
+      "Landing pages and corporate sites built for speed, clarity, and trust — including SKH Solutions, Veritas, and Pascale Agency.",
   },
   {
     id: "crm-systems",
@@ -211,89 +211,128 @@ export const problems = [
   },
   {
     problem: "Follow-ups slip through the cracks.",
-    solution: "A clean operational view of customers, sales, and team activity — the same reliability we bring from larger networks to local businesses.",
+    solution: "A clean operational view of customers, sales, and team activity, so every follow-up has an owner.",
     href: "/work#dashboards",
   },
+] as const;
+
+/**
+ * Six services in three groups — one entry per dedicated service guide.
+ * Build: what customers and staff touch. Automate: AI on top of it. Grow: traffic into it.
+ */
+export const serviceGroups = [
+  { id: "build", label: "Build", line: "Websites, stores, apps, and software your customers and staff use." },
+  { id: "automate", label: "Automate", line: "AI assistants that sit on top of what you already run." },
+  { id: "grow", label: "Grow", line: "Content and campaigns that send the right people in." },
 ] as const;
 
 export const services = [
   {
     id: "landing",
+    glyph: "landing",
+    group: "build",
     tier: "01",
-    category: "Web design",
-    title: "Landing page & lead capture",
-    problem: "Casual visitors leave without becoming customers.",
+    category: "Build · Web",
+    title: "Websites",
+    href: "/services/web-design-development",
+    problem: "Visitors arrive, read nothing clear, and leave without contacting you.",
     summary:
-      "A high-speed, professional single-page website designed to capture attention and turn casual visitors into paying customers.",
+      "Landing pages and corporate websites built around how you win customers, with fast mobile loading and a direct path to WhatsApp or a form.",
     points: [
-      "A high-speed, professional single-page website meticulously designed to capture attention and turn casual visitors into paying customers.",
-      "Strategically placed, direct WhatsApp integration that routes high-intent buyers straight to your phone for immediate conversation.",
-      "Automated lead capture forms that collect customer details and inquiries 24/7, even when you are away from the desk.",
-      "Integrated mapping and clear contact sections so local clients can locate your physical business instantly.",
-      "Lightning-fast mobile optimization so your page loads flawlessly on any connection, reducing customer drop-off.",
-    ],
-  },
-  {
-    id: "corporate",
-    tier: "02",
-    category: "Web design",
-    title: "Corporate website",
-    problem: "Clients and partners cannot see a clear, trustworthy presence.",
-    summary:
-      "A premium, multi-page web presence designed to build instant trust with your clients and partners.",
-    points: [
-      "A premium, multi-page web presence designed to build instant trust with your clients and partners.",
-      "Dedicated pages for your services, company history, and team to clearly showcase your full expertise.",
-      "Built-in contact forms and lead routing so customer inquiries go straight to your email or WhatsApp.",
-      "Fully optimized for mobile devices, ensuring it looks flawless on any phone, tablet, or computer.",
-      "Fast loading speeds and basic SEO setup so local customers can easily find your business on Google.",
+      "Landing pages for a single offer or campaign, with WhatsApp routing where intent is highest.",
+      "Multi-page corporate sites covering services, company, and contact for partners who need to verify you.",
+      "Forms that capture inquiries overnight and send them to your inbox or WhatsApp.",
+      "Mobile-first layouts tested on the phone networks your customers actually use.",
     ],
   },
   {
     id: "shop",
-    tier: "03",
-    category: "Online shop",
-    title: "E-commerce store",
-    problem: "Customers cannot browse, cart, and buy in one place.",
+    glyph: "shop",
+    group: "build",
+    tier: "02",
+    category: "Build · Commerce",
+    title: "Online stores",
+    href: "/services/ecommerce-development",
+    problem: "Customers cannot browse, add to cart, and pay in one place.",
     summary:
-      "A complete, fully functional online storefront where customers can browse your catalog, add items to their cart, and purchase.",
+      "A storefront with catalog, cart, and checkout, plus an admin your staff can update without calling a developer.",
     points: [
-      "A complete, fully functional online storefront where customers can seamlessly browse your catalog, add items to their cart, and purchase.",
-      "A frictionless, one-page checkout process heavily optimized to prevent buyers from abandoning their carts at the last minute.",
-      "Bank-grade secure payment gateways and localized shipping integrations tailored specifically for seamless retail operations.",
-      "An intuitive backend dashboard allowing you to easily track inventory, update product pricing, and fulfill orders without needing any technical skills.",
-      "An optional intelligent AI shopping assistant built-in to guide buyers, answer product questions, and manage order updates automatically.",
+      "Catalog, product pages, cart, and a short checkout.",
+      "Payment and courier integrations scoped to how you already fulfil orders.",
+      "An admin for stock, pricing, and order status that staff can run daily.",
+      "Optional AI shopping assistant for product and order questions.",
     ],
-    addons: ["AI voice / chatbot add-on"],
   },
   {
     id: "app",
-    tier: "04",
-    category: "Custom software",
-    title: "Custom mobile app",
-    problem: "Spreadsheets and generic apps do not match how the team works.",
-    summary: "A custom mobile app built around your exact business needs.",
+    glyph: "app",
+    group: "build",
+    tier: "03",
+    category: "Build · Mobile",
+    title: "Mobile apps",
+    href: "/services/mobile-app-development",
+    problem: "Field and floor staff work from spreadsheets and chats on their phones.",
+    summary:
+      "Custom mobile apps for staff or customers, on a secure cloud backend with login roles and data you own.",
     points: [
-      "A custom mobile app built around your exact business needs.",
-      "Secure cloud backend with staff login roles and data protection.",
-      "Your business data stays private and under your control.",
+      "Screens designed around the job the person is doing, not a generic template.",
+      "Secure backend with staff roles and permissions.",
+      "Works with the same data as your web dashboard or CRM.",
     ],
-    architecture: ["Database layer", "User permissions", "Encryption"],
+    architecture: ["Cloud backend", "Role permissions", "Your data"],
+  },
+  {
+    id: "software",
+    glyph: "software",
+    group: "build",
+    tier: "04",
+    category: "Build · Software",
+    title: "Custom software",
+    href: "/services/custom-software-development",
+    problem: "Orders, follow-ups, and reporting live in separate tools nobody trusts.",
+    summary:
+      "CRM-style workspaces and dashboards where staff, managers, and leadership see the same numbers from their own role.",
+    points: [
+      "CRM and customer workspaces so follow-ups have an owner.",
+      "Role-based dashboards for sales staff, managers, and leadership.",
+      "Operational tools for orders, visits, and team activity.",
+      "Built to connect to your website, app, and AI assistants later.",
+    ],
+  },
+  {
+    id: "ai",
+    glyph: "ai",
+    group: "automate",
+    tier: "05",
+    category: "Automate · AI",
+    title: "AI solutions",
+    href: "/services/ai-solutions",
+    problem: "Inquiries arrive after hours and staff repeat the same answers all day.",
+    summary:
+      "WhatsApp chatbots, voice receptionists in English or Urdu, and custom agents that qualify leads and hand a summary to your team.",
+    points: [
+      "WhatsApp chatbots that answer product and order questions from your own information.",
+      "Voice receptionists that pick up, qualify the caller, and continue on WhatsApp.",
+      "Custom agents with escalation rules you approve before launch.",
+      "Every conversation logged to your CRM or sheet for follow-up.",
+    ],
   },
   {
     id: "marketing",
-    tier: "05",
-    category: "Growth",
-    title: "Social media & marketing",
-    problem: "The brand goes quiet, and attention never turns into leads.",
+    glyph: "marketing",
+    group: "grow",
+    tier: "06",
+    category: "Grow · Marketing",
+    title: "Digital marketing",
+    href: "/services/digital-marketing",
+    problem: "The brand goes quiet, and paid attention never turns into leads.",
     summary:
-      "End-to-end management of your brand's social profiles to keep your business active and relevant.",
+      "Social management, content, and paid campaigns aimed at leads, with a monthly report on what came back.",
     points: [
-      "End-to-end management of your brand's social profiles to keep your business active and relevant.",
-      "High-quality content creation, including written posts, graphics, and short-form video strategies.",
-      "Targeted paid ad campaigns designed to generate direct leads and sales, not just vanity likes.",
-      "AI-enhanced media production to scale your content output without the massive traditional agency costs.",
-      "Transparent monthly performance reports so you can clearly see the return on your marketing investment.",
+      "Social profile management and a steady posting rhythm.",
+      "Posts, graphics, and short-form video that explain the offer plainly.",
+      "Paid campaigns pointed at a page that can capture the lead.",
+      "Monthly reporting on leads and cost, not only reach.",
     ],
   },
 ] as const;
@@ -313,63 +352,81 @@ export const pillars = [
   },
 ] as const;
 
+/**
+ * `relation` keeps proof honest: client work, our own platforms, and concept
+ * builds are labelled differently everywhere they appear.
+ */
+export type WorkRelation = "client" | "in-house" | "concept";
+
+export const workRelationLabel: Record<WorkRelation, string> = {
+  client: "Client site",
+  "in-house": "Our own platform",
+  concept: "Concept build",
+};
+
 export const work = [
-  {
-    name: "istiqeme.net",
-    plate: "Clear data, direct to leadership",
-    problem: "Leadership needs a clear view of data and a direct line to the business.",
-    kind: "Enterprise telemetry corporate hub",
-    body: "Corporate platform for clear data tracking, clean information mapping, and direct executive communication.",
-    image: "/work/istiqeme-net.jpg",
-    href: "https://istiqeme.net/",
-    uptime: "99.9%",
-  },
-  {
-    name: "Credo",
-    plate: "Workflows that hold on a phone",
-    problem: "Complex workflows fall apart on a phone screen.",
-    kind: "Interactive workflow business framework",
-    body: "Multi-page corporate layout presenting complex operational workflows smoothly on any mobile screen.",
-    image: "/work/credo.png",
-    href: "https://credo-lumina-framework.lovable.app/",
-    uptime: "99.8%",
-  },
-  {
-    name: "Pascale Agency",
-    plate: "High-end media without the lag",
-    problem: "High-end work needs a fast showcase that does not lag.",
-    kind: "High-velocity digital media showcase",
-    body: "Fast digital media showcase for high-end brand assets and portfolios without local network lag.",
-    image: "/work/pascale.jpg",
-    href: "https://pascaleagency.org/",
-    uptime: "99.7%",
-  },
   {
     name: "SKH Solutions",
     plate: "Subjects, practice, five campuses",
     problem: "Students need one institute for subjects, practice, and a campus close to home.",
     kind: "O and A Level coaching",
-    body: "O and A Level coaching across five Karachi campuses, with subject specialists and weekly written practice.",
+    relation: "client" as WorkRelation,
+    body: "Multi-campus site for an O and A Level institute — subjects, campuses, and admissions routed to WhatsApp.",
     image: "/work/skh.jpg",
     href: "https://www.skh.com.pk/",
-    uptime: "99.8%",
+    uptime: "",
   },
   {
     name: "Veritas Schooling System",
     plate: "Early years through A Levels",
     problem: "Families want one school journey from early years through A Levels.",
     kind: "Karachi school",
-    body: "A Karachi school from Early Years to A Levels, with Gulshan and Jauhar campuses and admissions on WhatsApp.",
+    relation: "client" as WorkRelation,
+    body: "School website from Early Years to A Levels, covering Gulshan and Jauhar campuses with admissions on WhatsApp.",
     image: "/work/veritas.jpg",
     href: "https://www.veritas.edu.pk/",
-    uptime: "99.8%",
+    uptime: "",
+  },
+  {
+    name: "Pascale Agency",
+    plate: "High-end media without the lag",
+    problem: "High-end work needs a fast showcase that does not lag.",
+    kind: "Media showcase",
+    relation: "client" as WorkRelation,
+    body: "Image-heavy portfolio site built to stay fast on local networks without compressing the work into mush.",
+    image: "/work/pascale.jpg",
+    href: "https://pascaleagency.org/",
+    uptime: "",
+  },
+  {
+    name: "istiqeme.net",
+    plate: "Our corporate platform",
+    problem: "A technology studio needs a corporate presence that shows how it works.",
+    kind: "Corporate site",
+    relation: "in-house" as WorkRelation,
+    body: "ISTIQEME's own corporate platform — the structure, performance, and lead routing we apply to client sites.",
+    image: "/work/istiqeme-net.jpg",
+    href: "https://istiqeme.net/",
+    uptime: "",
+  },
+  {
+    name: "Credo",
+    plate: "Workflows that hold on a phone",
+    problem: "Complex workflows fall apart on a phone screen.",
+    kind: "Workflow framework",
+    relation: "concept" as WorkRelation,
+    body: "A concept build exploring how multi-step operational workflows can stay readable on a phone screen.",
+    image: "/work/credo.png",
+    href: "https://credo-lumina-framework.lovable.app/",
+    uptime: "",
   },
   {
     name: "OFFDUTY",
     plate: "Vol. 002 Soundwave",
     problem: "The drop needs a homepage that shows the product, not a catalogue wall.",
-    kind: "Apparel",
-    body: "OFFDUTY Vol. 002 Soundwave — oversized tees and mark essentials.",
+    kind: "Apparel storefront",
+    relation: "client" as WorkRelation,
+    body: "Storefront homepage for the OFFDUTY Vol. 002 drop — product first, not a catalogue wall.",
     image: "/work/offduty.png",
     href: "",
     uptime: "",
@@ -656,15 +713,15 @@ export const faqs = [
   },
   {
     q: "Show me proof for my industry",
-    a: "We build for retailers, wholesalers, agencies, and field sales teams in Karachi. See istiqeme.net, Credo, and Pascale Agency live — plus the Command Center dashboard and AI receptionist demos on this site. Message us with your industry and we’ll walk you through the closest match.",
+    a: "See SKH Solutions, Veritas, and Pascale Agency live, plus our own platforms and the AI receptionist demo on this site. Each project on the Work page is labelled as client work, our own platform, or a concept. Message us with your industry and we’ll walk you through the closest match.",
   },
   {
     q: "What is the Command Center?",
-    a: "istiqeme.live is a custom dashboard we built for field sales teams. Sales staff, managers, and leadership each see the information they need in one secure place — leads, performance, and a clear picture of the business.",
+    a: "The Command Center (istiqeme.live) is our own CRM platform for field sales teams. Sales staff, managers, and leadership each see the information they need in one secure place. It is the same role-based approach we use in custom software for clients.",
   },
   {
     q: "How does the AI receptionist work?",
-    a: "It answers in English or Urdu, follows your script, qualifies the lead, and hands a warm summary to your team on WhatsApp. Same class of agent we deploy for businesses that lose calls after hours.",
+    a: "It answers in English or Urdu, follows your script, qualifies the lead, and hands a warm summary to your team on WhatsApp. Escalation rules are agreed with you before launch.",
   },
 ] as const;
 

@@ -32,6 +32,7 @@ export function portfolioFor(names: string[]) {
       body: w.body,
       href: w.href,
       kind: w.kind,
+      relation: w.relation,
       image: w.image,
     }));
 }

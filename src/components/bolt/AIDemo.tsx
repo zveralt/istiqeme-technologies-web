@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Send, Bot, User } from "lucide-react";
 import { aiDemoSteps } from "@/lib/bolt-home-data";
+import { AiInteractionNotice } from "@/components/legal/AiInteractionNotice";
 import { Reveal } from "./Reveal";
 
 type Message = {
@@ -81,21 +82,22 @@ export function AIDemo() {
   }, [visibleCount]);
 
   return (
-    <section ref={sectionRef} id="ai-demo" className="relative py-28 lg:py-40 border-y border-ink-200/60 dark:border-ink-800/60">
+    <section ref={sectionRef} id="ai-demo" className="itq-bolt-section relative overflow-x-clip border-y border-ink-200/60 dark:border-ink-800/60">
       <div className="absolute inset-0 grid-bg opacity-50" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative itq-container">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Left — explanation */}
           <div className="lg:col-span-5">
             <Reveal>
               <p className="text-xs font-mono uppercase tracking-wide2 text-accent-500 mb-3">AI & automation</p>
-              <h2 className="font-display text-5xl lg:text-6xl leading-[0.95] tracking-tightest text-ink-900 dark:text-ink-50">
+              <h2 className="itq-section-title text-ink-900 dark:text-ink-50 lg:text-[clamp(2.5rem,5vw,3.75rem)]">
                 A lead at 2 AM still becomes a conversation.
               </h2>
               <p className="mt-6 text-base text-ink-500 dark:text-ink-400 leading-relaxed text-balance">
                 Late-night inquiries, quote requests, and support messages — handled automatically
                 and routed to your team on WhatsApp.
               </p>
+              <AiInteractionNotice className="mt-6" />
             </Reveal>
 
             {/* Steps timeline */}

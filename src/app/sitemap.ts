@@ -11,6 +11,11 @@ const staticRoutes: { path: string; changeFrequency: MetadataRoute.Sitemap[numbe
   { path: "/ai/agents", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
   { path: "/start", changeFrequency: "monthly", priority: 0.65 },
+  { path: "/legal", changeFrequency: "monthly", priority: 0.4 },
+  { path: "/legal/privacy-policy", changeFrequency: "monthly", priority: 0.35 },
+  { path: "/legal/terms", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/legal/cookie-policy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/legal/ai-disclosure", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

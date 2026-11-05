@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ButtonLink, WhatsAppLink } from "@/components/Button";
+import { ButtonLink } from "@/components/Button";
 import { Guide } from "@/components/Guide";
 import { AiFaqList } from "@/components/ai/AiFaqList";
+import { TechEcosystem } from "@/components/TechEcosystem";
 import { LeadDemo } from "@/components/LeadDemo";
 import { Eyebrow, Reveal } from "@/components/Reveal";
 import { PageHero } from "@/components/ui/PageHero";
@@ -106,6 +107,14 @@ export default function AiHubPage() {
 
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <Eyebrow>How it connects</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">From first message to the morning callback</h2>
+          <TechEcosystem focus={["whatsapp", "ai", "crm", "automation"]} className="mt-10" />
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
           <LeadDemo />
         </div>
       </section>
@@ -192,23 +201,6 @@ export default function AiHubPage() {
               "Can this run on WhatsApp?",
             ]}
           />
-        </div>
-      </section>
-
-      <section data-header-theme="dark" className="band-deep glow-field px-5 py-20 md:px-8">
-        <div className="mx-auto max-w-7xl text-center">
-          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-foreground">
-            Ready when you are
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-ink-soft">
-            Pick an industry in the library or start the intake — we reply on WhatsApp within one business day.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <ButtonLink href="/start" variant="ink">
-              Free assessment
-            </ButtonLink>
-            <WhatsAppLink variant="ghost">Message on WhatsApp</WhatsAppLink>
-          </div>
         </div>
       </section>
     </>

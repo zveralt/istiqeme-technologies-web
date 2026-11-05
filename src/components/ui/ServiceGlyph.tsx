@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export type ServiceGlyphId = "landing" | "corporate" | "shop" | "app" | "marketing";
+export type ServiceGlyphId = "landing" | "corporate" | "shop" | "app" | "software" | "ai" | "marketing";
 
 /**
  * Purpose-built, brand-coloured diagrams for each service — not stock photos.
@@ -26,6 +26,8 @@ export function ServiceGlyph({
         {id === "corporate" && <CorporateGlyph />}
         {id === "shop" && <ShopGlyph />}
         {id === "app" && <AppGlyph />}
+        {id === "software" && <SoftwareGlyph />}
+        {id === "ai" && <AiGlyph />}
         {id === "marketing" && <MarketingGlyph />}
       </svg>
     </div>
@@ -130,6 +132,58 @@ function AppGlyph() {
         </g>
       ))}
       <rect x="140" y="176" width="40" height="6" rx="3" fill="rgba(232,232,234,0.16)" />
+    </g>
+  );
+}
+
+function SoftwareGlyph() {
+  return (
+    <g>
+      <rect x="34" y="28" width="252" height="164" rx="14" fill="#111214" stroke="rgba(232,232,234,0.22)" />
+      <rect x="34" y="28" width="58" height="164" rx="14" fill="#0a0a0c" />
+      {[0, 1, 2, 3].map((i) => (
+        <rect
+          key={i}
+          x="46"
+          y={48 + i * 20}
+          width="34"
+          height="6"
+          rx="3"
+          fill={i === 1 ? "#d4e3fa" : "rgba(232,232,234,0.2)"}
+        />
+      ))}
+      {[0, 1, 2].map((i) => (
+        <g key={i} transform={`translate(${106 + i * 58} 44)`}>
+          <rect width="50" height="34" rx="7" fill="rgba(232,232,234,0.06)" stroke="rgba(232,232,234,0.14)" />
+          <rect x="8" y="8" width="20" height="4" rx="2" fill="rgba(232,232,234,0.3)" />
+          <rect x="8" y="18" width="30" height="7" rx="3.5" fill={i === 0 ? "#2b63c8" : "rgba(232,232,234,0.16)"} />
+        </g>
+      ))}
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i} transform={`translate(106 ${94 + i * 22})`}>
+          <rect width="166" height="16" rx="5" fill={i === 0 ? "rgba(43,99,200,0.18)" : "rgba(232,232,234,0.04)"} />
+          <rect x="8" y="6" width="44" height="4" rx="2" fill="rgba(232,232,234,0.35)" />
+          <rect x="70" y="6" width="32" height="4" rx="2" fill="rgba(232,232,234,0.18)" />
+          <circle cx="152" cy="8" r="3.5" fill={i === 2 ? "#128c7e" : "rgba(232,232,234,0.22)"} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function AiGlyph() {
+  return (
+    <g>
+      <rect x="40" y="34" width="132" height="30" rx="15" fill="rgba(232,232,234,0.08)" stroke="rgba(232,232,234,0.16)" />
+      <rect x="56" y="46" width="88" height="6" rx="3" fill="rgba(232,232,234,0.35)" />
+      <rect x="120" y="78" width="144" height="42" rx="15" fill="rgba(43,99,200,0.22)" stroke="#2b63c8" />
+      <rect x="136" y="90" width="104" height="5" rx="2.5" fill="#d4e3fa" />
+      <rect x="136" y="102" width="72" height="5" rx="2.5" fill="rgba(212,227,250,0.55)" />
+      <rect x="40" y="134" width="112" height="30" rx="15" fill="rgba(232,232,234,0.08)" stroke="rgba(232,232,234,0.16)" />
+      <rect x="56" y="146" width="64" height="6" rx="3" fill="rgba(232,232,234,0.35)" />
+      <circle cx="232" cy="158" r="18" fill="#111214" stroke="rgba(232,232,234,0.28)" />
+      <circle cx="232" cy="158" r="7" fill="#128c7e" />
+      <path d="M214 158h-50" stroke="rgba(232,232,234,0.22)" strokeDasharray="3 4" />
     </g>
   );
 }

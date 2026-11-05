@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { faqs, site, waLink } from "@/lib/site";
+import { AiInteractionNotice } from "@/components/legal/AiInteractionNotice";
 import { Arrow } from "./Button";
 
 function matchAnswer(query: string) {
@@ -48,6 +49,12 @@ export function Guide({
   ]);
 
   const shown = suggestions;
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages]);
 
   function send(text: string) {
     const trimmed = text.trim();
@@ -63,8 +70,8 @@ export function Guide({
 
   return (
     <div className="grid overflow-hidden rounded-2xl border border-line bg-cream lg:grid-cols-[1.1fr_0.9fr]">
-      <div className="flex min-h-[420px] flex-col">
-        <div className="flex items-center justify-between border-b border-line px-6 py-4">
+      <div className="flex h-[520px] min-h-0 flex-col">
+        <div className="flex shrink-0 items-center justify-between border-b border-line px-6 py-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.24em] text-muted">
               English · اردو
@@ -76,7 +83,12 @@ export function Guide({
             Ready
           </span>
         </div>
-        <div className="flex-1 space-y-3 overflow-y-auto px-6 py-5">
+        <AiInteractionNotice className="mx-6 mt-4 shrink-0" />
+        <div
+          ref={scrollRef}
+          data-lenis-prevent
+          className="itq-inquiry-select-menu min-h-0 flex-1 space-y-3 overscroll-contain px-6 py-5"
+        >
           {messages.map((m, i) => (
             <div
               key={`${m.from}-${i}`}
@@ -91,7 +103,7 @@ export function Guide({
           ))}
         </div>
         <form
-          className="flex gap-2 border-t border-line p-4"
+          className="flex shrink-0 gap-2 border-t border-line p-4"
           onSubmit={(e) => {
             e.preventDefault();
             send(input);

@@ -33,13 +33,17 @@ export function FooterMarquee() {
   }, []);
 
   return (
-    <div className="relative mt-12 overflow-hidden sm:mt-16" aria-hidden="true">
-      <div
-        ref={trackRef}
-        className="itq-footer-marquee font-display text-5xl leading-none tracking-tighter text-accent-500/[0.14] dark:text-accent-500/[0.16] sm:text-7xl md:text-[9.5vw]"
-      >
-        <span className="whitespace-nowrap pr-10 sm:pr-14">{FOOTER_MARQUEE_PHRASE}</span>
-        <span className="whitespace-nowrap pr-10 sm:pr-14">{FOOTER_MARQUEE_PHRASE}</span>
+    <div className="itq-footer-marquee-band" aria-hidden="true">
+      <div className="itq-footer-marquee-band__fade itq-footer-marquee-band__fade--left" />
+      <div className="itq-footer-marquee-band__fade itq-footer-marquee-band__fade--right" />
+      <div className="itq-footer-marquee-band__inner overflow-hidden">
+        <div
+          ref={trackRef}
+          className="itq-footer-marquee font-display text-[clamp(3.25rem,11vw,7.5rem)] leading-[0.88] tracking-[-0.02em] text-accent-500/[0.12] dark:text-accent-400/[0.18]"
+        >
+          <span className="whitespace-nowrap pr-12 sm:pr-16">{FOOTER_MARQUEE_PHRASE}</span>
+          <span className="whitespace-nowrap pr-12 sm:pr-16">{FOOTER_MARQUEE_PHRASE}</span>
+        </div>
       </div>
     </div>
   );

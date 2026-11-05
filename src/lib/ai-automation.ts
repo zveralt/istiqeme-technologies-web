@@ -10,7 +10,7 @@ export const aiHero = {
 };
 
 export const aiStats = [
-  { value: "7", label: "Days from call to first agent live" },
+  { value: "Weeks", label: "Typical time to a first live agent" },
   { value: "24/7", label: "Coverage on WhatsApp and voice" },
   { value: "100%", label: "You own prompts, workflows, and code" },
 ];
@@ -107,7 +107,7 @@ export const aiProductsFull = [
     label: "Web",
     title: "Websites & shops",
     summary:
-      "Conversion-first websites and stores — designed, built, and wired to WhatsApp. See our five software tiers on the Services page.",
+      "Conversion-first websites and stores — designed, built, and wired to WhatsApp. See our six services on the Services page.",
     bullets: [
       "Landing pages through full e-commerce",
       "SEO-ready structure and fast mobile",
@@ -122,7 +122,7 @@ export const aiProductsFull = [
     label: "Growth",
     title: "Content & social pipeline",
     summary:
-      "Content written in your voice, quality checks before publish, and social drafts aligned to campaigns — often paired with Tier 05 marketing.",
+      "Content written in your voice, quality checks before publish, and social drafts aligned to campaigns — often paired with our digital marketing service.",
     bullets: [
       "Posts and captions in brand voice",
       "Scheduled publishing rhythm",
@@ -144,16 +144,16 @@ export const industryGrid = industries.filter((i) => i.slug !== "general");
 
 export const aiCaseStudies = [
   {
-    meta: "Karachi · Field sales",
+    meta: "Our own platform · CRM",
     title: "Command Center for a sales team",
-    body: "Staff, managers, and leadership each see the pipeline they need — leads, performance, and risk in one secure place.",
+    body: "Our own role-based CRM workspace — staff, managers, and leadership each see the pipeline they need in one place.",
     href: "/work#dashboards",
   },
   {
     meta: "After hours · WhatsApp",
     title: "AI receptionist that hands off warm leads",
     body: "English and Urdu intake, qualification, and a summary to your team before the first human reply.",
-    href: "/#top",
+    href: "/services/ai-solutions",
   },
   {
     meta: "Education · Admissions",

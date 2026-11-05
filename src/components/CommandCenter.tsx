@@ -33,7 +33,7 @@ const screens = {
     kpis: [
       { l: "Pipeline", v: "PKR 4.8cr" },
       { l: "Win rate", v: "31%" },
-      { l: "Uptime", v: "99.99%" },
+      { l: "Open risks", v: "3" },
     ],
     rows: [
       ["Field ops", "Healthy", "12ms"],
@@ -118,9 +118,9 @@ export function CommandCenter() {
           ))}
         </div>
         <ul className="mt-5 flex flex-wrap gap-4 text-[12px] text-muted">
-          <li>Latency 12ms</li>
-          <li>Uptime 99.99%</li>
-          <li>Data sovereignty secured</li>
+          <li>Sample data</li>
+          <li>Role-based views</li>
+          <li>Same workspace for every role</li>
         </ul>
       </div>
     </div>

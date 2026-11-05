@@ -6,7 +6,6 @@ import {
   LayoutDashboard,
   Megaphone,
   MessageSquare,
-  PenTool,
   Search,
   Smartphone,
   Store,
@@ -14,13 +13,14 @@ import {
   Workflow,
 } from "lucide-react";
 import { aiProcess } from "@/lib/ai-automation";
-import { marquee, services, site, testimonials, waLink, work } from "@/lib/site";
+import { marquee, services, site, testimonials, waLink, work, workRelationLabel } from "@/lib/site";
 
 const serviceIcons: Record<string, LucideIcon> = {
   landing: Globe,
-  corporate: PenTool,
   shop: Store,
   app: Smartphone,
+  software: LayoutDashboard,
+  ai: Bot,
   marketing: Megaphone,
 };
 
@@ -34,14 +34,6 @@ export type BoltService = {
   href: string;
 };
 
-const serviceSeoPath: Record<string, string> = {
-  landing: "/services/web-design-development",
-  corporate: "/services/web-design-development",
-  shop: "/services/ecommerce-development",
-  app: "/services/mobile-app-development",
-  marketing: "/services/digital-marketing",
-};
-
 export const boltServices: BoltService[] = services.map((s) => ({
   id: s.id,
   number: s.tier,
@@ -49,7 +41,7 @@ export const boltServices: BoltService[] = services.map((s) => ({
   category: s.category,
   description: s.summary,
   icon: serviceIcons[s.id] ?? Globe,
-  href: serviceSeoPath[s.id] ?? `/services#${s.id}`,
+  href: s.href,
 }));
 
 const scrollByHost: Record<string, string> = {
@@ -90,7 +82,7 @@ export const clientSites: ClientSite[] = work.map((w, i) => {
     title: w.name,
     domain: host,
     description: w.body,
-    category: w.kind,
+    category: `${workRelationLabel[w.relation]} · ${w.kind}`,
     url: w.href,
     image: w.image,
     scrollDistance: scrollByHost[host] ?? scrollByHost[`www.${host}`] ?? "-380px",

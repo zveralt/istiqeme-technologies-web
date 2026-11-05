@@ -3,6 +3,10 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { contactInfo, serviceOptions as serviceOptionsFromSite } from "@/lib/bolt-home-data";
+import { submitSiteForm } from "@/lib/contact-form-client";
+import { cn } from "@/lib/utils";
+import { inquiryInputClass } from "@/components/bolt/inquiry-field-styles";
+import { InquirySelect } from "@/components/bolt/InquirySelect";
 import { Reveal } from "./Reveal";
 
 type FormData = {
@@ -28,17 +32,22 @@ const initialData: FormData = {
 const serviceOptions = [...serviceOptionsFromSite, "Other / Not sure yet"];
 
 const budgetOptions = [
-  'Under PKR 50,000',
-  'PKR 50,000 – 150,000',
-  'PKR 150,000 – 500,000',
-  'PKR 500,000+',
-  'Let\'s discuss',
+  "Under PKR 50,000",
+  "PKR 50,000 – 150,000",
+  "PKR 150,000 – 500,000",
+  "PKR 500,000+",
+  "Let's discuss",
 ];
+
+const serviceSelectOptions = serviceOptions.map((s) => ({ value: s, label: s }));
+const budgetSelectOptions = budgetOptions.map((b) => ({ value: b, label: b }));
 
 export function InquiryForm() {
   const [data, setData] = useState<FormData>(initialData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [websiteHp, setWebsiteHp] = useState("");
 
   const validate = (): boolean => {
     const e: FormErrors = {};
@@ -60,16 +69,32 @@ export function InquiryForm() {
     e.preventDefault();
     if (!validate()) return;
     setStatus('submitting');
+    setSubmitError(null);
 
-    // Honest submission — we don't have a backend endpoint wired,
-    // so we acknowledge receipt and offer the WhatsApp fallback.
-    await new Promise((r) => setTimeout(r, 1400));
+    const result = await submitSiteForm({
+      form: "inquiry",
+      name: data.name.trim(),
+      email: data.email.trim(),
+      company: data.company.trim(),
+      service: data.service,
+      budget: data.budget,
+      message: data.message.trim(),
+      website: websiteHp,
+    });
+
+    if (!result.ok) {
+      setStatus('idle');
+      setSubmitError(result.error);
+      return;
+    }
+
     setStatus('success');
   };
 
   const reset = () => {
     setData(initialData);
     setErrors({});
+    setSubmitError(null);
     setStatus('idle');
   };
 
@@ -79,14 +104,14 @@ export function InquiryForm() {
   };
 
   return (
-    <section id="inquiry" className="relative py-28 lg:py-40 border-t border-ink-200/60 dark:border-ink-800/60">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="inquiry" className="itq-bolt-section relative overflow-x-clip border-t border-ink-200/60 dark:border-ink-800/60">
+      <div className="itq-container">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left — intro */}
           <div className="lg:col-span-5">
             <Reveal>
               <p className="text-xs font-mono uppercase tracking-wide2 text-accent-500 mb-3">Project inquiry</p>
-              <h2 className="font-display text-5xl lg:text-6xl leading-[0.95] tracking-tightest text-ink-900 dark:text-ink-50">
+              <h2 className="itq-section-title text-ink-900 dark:text-ink-50 lg:text-[clamp(2.5rem,5vw,3.75rem)]">
                 Start a project.
               </h2>
               <p className="mt-6 text-base text-ink-500 dark:text-ink-400 leading-relaxed text-balance">
@@ -118,8 +143,7 @@ export function InquiryForm() {
                       Inquiry received.
                     </h3>
                     <p className="mt-3 max-w-sm text-sm text-ink-500 dark:text-ink-400 leading-relaxed">
-                      Thank you, {data.name.split(' ')[0]}. We've noted your request about{' '}
-                      {data.service.toLowerCase()}. Our team will reach out within one business day.
+                      Thank you, {data.name.split(' ')[0]}. We've emailed your inquiry to our team and will reply within one business day.
                     </p>
                     <p className="mt-4 text-xs text-ink-400 dark:text-ink-400">
                       Want to speed things up? Continue on WhatsApp now.
@@ -144,6 +168,20 @@ export function InquiryForm() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                    <div
+                      className="pointer-events-none absolute left-[-9999px] h-px w-px overflow-hidden opacity-0"
+                      aria-hidden="true"
+                    >
+                      <label htmlFor="inquiry-website-hp">Website</label>
+                      <input
+                        id="inquiry-website-hp"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={websiteHp}
+                        onChange={(e) => setWebsiteHp(e.target.value)}
+                      />
+                    </div>
                     <div className="grid sm:grid-cols-2 gap-5">
                       <Field
                         label="Name"
@@ -155,7 +193,7 @@ export function InquiryForm() {
                           value={data.name}
                           onChange={(e) => update('name', e.target.value)}
                           placeholder="Your name"
-                          className={inputClass(!!errors.name)}
+                          className={inquiryInputClass(!!errors.name)}
                         />
                       </Field>
 
@@ -169,7 +207,7 @@ export function InquiryForm() {
                           value={data.email}
                           onChange={(e) => update('email', e.target.value)}
                           placeholder="you@company.com"
-                          className={inputClass(!!errors.email)}
+                          className={inquiryInputClass(!!errors.email)}
                         />
                       </Field>
                     </div>
@@ -180,35 +218,28 @@ export function InquiryForm() {
                         value={data.company}
                         onChange={(e) => update('company', e.target.value)}
                         placeholder="Company name"
-                        className={inputClass(false)}
+                        className={inquiryInputClass(false)}
                       />
                     </Field>
 
-                    <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="grid sm:grid-cols-2 gap-5 items-start">
                       <Field label="Service needed" required error={errors.service}>
-                        <select
+                        <InquirySelect
                           value={data.service}
-                          onChange={(e) => update('service', e.target.value)}
-                          className={inputClass(!!errors.service)}
-                        >
-                          <option value="">Select a service...</option>
-                          {serviceOptions.map((s) => (
-                            <option key={s} value={s}>{s}</option>
-                          ))}
-                        </select>
+                          onChange={(v) => update("service", v)}
+                          placeholder="Select a service..."
+                          options={serviceSelectOptions}
+                          hasError={!!errors.service}
+                        />
                       </Field>
 
                       <Field label="Budget range (optional)">
-                        <select
+                        <InquirySelect
                           value={data.budget}
-                          onChange={(e) => update('budget', e.target.value)}
-                          className={inputClass(false)}
-                        >
-                          <option value="">Select a range...</option>
-                          {budgetOptions.map((b) => (
-                            <option key={b} value={b}>{b}</option>
-                          ))}
-                        </select>
+                          onChange={(v) => update("budget", v)}
+                          placeholder="Select a range..."
+                          options={budgetSelectOptions}
+                        />
                       </Field>
                     </div>
 
@@ -218,13 +249,23 @@ export function InquiryForm() {
                         onChange={(e) => update('message', e.target.value)}
                         placeholder="Tell us about your project, goals, or the problem you're trying to solve..."
                         rows={4}
-                        className={inputClass(!!errors.message) + ' resize-none'}
+                        className={inquiryInputClass(!!errors.message) + " resize-none"}
                       />
                     </Field>
 
+                    {submitError ? (
+                      <p className="flex items-start gap-2 rounded-xl border border-red-400/40 bg-red-500/5 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+                        <AlertCircle size={16} className="mt-0.5 shrink-0" aria-hidden />
+                        {submitError}
+                      </p>
+                    ) : null}
+
                     <div className="flex items-center justify-between pt-2">
                       <p className="text-xs text-ink-400 dark:text-ink-400">
-                        We reply within one business day.
+                        We reply within one business day.{" "}
+                        <a href="/legal/privacy-policy" className="underline-offset-2 hover:underline">
+                          Privacy Policy
+                        </a>
                       </p>
                       <button
                         type="submit"
@@ -284,26 +325,28 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label className="block text-xs font-mono uppercase tracking-wide2 text-ink-500 dark:text-ink-400 mb-2">
+    <div className="flex flex-col">
+      <label className="block min-h-[2rem] text-xs font-mono uppercase tracking-wide2 text-ink-500 dark:text-ink-400 mb-2 leading-snug">
         {label}
         {required && <span className="text-accent-500 ml-0.5">*</span>}
       </label>
       {children}
-      {error && (
-        <p className="mt-1.5 flex items-center gap-1.5 text-xs text-red-500">
-          <AlertCircle size={12} />
-          {error}
-        </p>
-      )}
+      <p
+        className={cn(
+          "mt-1.5 flex min-h-[1.125rem] items-center gap-1.5 text-xs text-red-500",
+          !error && "invisible",
+        )}
+        aria-live="polite"
+      >
+        {error ? (
+          <>
+            <AlertCircle size={12} aria-hidden />
+            {error}
+          </>
+        ) : (
+          <span aria-hidden>&nbsp;</span>
+        )}
+      </p>
     </div>
   );
-}
-
-function inputClass(hasError: boolean): string {
-  return `w-full rounded-xl border bg-ink-50 dark:bg-ink-800/50 px-4 py-2.5 text-sm text-ink-900 dark:text-ink-100 placeholder:text-ink-400 dark:placeholder:text-ink-600 transition-colors focus:outline-none focus:ring-2 ${
-    hasError
-      ? 'border-red-400 focus:ring-red-400/20'
-      : 'border-ink-200 dark:border-ink-700 focus:border-accent-500 focus:ring-accent-500/20'
-  }`;
 }

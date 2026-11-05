@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { WhatsAppLink } from "@/components/Button";
-import { ClosingCta } from "@/components/ui/ClosingCta";
+import { TechEcosystem } from "@/components/TechEcosystem";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Sheet } from "@/components/ui/Sheet";
@@ -15,7 +15,8 @@ import { getServiceMedia } from "@/lib/service-media";
 import { keywordForPath } from "@/lib/seo/keywords";
 import { faqSchema, serviceSchema } from "@/lib/seo/schema";
 import { getServicePage, portfolioFor, type ServicePageContent } from "@/lib/seo/services";
-import { site, waLink } from "@/lib/site";
+import { site, waLink, workRelationLabel } from "@/lib/site";
+import { serviceAi } from "@/components/seo/service-ai";
 
 function ServiceIntro({
   eyebrow,
@@ -51,6 +52,7 @@ export function ServiceLanding({ slug }: { slug: string }) {
   const accent = mapped?.h1Accent;
   const media = getServiceMedia(page.mediaKey);
   if (!media) return null;
+  const ai = serviceAi[page.slug];
 
   return (
     <>
@@ -138,7 +140,7 @@ export function ServiceLanding({ slug }: { slug: string }) {
             <ServiceIntro
               eyebrow="Problems"
               title={mapped?.supportingH2[1] ?? "Problems we solve"}
-              description="The friction that usually shows up before a business calls us — framed so you can match it to your own operation."
+              description={ai?.problems}
             />
           </Reveal>
           <div className="mt-12 grid gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
@@ -168,6 +170,17 @@ export function ServiceLanding({ slug }: { slug: string }) {
         </div>
       </Sheet>
 
+      {ai ? (
+        <Sheet tone="tint">
+          <div className="itq-container">
+            <Reveal>
+              <ServiceIntro eyebrow="AI implementation" title={ai.title} description={ai.lead} />
+            </Reveal>
+            <TechEcosystem focus={ai.focus} className="mt-12 md:mt-14" />
+          </div>
+        </Sheet>
+      ) : null}
+
       {portfolio.length ? (
         <Sheet>
           <div className="itq-container">
@@ -175,7 +188,7 @@ export function ServiceLanding({ slug }: { slug: string }) {
               <ServiceIntro
                 eyebrow="Proof"
                 title={mapped?.supportingH2[3] ?? "Related work"}
-                description="Examples from live client work and systems we build and run. Not every engagement looks identical — these show the quality bar."
+                description={ai?.proof}
               />
             </Reveal>
             <ul className="mt-12 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5">
@@ -185,7 +198,7 @@ export function ServiceLanding({ slug }: { slug: string }) {
                     href={item.href || "/work"}
                     external={Boolean(item.href)}
                     size="proof"
-                    kicker={item.kind}
+                    kicker={`${workRelationLabel[item.relation]} · ${item.kind}`}
                     title={item.name}
                     description={item.body}
                     cta={item.href ? "Open live site" : "See in portfolio"}
@@ -208,30 +221,6 @@ export function ServiceLanding({ slug }: { slug: string }) {
       </Sheet>
 
       <Sheet>
-        <div className="itq-container">
-          <Reveal>
-            <ServiceIntro
-              eyebrow="Related"
-              title="Continue exploring"
-              description="Internal paths that commonly sit next to this service."
-            />
-          </Reveal>
-          <ul className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3">
-            {page.relatedPaths.map((link, index) => (
-              <Reveal as="li" key={link.href} delay={index * 40} className="h-full">
-                <ServiceGuideCard
-                  href={link.href}
-                  title={link.label}
-                  description={link.line}
-                  cta="Explore"
-                />
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </Sheet>
-
-      <Sheet tone="tint">
         <div className="itq-container">
           <Reveal>
             <ServiceIntro
@@ -261,12 +250,25 @@ export function ServiceLanding({ slug }: { slug: string }) {
         </div>
       </Sheet>
 
-      <ClosingCta
-        eyebrow="Next step"
-        title="Ready to scope this"
-        mark="?"
-        description={`Tell us about your ${page.eyebrow} needs. We reply within one business day with a clear next step — no long brief required.`}
-      />
+      <Sheet tone="tint">
+        <div className="itq-container">
+          <Reveal>
+            <ServiceIntro eyebrow="Related" title="Keep exploring" />
+          </Reveal>
+          <ul className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3">
+            {page.relatedPaths.map((link, index) => (
+              <Reveal as="li" key={link.href} delay={index * 40} className="h-full">
+                <ServiceGuideCard
+                  href={link.href}
+                  title={link.label}
+                  description={link.line}
+                  cta="Explore"
+                />
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </Sheet>
     </>
   );
 }

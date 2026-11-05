@@ -1,0 +1,22 @@
+{
+  "name": "ISTIQEME Technologies",
+  "short_name": "ISTIQEME",
+  "description": "Premium digital engineering for growing businesses in Karachi and beyond.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "icons": [
+    {
+      "src": "/brand/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

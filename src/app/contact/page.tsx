@@ -23,11 +23,13 @@ export default function ContactPage() {
         imageAlt={heroMedia.contact.alt}
         imagePosition={heroMedia.contact.objectPosition}
       >
-        <div className="flex flex-wrap gap-3">
-          <WhatsAppLink text={site.whatsapp.discussText}>Message on WhatsApp</WhatsAppLink>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <WhatsAppLink text={site.whatsapp.discussText} className="w-full sm:w-auto">
+            Message on WhatsApp
+          </WhatsAppLink>
           <a
             href={site.emails[0].href}
-            className="inline-flex items-center rounded-xl border border-line px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent-500/50"
+            className="inline-flex w-full items-center justify-center rounded-xl border border-line px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent-500/50 sm:w-auto"
           >
             Email {site.emails[0].label}
           </a>

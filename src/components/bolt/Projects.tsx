@@ -6,9 +6,9 @@ import { Reveal } from "./Reveal";
 
 export function Projects() {
   return (
-    <section id="work" className="relative overflow-hidden py-28 lg:py-40">
+    <section id="work" className="itq-bolt-section relative overflow-x-clip">
       <div className="absolute inset-0 grid-faint pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="relative itq-container">
         <Reveal>
           <div className="mb-14 flex flex-col gap-8 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -16,13 +16,13 @@ export function Projects() {
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
                 Selected work
               </p>
-              <h2 className="font-display text-5xl leading-[0.95] tracking-tightest text-ink-900 dark:text-ink-50 sm:text-6xl lg:text-7xl">
-                Live client sites.
+              <h2 className="itq-section-title text-ink-900 dark:text-ink-50">
+                Selected builds.
               </h2>
             </div>
             <div className="flex max-w-md flex-col gap-5">
               <p className="text-base leading-relaxed text-ink-500 dark:text-ink-400 text-balance">
-                Real websites and systems we build and run — designed for speed, clarity, and trust.
+                Client websites, our own platform, and concept builds — each card labelled by who it was built for.
               </p>
             </div>
           </div>

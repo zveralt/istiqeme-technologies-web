@@ -48,13 +48,13 @@ export function Hero() {
   });
 
   return (
-    <section id="top" data-header-theme="light" className="relative min-h-screen overflow-hidden pt-16">
+    <section id="top" data-header-theme="light" className="relative min-h-dvh overflow-x-clip pt-16">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute inset-0 itq-grid" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white dark:to-ink-950" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-24 lg:px-10 lg:pt-32">
+      <div className="itq-container relative pb-16 pt-[max(5.5rem,calc(env(safe-area-inset-top)+4rem))] md:pb-20 md:pt-28 lg:pt-32">
         <div className="grid items-start gap-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-8 lg:gap-12">
           <div className="max-w-[46rem]">
             <motion.div {...fade(0.05)}>

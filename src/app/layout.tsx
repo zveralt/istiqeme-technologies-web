@@ -1,20 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { CookieBanner } from "@/components/CookieBanner";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { GridBackground } from "@/components/ui/GridBackground";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import { AnalyticsGate } from "@/components/legal/AnalyticsGate";
+import {
+  CookieConsentBanner,
+  CookiePreferencesModal,
+} from "@/components/legal/CookieConsentBanner";
+import { ConsentProvider } from "@/components/legal/ConsentProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
 import { keywordForPath } from "@/lib/seo/keywords";
 import { SITE_URL } from "@/lib/seo/site";
+import { openGraphImages, siteIcons } from "@/lib/seo/social";
 import { site } from "@/lib/site";
 
 const homeSeo = keywordForPath("/");
@@ -54,6 +58,11 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: "technology",
+  icons: siteIcons,
+  manifest: "/brand/site.webmanifest",
+  alternates: {
+    canonical: SITE_URL,
+  },
   keywords: [
     "website design company Karachi",
     "website development Pakistan",
@@ -70,11 +79,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_PK",
     type: "website",
+    images: openGraphImages(),
   },
   twitter: {
     card: "summary_large_image",
     title: homeSeo?.title ?? site.name,
     description: homeSeo?.description ?? site.tagline,
+    images: openGraphImages(),
   },
   robots: {
     index: true,
@@ -90,6 +101,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0c" },
+  ],
 };
 
 const themeInitScript = `(function(){try{var t=localStorage.getItem('istiqeme-theme-v1');if(t==='light')document.documentElement.classList.remove('dark');else document.documentElement.classList.add('dark');}catch(e){document.documentElement.classList.add('dark');}})();`;
@@ -112,17 +127,19 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>
-          <SmoothScroll />
-          <ScrollToTop />
-          <GridBackground />
-          <Header />
-          <main className="relative z-10 flex-1 overflow-x-clip">{children}</main>
-          <Footer />
-          <FloatingWhatsApp />
-          <CookieBanner />
+          <ConsentProvider>
+            <SmoothScroll />
+            <ScrollToTop />
+            <GridBackground />
+            <Header />
+            <main className="relative z-10 flex-1 overflow-x-clip">{children}</main>
+            <Footer />
+            <FloatingWhatsApp />
+            <CookieConsentBanner />
+            <CookiePreferencesModal />
+            <AnalyticsGate />
+          </ConsentProvider>
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

@@ -60,7 +60,7 @@ export const portfolioCopy = {
       label: "Enterprise Telemetry Corporate Hub",
       description:
         "Corporate platform for clear data tracking, clean information mapping, and direct executive communication.",
-      status: "STATUS: OPERATIONAL // UPTIME: 99.9%",
+      status: "STATUS: LIVE",
     },
     {
       name: "Credo",
@@ -68,7 +68,7 @@ export const portfolioCopy = {
       label: "Interactive Workflow Business Framework",
       description:
         "Multi-page corporate layout presenting complex operational workflows smoothly on any mobile screen.",
-      status: "STATUS: OPERATIONAL // UPTIME: 99.8%",
+      status: "STATUS: LIVE",
     },
     {
       name: "Pascale Agency",
@@ -76,7 +76,7 @@ export const portfolioCopy = {
       label: "High-Velocity Digital Media Showcase",
       description:
         "Fast digital media showcase for high-end brand assets and portfolios without local network lag.",
-      status: "STATUS: OPERATIONAL // UPTIME: 99.7%",
+      status: "STATUS: LIVE",
     },
   ],
   auditTitle: "READY TO GET STARTED?",
@@ -199,11 +199,11 @@ export const sovereignLedgerCopy = {
       header: "TELEMETRY PULSE",
       deepDiveTitle: "The Telemetry Pulse",
       deepDiveBody:
-        "High-availability infrastructure is not a marketing claim — it is measured. Sub-millisecond latency, sovereign data residency, and continuous uptime readouts give risk officers and CIOs the confidence to scale without compromising compliance posture.",
+        "Every site we ship is built on managed hosting with HTTPS, image optimisation, and caching by default, so pages stay fast on the mobile networks your customers actually use.",
       metrics: [
-        { label: "LATENCY", value: "12ms" },
-        { label: "SYSTEM_UPTIME", value: "99.99%" },
-        { label: "DATA_SOVEREIGNTY", value: "SECURED" },
+        { label: "HOSTING", value: "MANAGED" },
+        { label: "STATUS", value: "LIVE" },
+        { label: "HTTPS", value: "ON" },
       ],
     },
   },

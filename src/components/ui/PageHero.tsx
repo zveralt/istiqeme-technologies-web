@@ -42,7 +42,7 @@ export function PageHero({
     <section
       id={id}
       data-header-theme="light"
-      className="itq-stage relative overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40"
+      className="itq-stage relative overflow-hidden pb-14 pt-[max(7.5rem,calc(env(safe-area-inset-top)+5.5rem))] md:pb-24 md:pt-40"
     >
       {hasImage ? (
         <HeroImageBackground

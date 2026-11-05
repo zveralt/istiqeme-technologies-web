@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { aiMenu, nav, problems, serviceMenu, site, waLink, work, workMenu } from "@/lib/site";
+import { aiMenu, nav, problems, services, site, waLink, work, workMenu } from "@/lib/site";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useTheme } from "@/components/ui/ThemeProvider";
@@ -20,8 +20,8 @@ const homeLinks = [
   { href: "/#top", title: "Opening", line: "The standard for technology inquiries." },
   { href: "/#services", title: "What we build", line: "Websites, apps, AI, and marketing." },
   { href: "/#work", title: "Live work", line: "Sites and systems already running." },
-  { href: "/#problems", title: "Problems", line: "Market gaps and the systems that close them." },
-  { href: "/start", title: "Intake", line: "A few taps to the right next step." },
+  { href: "/#process", title: "Process", line: "From a short interview to a system that runs." },
+  { href: "/#inquiry", title: "Inquiry", line: "Tell us what you need — reply within a day." },
 ];
 
 export function Header() {
@@ -156,7 +156,10 @@ export function Header() {
                 className="absolute top-full left-1/2 z-50 hidden -translate-x-1/2 pt-2 md:block"
                 onMouseEnter={clearTimer}
               >
-                <div className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-card p-7 text-foreground shadow-[0_24px_60px_-28px_rgba(10,10,12,0.35)]">
+                <div
+                  className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-card p-7 text-foreground shadow-[0_24px_60px_-28px_rgba(10,10,12,0.35)]"
+                  onClick={() => setMenu(null)}
+                >
                   <MenuColumns menu={menu} />
                 </div>
               </motion.div>
@@ -171,7 +174,7 @@ export function Header() {
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center rounded-lg border md:hidden"
+          className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg border md:hidden"
           style={{ borderColor: "var(--hdr-line)" }}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -214,7 +217,7 @@ export function Header() {
             style={{ top: HEADER_H }}
           >
             <nav
-              className="itq-container flex h-full flex-col overflow-y-auto pb-8 pt-2"
+              className="itq-container flex h-full flex-col overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))] pt-2"
               aria-label="Mobile"
             >
               {nav.map((item, idx) => {
@@ -222,7 +225,7 @@ export function Header() {
                 const expanded = Boolean(key && mobileGroup === key);
                 const rows =
                   key === "services"
-                    ? serviceMenu.map((entry) => ({
+                    ? services.map((entry) => ({
                         href: entry.href,
                         title: entry.title,
                       }))
@@ -246,7 +249,7 @@ export function Header() {
                     <div className="flex items-center justify-between">
                       <Link
                         href={item.href}
-                        className="flex-1 py-4 font-display text-[2rem] leading-none text-foreground"
+                        className="flex-1 py-4 font-display text-[clamp(1.65rem,7vw,2rem)] leading-none text-foreground"
                         onClick={() => setOpen(false)}
                       >
                         {item.label}
@@ -284,6 +287,7 @@ export function Header() {
                               <Link
                                 key={entry.href + entry.title}
                                 href={entry.href}
+                                onClick={() => setOpen(false)}
                                 className="block py-2 text-[15px] text-ink-soft"
                               >
                                 {entry.title}
@@ -375,7 +379,7 @@ function Column({
         {items.map((item) =>
           item.href.startsWith("http") ? (
             <a
-              key={item.href}
+              key={item.title}
               href={item.href}
               target="_blank"
               rel="noreferrer"
@@ -385,7 +389,7 @@ function Column({
             </a>
           ) : (
             <Link
-              key={item.href}
+              key={item.title}
               href={item.href}
               className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
             >
@@ -400,12 +404,12 @@ function Column({
 
 function MenuColumns({ menu }: { menu: MenuKey }) {
   if (menu === "services") {
-    const mid = Math.ceil(serviceMenu.length / 2);
-    const left = serviceMenu.slice(0, mid).map((item) => ({
+    const mid = Math.ceil(services.length / 2);
+    const left = services.slice(0, mid).map((item) => ({
       href: item.href,
       title: item.title,
     }));
-    const right = serviceMenu.slice(mid).map((item) => ({
+    const right = services.slice(mid).map((item) => ({
       href: item.href,
       title: item.title,
     }));
@@ -420,7 +424,7 @@ function MenuColumns({ menu }: { menu: MenuKey }) {
     return (
       <div className="flex gap-10">
         <Column title="Solutions" items={workMenu.map((item) => ({ href: `/work#${item.id}`, title: item.title }))} />
-        <Column title="Live sites" items={work.map((item) => ({ href: item.href, title: item.name }))} divided />
+        <Column title="Live sites" items={work.map((item) => ({ href: item.href || "/work", title: item.name }))} divided />
       </div>
     );
   }

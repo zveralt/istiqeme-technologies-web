@@ -6,12 +6,12 @@ import { Reveal } from "./Reveal";
 
 export function Workflow() {
   return (
-    <section id="workflow" className="relative py-28 lg:py-40 border-y border-ink-200/60 dark:border-ink-800/60 dot-bg overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="workflow" className="itq-bolt-section relative overflow-x-clip border-y border-ink-200/60 dark:border-ink-800/60 dot-bg">
+      <div className="itq-container">
         <Reveal>
           <div className="text-center mb-16">
             <p className="text-xs font-mono uppercase tracking-wide2 text-accent-500 mb-3">Why ISTIQEME</p>
-            <h2 className="font-display text-5xl lg:text-7xl leading-[0.95] tracking-tightest text-ink-900 dark:text-ink-50">
+            <h2 className="itq-section-title text-ink-900 dark:text-ink-50">
               One system, not spreadsheets.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base text-ink-500 dark:text-ink-400 text-balance">
