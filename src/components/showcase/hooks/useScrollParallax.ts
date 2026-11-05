@@ -14,7 +14,7 @@ export function useScrollParallax(ref: RefObject<HTMLElement | null>, maxPx = 6)
       const rect = el.getBoundingClientRect();
       const center = rect.top + rect.height / 2;
       const offset = (center - window.innerHeight / 2) / window.innerHeight;
-      el.style.transform = `translateX(${offset * maxPx}px)`;
+      el.style.transform = `translate3d(${offset * maxPx}px, 0, 0)`;
     };
 
     const onScroll = () => {

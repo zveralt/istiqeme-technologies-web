@@ -34,6 +34,14 @@ export type BoltService = {
   href: string;
 };
 
+const serviceSeoPath: Record<string, string> = {
+  landing: "/services/web-design-development",
+  corporate: "/services/web-design-development",
+  shop: "/services/ecommerce-development",
+  app: "/services/mobile-app-development",
+  marketing: "/services/digital-marketing",
+};
+
 export const boltServices: BoltService[] = services.map((s) => ({
   id: s.id,
   number: s.tier,
@@ -41,7 +49,7 @@ export const boltServices: BoltService[] = services.map((s) => ({
   category: s.category,
   description: s.summary,
   icon: serviceIcons[s.id] ?? Globe,
-  href: `/services#${s.id}`,
+  href: serviceSeoPath[s.id] ?? `/services#${s.id}`,
 }));
 
 const scrollByHost: Record<string, string> = {

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { getLenis, scrollPageTo } from "@/lib/smooth-scroll";
 
 export function ScrollToTop() {
   const pathname = usePathname();
@@ -15,11 +16,14 @@ export function ScrollToTop() {
     if (hash.length > 1) {
       const el = document.getElementById(decodeURIComponent(hash.slice(1)));
       if (el) {
-        el.scrollIntoView({ block: "start" });
+        // Instant jump on route change — do not animate through Lenis here.
+        const lenis = getLenis();
+        if (lenis) lenis.scrollTo(el, { offset: -72, immediate: true });
+        else el.scrollIntoView({ block: "start" });
         return;
       }
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    scrollPageTo(0, { immediate: true });
   }, [pathname]);
 
   return null;

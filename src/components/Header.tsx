@@ -39,7 +39,8 @@ export function Header() {
     let raf = 0;
     const update = () => {
       raf = 0;
-      setScrolled(window.scrollY > 24);
+      const next = window.scrollY > 24;
+      setScrolled((prev) => (prev === next ? prev : next));
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -221,7 +222,10 @@ export function Header() {
                 const expanded = Boolean(key && mobileGroup === key);
                 const rows =
                   key === "services"
-                    ? serviceMenu.map((entry) => ({ href: `/services#${entry.id}`, title: entry.title }))
+                    ? serviceMenu.map((entry) => ({
+                        href: entry.href,
+                        title: entry.title,
+                      }))
                     : key === "work"
                       ? workMenu.map((entry) => ({ href: `/work#${entry.id}`, title: entry.title }))
                       : key === "ai"
@@ -397,8 +401,14 @@ function Column({
 function MenuColumns({ menu }: { menu: MenuKey }) {
   if (menu === "services") {
     const mid = Math.ceil(serviceMenu.length / 2);
-    const left = serviceMenu.slice(0, mid).map((item) => ({ href: `/services#${item.id}`, title: item.title }));
-    const right = serviceMenu.slice(mid).map((item) => ({ href: `/services#${item.id}`, title: item.title }));
+    const left = serviceMenu.slice(0, mid).map((item) => ({
+      href: item.href,
+      title: item.title,
+    }));
+    const right = serviceMenu.slice(mid).map((item) => ({
+      href: item.href,
+      title: item.title,
+    }));
     return (
       <div className="flex gap-10">
         <Column title="Services" items={left} />

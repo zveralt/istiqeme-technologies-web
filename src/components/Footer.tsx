@@ -6,6 +6,7 @@ import { FooterClosing } from "@/components/FooterClosing";
 import { FooterMarquee } from "@/components/FooterMarquee";
 import { useTheme } from "@/components/ui/ThemeProvider";
 import { aiMenu, nav, site } from "@/lib/site";
+import { scrollPageTo } from "@/lib/smooth-scroll";
 
 const explore = [
   ...nav.map((item) => ({ href: item.href, label: item.label })),
@@ -105,7 +106,7 @@ export function Footer() {
             type="button"
             onClick={() => {
               const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-              window.scrollTo({ top: 0, behavior: fine ? "smooth" : "auto" });
+              scrollPageTo(0, { immediate: !fine, duration: 1.05 });
             }}
             className="group inline-flex items-center gap-2 self-start font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-ink-400 transition-colors hover:text-accent-500 dark:text-white/50 dark:hover:text-accent-300 md:self-auto"
           >

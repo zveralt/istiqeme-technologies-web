@@ -1,0 +1,22 @@
+Service-page photography — Unsplash License (https://unsplash.com/license).
+Stored locally under /public/images/heroes (heroes) and /public/images/services (overview).
+Optimized as JPEG (~1600–1920px). Distinct from shared interior heroes in hero-media.ts.
+
+HEROES
+svc-web-hero.jpg         — photo-1498050108023-c5249f4df085 (laptop / web development workspace)
+svc-ecommerce-hero.jpg   — photo-1556742049-0cfed4f6a45d (retail / commerce checkout)
+svc-software-hero.jpg    — photo-1551288049-bebda4e38f71 (analytics / software dashboard)
+svc-mobile-hero.jpg      — photo-1512941937669-90a1b58e7e9c (smartphone / mobile product)
+svc-ai-hero.jpg          — photo-1677442136019-21780ecad995 (AI / neural visual)
+svc-marketing-hero.jpg   — photo-1460925895917-afdab827c52f (marketing analytics laptop)
+
+OVERVIEW
+svc-web-overview.jpg         — photo-1547658719-da2b51169166 (website design desk)
+svc-ecommerce-overview.jpg   — photo-1563013544-824ae1b704d3 (online checkout)
+svc-software-overview.jpg    — photo-1571171637578-41bc2dd41cd2 (source code monitor)
+svc-mobile-overview.jpg      — photo-1551650975-87deedd944c3 (mobile UI screens)
+svc-ai-overview.jpg          — photo-1485827404703-89b55fcc595e (studio robot / automation)
+svc-marketing-overview.jpg   — photo-1557838923-2985c318be48 (campaign / marketing studio)
+
+Each service uses a unique hero and a different overview image. No reuse of
+/services, /ai, /contact, /work, or /start interior heroes.

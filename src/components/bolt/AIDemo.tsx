@@ -39,6 +39,8 @@ export function AIDemo() {
       const next = reachedEnd ? 1 : Math.min(1, Math.max(0, raw));
       track.style.setProperty("--lead-progress", String(next));
       const count = next >= 1 ? aiDemoSteps.length : Math.floor(next * aiDemoSteps.length);
+      // Only commit React state when the filled-step count changes — avoids
+      // re-renders on every Lenis frame while the CSS var still tracks live.
       if (count !== lastFilled) {
         lastFilled = count;
         setProgress(next >= 1 ? 1 : count / aiDemoSteps.length);

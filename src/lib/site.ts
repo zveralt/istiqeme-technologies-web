@@ -54,6 +54,7 @@ export const serviceMenu = [
     solution:
       "A high-speed landing page or corporate site that captures attention, routes buyers to WhatsApp, and builds trust.",
     source: "landing",
+    href: "/services/web-design-development",
   },
   {
     id: "custom-app-frameworks",
@@ -62,6 +63,7 @@ export const serviceMenu = [
     solution:
       "A custom mobile app with a secure cloud backend, staff roles, and data that stays under your control.",
     source: "app",
+    href: "/services/mobile-app-development",
   },
   {
     id: "software-development",
@@ -70,6 +72,7 @@ export const serviceMenu = [
     solution:
       "Custom software scoped to your business — not a one-size-fits-all template.",
     source: "app",
+    href: "/services/custom-software-development",
   },
   {
     id: "social-media-marketing",
@@ -78,6 +81,7 @@ export const serviceMenu = [
     solution:
       "End-to-end management of social profiles, content, and a posting rhythm that keeps the business active.",
     source: "marketing",
+    href: "/services/digital-marketing",
   },
   {
     id: "brand-awareness",
@@ -86,6 +90,7 @@ export const serviceMenu = [
     solution:
       "Written posts, graphics, and short-form video that present the brand clearly and consistently.",
     source: "marketing",
+    href: "/services/digital-marketing",
   },
   {
     id: "digital-marketing",
@@ -94,6 +99,7 @@ export const serviceMenu = [
     solution:
       "Targeted paid campaigns and monthly reports so you can see the return, not only the reach.",
     source: "marketing",
+    href: "/services/digital-marketing",
   },
   {
     id: "ai-voice-agents",
@@ -102,6 +108,7 @@ export const serviceMenu = [
     solution:
       "An AI receptionist in English or Urdu that qualifies the lead and hands a summary to WhatsApp.",
     source: "shop",
+    href: "/services/ai-solutions",
   },
   {
     id: "ai-chatbot-systems",
@@ -110,6 +117,7 @@ export const serviceMenu = [
     solution:
       "A chatbot on WhatsApp that answers questions, checks context, and logs the conversation for your team.",
     source: "shop",
+    href: "/services/ai-solutions",
   },
   {
     id: "crm-systems",
@@ -118,6 +126,7 @@ export const serviceMenu = [
     solution:
       "One workspace for customers, sales, and team activity so nothing sits in a private chat.",
     source: "app",
+    href: "/services/custom-software-development",
   },
   {
     id: "erp-systems",
@@ -126,6 +135,7 @@ export const serviceMenu = [
     solution:
       "An operational workspace where orders, staff activity, and sales sit in one system your team can run every day.",
     source: "app",
+    href: "/services/custom-software-development",
   },
   {
     id: "custom-ai-agents",
@@ -134,6 +144,7 @@ export const serviceMenu = [
     solution:
       "Agents trained on your services and rules — they qualify leads, answer in simple words, and continue on WhatsApp.",
     source: "landing",
+    href: "/services/ai-solutions",
   },
 ] as const;
 
@@ -186,12 +197,12 @@ export const problems = [
   {
     problem: "Visitors never become customers.",
     solution: "Landing pages and corporate websites with WhatsApp routing and overnight lead capture.",
-    href: "/services#website-development",
+    href: "/services/web-design-development",
   },
   {
     problem: "After-hours inquiries go unanswered.",
     solution: "AI voice agents and chatbots that qualify the lead and continue on WhatsApp.",
-    href: "/services#ai-voice-agents",
+    href: "/services/ai-solutions",
   },
   {
     problem: "Orders live in spreadsheets and private chats.",

@@ -14,6 +14,7 @@ export function PageHero({
   imageSrc,
   imageAlt,
   imagePosition,
+  lead,
 }: {
   id?: string;
   eyebrow: string;
@@ -21,6 +22,8 @@ export function PageHero({
   accent?: string;
   description?: string;
   children?: ReactNode;
+  /** Optional trail above the eyebrow (e.g. breadcrumbs). */
+  lead?: ReactNode;
   /** Interior pages: local photo under /public/images/heroes */
   imageSrc?: string;
   imageAlt?: string;
@@ -57,6 +60,7 @@ export function PageHero({
         </>
       )}
       <div className="itq-container relative">
+        {lead ? <div className="mb-6">{lead}</div> : null}
         <p className="itq-eyebrow">{eyebrow}</p>
         <DisplayTitle lines={lines} className="itq-hero-title mt-6 max-w-5xl" />
         {description ? <p className="itq-lead mt-7 max-w-2xl text-balance">{description}</p> : null}

@@ -12,11 +12,9 @@ import { Projects } from "@/components/bolt/Projects";
 import { heroMedia } from "@/lib/hero-media";
 import { site, workMenu } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Work",
-  description:
-    "See real sites we have built, try our live demos, and reach our team directly when you are ready to talk.",
-};
+import { pageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = pageMetadata("/work");
 
 export default function WorkPage() {
   return (

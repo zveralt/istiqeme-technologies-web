@@ -11,7 +11,13 @@ import { GridBackground } from "@/components/ui/GridBackground";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/seo/schema";
+import { keywordForPath } from "@/lib/seo/keywords";
+import { SITE_URL } from "@/lib/seo/site";
 import { site } from "@/lib/site";
+
+const homeSeo = keywordForPath("/");
 
 const bebas = Bebas_Neue({
   subsets: ["latin"],
@@ -35,16 +41,48 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "ISTIQEME Technologies — Complex systems, beautifully simplified",
+    default:
+      homeSeo?.title ??
+      "ISTIQEME Technologies — Websites, Software & AI in Karachi",
     template: "%s — ISTIQEME Technologies",
   },
-  description: site.tagline,
-  metadataBase: new URL("https://www.istiqeme.net"),
+  description: homeSeo?.description ?? site.tagline,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: SITE_URL }],
+  creator: site.name,
+  publisher: site.name,
+  category: "technology",
+  keywords: [
+    "website design company Karachi",
+    "website development Pakistan",
+    "custom software development Pakistan",
+    "mobile app development Pakistan",
+    "AI automation Pakistan",
+    "digital marketing Karachi",
+    "ISTIQEME Technologies",
+  ],
   openGraph: {
-    title: "ISTIQEME Technologies",
-    description: site.tagline,
+    title: homeSeo?.title ?? site.name,
+    description: homeSeo?.description ?? site.tagline,
+    url: SITE_URL,
+    siteName: site.name,
+    locale: "en_PK",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeSeo?.title ?? site.name,
+    description: homeSeo?.description ?? site.tagline,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -66,10 +104,11 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={`${bebas.variable} ${inter.variable} ${jetbrains.variable} dark h-full`}
-      data-scroll-behavior="smooth"
+      data-scroll-behavior="auto"
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased">
         <ThemeProvider>

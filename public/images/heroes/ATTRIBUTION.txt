@@ -11,3 +11,7 @@ contact.jpg       — blake-wisz-Xn5FbEM9564-unsplash.jpg (Blake Wisz)
 
 Note: Five source photos map to seven interior pages; Blake Wisz is reused for
 work, AI products, and contact with different object-position crops.
+
+Service landing heroes (svc-*-hero.jpg) are listed in
+public/images/services/ATTRIBUTION.txt and must stay distinct from the
+shared interior set above.

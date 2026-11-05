@@ -22,10 +22,11 @@ import {
 } from "@/lib/ai-automation";
 import { agents } from "@/lib/ai-agents";
 
-export const metadata: Metadata = {
-  title: "AI & Automation",
+import { pageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = pageMetadata("/ai", {
   description: aiHero.subtitle,
-};
+});
 
 export default function AiHubPage() {
   return (

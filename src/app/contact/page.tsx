@@ -7,11 +7,9 @@ import { WhatsAppLink } from "@/components/Button";
 import { heroMedia } from "@/lib/hero-media";
 import { site, waLink } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Reach ISTIQEME Technologies in Karachi — WhatsApp, phone, or email. Tell us what you need and we reply within one business day.",
-};
+import { pageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = pageMetadata("/contact");
 
 export default function ContactPage() {
   return (

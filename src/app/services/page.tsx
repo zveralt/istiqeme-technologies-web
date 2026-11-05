@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Guide } from "@/components/Guide";
 import { LeadDemo } from "@/components/LeadDemo";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,13 +10,21 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceGlyph, type ServiceGlyphId } from "@/components/ui/ServiceGlyph";
 import { Sheet } from "@/components/ui/Sheet";
 import { WhatsAppLink } from "@/components/Button";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { ServiceGuideCard } from "@/components/seo/ServiceGuideCard";
 import { heroMedia } from "@/lib/hero-media";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { servicePages } from "@/lib/seo/services";
 import { serviceMenu, services, site, waLink } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Five clear options for getting your business online — from a simple landing page to a full mobile app.",
+export const metadata: Metadata = pageMetadata("/services");
+
+const catalogLinks: Record<string, string> = {
+  landing: "/services/web-design-development",
+  corporate: "/services/web-design-development",
+  shop: "/services/ecommerce-development",
+  app: "/services/mobile-app-development",
+  marketing: "/services/digital-marketing",
 };
 
 const menuRows = serviceMenu.map((item, i) => ({
@@ -24,9 +33,9 @@ const menuRows = serviceMenu.map((item, i) => ({
   title: item.title,
   kicker: item.problem,
   body: item.solution,
-  href: waLink(`Hi ISTIQEME Technologies — I'd like to discuss ${item.title} for my business.`),
-  cta: "Discuss on WhatsApp",
-  external: true,
+  href: item.href,
+  cta: "View service",
+  external: false,
 }));
 
 export default function ServicesPage() {
@@ -40,9 +49,43 @@ export default function ServicesPage() {
         imageSrc={heroMedia.services.src}
         imageAlt={heroMedia.services.alt}
         imagePosition={heroMedia.services.objectPosition}
+        lead={
+          <Breadcrumbs
+            contained={false}
+            items={[
+              { name: "Home", path: "/" },
+              { name: "Services", path: "/services" },
+            ]}
+          />
+        }
       />
 
       <Sheet>
+        <div className="itq-container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Service guides"
+              title="Dedicated pages for each practice"
+              description="In-depth pages for web, commerce, software, mobile, AI, and marketing — written for buyers who want substance before they talk to the team."
+              align="stack"
+            />
+          </Reveal>
+          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {servicePages.map((page) => (
+              <li key={page.slug} className="h-full">
+                <ServiceGuideCard
+                  href={page.path}
+                  title={page.eyebrow}
+                  description={page.intro}
+                  cta="Open guide"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Sheet>
+
+      <Sheet tone="tint">
         <div className="itq-container">
           <Reveal>
             <SectionHeading eyebrow="Catalogue" title="Five ways to get the work online" align="stack" />
@@ -96,23 +139,24 @@ export default function ServicesPage() {
                       ))}
                     </div>
                   ) : null}
-                  <a
-                    href={waLink(`Hi ISTIQEME Technologies — I'd like to discuss ${s.title} for my business.`)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="itq-link-arrow mt-8 text-[13px] font-medium text-forest dark:text-ember-bright"
-                  >
-                    Discuss this project on WhatsApp
-                    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" aria-hidden>
-                      <path
-                        d="M4 12L12 4M12 4H5M12 4V11"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    {catalogLinks[s.id] ? (
+                      <Link
+                        href={catalogLinks[s.id]}
+                        className="itq-link-arrow text-[13px] font-medium text-forest dark:text-ember-bright"
+                      >
+                        Read the full service page
+                      </Link>
+                    ) : null}
+                    <a
+                      href={waLink(`Hi ISTIQEME Technologies — I'd like to discuss ${s.title} for my business.`)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="itq-link-arrow text-[13px] font-medium text-forest dark:text-ember-bright"
+                    >
+                      Discuss on WhatsApp
+                    </a>
+                  </div>
                 </div>
               </Reveal>
             ))}
