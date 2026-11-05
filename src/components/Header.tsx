@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FocusEvent } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { aiMenu, nav, problems, services, site, waLink, work, workMenu } from "@/lib/site";
@@ -105,6 +105,13 @@ export function Header() {
     timer.current = window.setTimeout(() => setMenu(next), delay);
   }
 
+  function openMenuFromFocus(e: FocusEvent<HTMLAnchorElement>, key: MenuKey | null) {
+    // Mouse clicks focus the link too — only keyboard focus should open the panel.
+    if (!e.currentTarget.matches(":focus-visible")) return;
+    if (key) schedule(key, 0);
+    else schedule(null, 0);
+  }
+
   function keyFor(href: string): MenuKey | null {
     if (href === "/contact" || href === "/start") return null;
     if (href.startsWith("/work")) return "work";
@@ -144,8 +151,9 @@ export function Header() {
                     aria-current={active ? "page" : undefined}
                     data-active={key && menu === key ? true : undefined}
                     onPointerDown={() => closeMenus()}
+                    onClick={() => closeMenus()}
                     onMouseEnter={() => (key ? schedule(key, 140) : schedule(null, 0))}
-                    onFocus={() => (key ? schedule(key, 0) : schedule(null, 0))}
+                    onFocus={(e) => openMenuFromFocus(e, key)}
                   >
                     {item.label}
                   </Link>
