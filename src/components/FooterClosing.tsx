@@ -12,7 +12,7 @@ export function FooterClosing() {
       aria-labelledby="footer-closing-heading"
     >
       <div className="itq-footer__invite-inner">
-        <div className="min-w-0 flex-1">
+        <div className="itq-footer__invite-copy min-w-0 flex-1">
           <p className="itq-footer__eyebrow">Next step</p>
           <h2
             id="footer-closing-heading"
@@ -24,15 +24,14 @@ export function FooterClosing() {
             Scoped to how you work — reply within one business day.
           </p>
         </div>
-        <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
-          <GlowButton href="/contact" size="sm" className="w-full sm:w-auto">
+        <div className="itq-footer__invite-actions flex shrink-0 flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
+          <GlowButton href="/contact" size="sm">
             Start a project
           </GlowButton>
           <GlowButton
             href={waLink(site.whatsapp.discussText)}
             variant="outline"
             size="sm"
-            className="w-full sm:w-auto"
             target="_blank"
             rel="noreferrer"
           >

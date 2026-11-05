@@ -3634,15 +3634,13 @@ html:not(.dark) .theme-preserve [class*="border-white"] {
     line-height: 0.94;
   }
 
-  .itq-footer__invite-inner > .flex.shrink-0 {
+  .itq-footer__invite-actions {
     width: 100%;
   }
 
-  .itq-footer__invite-inner > .flex.shrink-0 .itq-glow-btn {
-    flex: 1 1 calc(50% - 0.35rem);
-    min-width: 9.5rem;
-    white-space: normal;
-    text-align: center;
+  .itq-footer__invite-actions .itq-glow-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .itq-footer__main {
