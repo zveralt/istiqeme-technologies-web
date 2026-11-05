@@ -80,18 +80,25 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Close every menu when the route changes (state adjusted during render).
-  const [lastPath, setLastPath] = useState(pathname);
-  if (lastPath !== pathname) {
-    setLastPath(pathname);
+  function clearTimer() {
+    if (timer.current) {
+      window.clearTimeout(timer.current);
+      timer.current = null;
+    }
+  }
+
+  function closeMenus() {
+    clearTimer();
     setOpen(false);
     setMenu(null);
     setMobileGroup(null);
   }
 
-  function clearTimer() {
-    if (timer.current) window.clearTimeout(timer.current);
-  }
+  // Close on route change (and cancel any pending hover open).
+  useEffect(() => {
+    closeMenus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- pathname only
+  }, [pathname]);
 
   function schedule(next: MenuKey | null, delay: number) {
     clearTimer();
@@ -136,6 +143,7 @@ export function Header() {
                     className="itq-nav-link block"
                     aria-current={active ? "page" : undefined}
                     data-active={key && menu === key ? true : undefined}
+                    onPointerDown={() => closeMenus()}
                     onMouseEnter={() => (key ? schedule(key, 140) : schedule(null, 0))}
                     onFocus={() => (key ? schedule(key, 0) : schedule(null, 0))}
                   >
@@ -158,9 +166,9 @@ export function Header() {
               >
                 <div
                   className="w-[40rem] max-w-[80vw] rounded-2xl border border-line bg-card p-7 text-foreground shadow-[0_24px_60px_-28px_rgba(10,10,12,0.35)]"
-                  onClick={() => setMenu(null)}
+                  onClick={() => closeMenus()}
                 >
-                  <MenuColumns menu={menu} />
+                  <MenuColumns menu={menu} onNavigate={closeMenus} />
                 </div>
               </motion.div>
             )}
@@ -367,10 +375,12 @@ function Column({
   title,
   items,
   divided = false,
+  onNavigate,
 }: {
   title: string;
   items: { href: string; title: string }[];
   divided?: boolean;
+  onNavigate?: () => void;
 }) {
   return (
     <div className={cn("min-w-0 flex-1", divided && "border-l border-line pl-8")}>
@@ -383,6 +393,7 @@ function Column({
               href={item.href}
               target="_blank"
               rel="noreferrer"
+              onClick={() => onNavigate?.()}
               className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
             >
               {item.title}
@@ -391,6 +402,7 @@ function Column({
             <Link
               key={item.title}
               href={item.href}
+              onClick={() => onNavigate?.()}
               className="rounded-lg px-2 py-1.5 text-[14.5px] text-foreground/80 transition-colors hover:bg-paper-deep hover:text-foreground"
             >
               {item.title}
@@ -402,7 +414,7 @@ function Column({
   );
 }
 
-function MenuColumns({ menu }: { menu: MenuKey }) {
+function MenuColumns({ menu, onNavigate }: { menu: MenuKey; onNavigate?: () => void }) {
   if (menu === "services") {
     const mid = Math.ceil(services.length / 2);
     const left = services.slice(0, mid).map((item) => ({
@@ -415,24 +427,39 @@ function MenuColumns({ menu }: { menu: MenuKey }) {
     }));
     return (
       <div className="flex gap-10">
-        <Column title="Services" items={left} />
-        <Column title="More" items={right} divided />
+        <Column title="Services" items={left} onNavigate={onNavigate} />
+        <Column title="More" items={right} divided onNavigate={onNavigate} />
       </div>
     );
   }
   if (menu === "work") {
     return (
       <div className="flex gap-10">
-        <Column title="Solutions" items={workMenu.map((item) => ({ href: `/work#${item.id}`, title: item.title }))} />
-        <Column title="Live sites" items={work.map((item) => ({ href: item.href || "/work", title: item.name }))} divided />
+        <Column
+          title="Solutions"
+          items={workMenu.map((item) => ({ href: `/work#${item.id}`, title: item.title }))}
+          onNavigate={onNavigate}
+        />
+        <Column
+          title="Live sites"
+          items={work.map((item) => ({ href: item.href || "/work", title: item.name }))}
+          divided
+          onNavigate={onNavigate}
+        />
       </div>
     );
   }
   if (menu === "problems") {
-    return <Column title="Problems" items={problems.map((item) => ({ href: item.href, title: item.problem }))} />;
+    return (
+      <Column title="Problems" items={problems.map((item) => ({ href: item.href, title: item.problem }))} onNavigate={onNavigate} />
+    );
   }
   if (menu === "ai") {
-    return <Column title="AI & automation" items={aiMenu.map((item) => ({ href: item.href, title: item.title }))} />;
+    return (
+      <Column title="AI & automation" items={aiMenu.map((item) => ({ href: item.href, title: item.title }))} onNavigate={onNavigate} />
+    );
   }
-  return <Column title="On this site" items={homeLinks.map((item) => ({ href: item.href, title: item.title }))} />;
+  return (
+    <Column title="On this site" items={homeLinks.map((item) => ({ href: item.href, title: item.title }))} onNavigate={onNavigate} />
+  );
 }
